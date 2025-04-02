@@ -35,7 +35,7 @@ const HeroBanner = () => {
               <h1 className="text-h1 font-bold text-neutral-800 font-heading self-center md:self-start">
                 We Guide You To
               </h1>
-              <h1 className="text-h1 font-bold text-neutral-800 font-heading self-center md:self-start text-center md:text-start">
+              <h1 className="text-[37px] font-bold text-neutral-800 font-heading self-center md:self-start text-center md:text-start">
                 The Right University
               </h1>
             </div>
