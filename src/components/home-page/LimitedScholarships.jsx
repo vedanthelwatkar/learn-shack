@@ -33,7 +33,7 @@ const LimitedScholarships = () => {
             </Button>
           </div>
         </div>
-        <div className="flex relative p-3 md:p-6">
+        <div className="flex relative p-3 md:p-6 self-center">
           <GraduationHatIcon className="md:hidden absolute -top-6 -left-5" />
           <img src="./scholarship.png" />
         </div>

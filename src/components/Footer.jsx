@@ -343,9 +343,9 @@ const Footer = () => {
         </Button>
       </div>
 
-      <div className="w-fit overflow-x-hidden opacity-25 justify-self-center">
+      <div className="w-fit overflow-x-hidden opacity-25 justify-self-center ">
         <div className="flex justify-between text-neutral-0 items-center font-heading md:text-h3 text-h6 w-full">
-          <span className="md:pl-7">TURNING</span>
+          <span className="md:pb-7">TURNING</span>
           <span>ASPIRATIONS</span>
           <span>INTO</span>
         </div>
