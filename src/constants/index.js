@@ -1,0 +1,38 @@
+export const menuData = {
+  Countries: [
+    { title: "Study in UK", href: "/countries/uk" },
+    { title: "Study in Ireland", href: "/countries/ireland" },
+    { title: "Study in USA", href: "/countries/usa" },
+    { title: "Study in Canada", href: "/countries/canada" },
+    { title: "Study in Germany", href: "/countries/germany" },
+    { title: "Study in Australia", href: "/countries/australia" },
+    { title: "Study in France", href: "/countries/france" },
+    { title: "Study in Spain", href: "/countries/spain" },
+    { title: "Study in Europe", href: "/countries/europe" },
+    { title: "Study in New Zealand", href: "/countries/new-zealand" },
+  ],
+  "Test Prep": [
+    { title: "IELTS", href: "/test-prep/ielts" },
+    { title: "Duo Lingo", href: "/test-prep/duo-lingo" },
+    { title: "PTE", href: "/test-prep/pte" },
+    { title: "TOEFL", href: "/test-prep/toefl" },
+    { title: "GRE", href: "/test-prep/gre" },
+    { title: "GMAT", href: "/test-prep/gmat" },
+    { title: "SAT", href: "/test-prep/sat" },
+  ],
+  Services: [
+    { title: "About Us", href: "/services/about-us" },
+    { title: "Scholarships", href: "/services/scholarships" },
+    { title: "Our Services", href: "/services/our-services" },
+    { title: "Testimonials & Reviews", href: "/services/testimonials" },
+  ],
+  Resources: [
+    { title: "Blogs", href: "/resources/blogs" },
+    { title: "Tools", href: "/resources/tools" },
+    { title: "Expense Calculator", href: "/resources/expense-calculator" },
+    { title: "Loan Calculator", href: "/resources/loan-calculator" },
+    { title: "GPA Calculator", href: "/resources/gpa-calculator" },
+    { title: "Refer & Earn", href: "/resources/refer-and-earn" },
+    { title: "Alumni Connect", href: "/resources/alumni-connect" },
+  ],
+};
