@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "../ui/button";
 import GraduationHatIcon from "@/svgComponents/GraduationHatIcon";
+import { motion } from "framer-motion";
 
 const LimitedScholarships = () => {
   return (
@@ -11,7 +12,15 @@ const LimitedScholarships = () => {
           <div className="flex flex-col sm:gap-6 gap-4">
             <div className="flex flex-col sm:gap-4 gap-3">
               <div className="flex items-center justify-start gap-3">
-                <div className="w-[10px] h-[10px] bg-system-success-600 rounded-full" />
+                <motion.div
+                  className="w-[10px] h-[10px] bg-system-success-600 rounded-full"
+                  animate={{ opacity: [1, 0, 1] }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 1.2,
+                    ease: "easeInOut",
+                  }}
+                />
                 <span className="text-brand-primary font-semibold text-body-xl">
                   LIMITED SCHOLARSHIPS AVAILABLE
                 </span>

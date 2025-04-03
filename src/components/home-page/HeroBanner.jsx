@@ -88,7 +88,7 @@ const HeroBanner = () => {
       <a
         href="https://wa.me/918178759588"
         target="_blank"
-        className="fixed right-7 bottom-7 w-16 h-16 cursor-pointer z-50 hidden sm:flex"
+        className="fixed right-7 bottom-7 w-16 h-16 cursor-pointer z-50"
       >
         <WhatsappIcon />
       </a>
