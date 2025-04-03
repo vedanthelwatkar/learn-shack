@@ -93,13 +93,11 @@ export function Timeline({ items, className }) {
   );
   const timelineRef = useRef(null);
   const itemRefs = useRef([]);
-  const headerHeight = 130; // Height of the header in pixels
+  const headerHeight = 130;
 
-  // Store item measurements to avoid recalculating
   const itemMeasurements = useRef([]);
 
   useEffect(() => {
-    // Initialize measurements
     const initMeasurements = () => {
       if (!timelineRef.current) return;
 
@@ -107,77 +105,62 @@ export function Timeline({ items, className }) {
         if (!item) return { top: 0, height: 0, lineHeight: 0 };
 
         const rect = item.getBoundingClientRect();
-        // Add current scroll position to get absolute position
+
         const absoluteTop = rect.top + window.scrollY;
         return {
           top: absoluteTop,
           height: rect.height,
-          // The line height would be the distance to the next item or a fixed value
-          lineHeight: rect.height - 40, // approximation, adjust if needed
+
+          lineHeight: rect.height - 40,
         };
       });
     };
 
-    // Calculate progress per pixel for each timeline item
     const calculateProgress = () => {
       const scrollY = window.scrollY;
       const windowHeight = window.innerHeight;
 
-      // Account for header offset
       const adjustedScrollY = scrollY + headerHeight;
 
       const newProgress = [...progressState];
 
-      // Process items in sequence
       for (let i = 0; i < itemMeasurements.current.length; i++) {
         const measurement = itemMeasurements.current[i];
         if (!measurement) continue;
 
-        // Check if previous items are completed
         const previousIsComplete = i === 0 || newProgress[i - 1] >= 100;
 
         if (!previousIsComplete) {
-          // If previous not complete, ensure this one has no progress
           newProgress[i] = 0;
           continue;
         }
 
         const viewportPosition = measurement.top - adjustedScrollY;
 
-        // Calculate trigger point (when item enters viewport enough to start)
         const triggerPoint = windowHeight * 0.6;
 
         if (viewportPosition < triggerPoint) {
-          // Item is in the trigger zone
-
-          // Calculate progress based on how far item has moved past trigger
           const progressRange = measurement.lineHeight;
           const progressPixels = triggerPoint - viewportPosition;
 
-          // Convert to percentage with direct pixel mapping
           let calculatedProgress = (progressPixels / progressRange) * 100;
 
-          // Clamp between 0-100%
           calculatedProgress = Math.min(Math.max(calculatedProgress, 0), 100);
 
           newProgress[i] = calculatedProgress;
         } else {
-          // Item hasn't reached trigger zone yet
           newProgress[i] = 0;
         }
       }
 
-      // Only update state if there's a change
       if (JSON.stringify(newProgress) !== JSON.stringify(progressState)) {
         setProgressState(newProgress);
       }
     };
 
-    // Initialize and attach scroll handler
     initMeasurements();
-    calculateProgress(); // Initial calculation
+    calculateProgress();
 
-    // Use requestAnimationFrame for smoother performance
     let ticking = false;
     const scrollHandler = () => {
       if (!ticking) {
