@@ -120,7 +120,7 @@ const MobileDrawer = ({ isOpen }) => {
             <div className="flex items-start justify-between gap-6">
               <div className="flex flex-col gap-3">
                 <div className="flex flex-col gap-1">
-                  <h3 className="font-medium text-neutral-900 text-body-md">
+                  <h3 className="font-medium text-neutral-900 text-body-sm">
                     Refer & Earn
                   </h3>
                   <p className="text-body-sm text-neutral-700">

@@ -4,12 +4,12 @@ import GraduationHatIcon from "@/svgComponents/GraduationHatIcon";
 
 const LimitedScholarships = () => {
   return (
-    <div className="md:py-20 py-[60px] w-full px-5 md:px-24 flex flex-col gap-14 items-center justify-center">
-      <div className="flex md:flex-row flex-col-reverse bg-neutral-0 rounded-xl ">
-        <div className="relative md:p-14 p-5 flex flex-col justify-start md:gap-10 gap-8">
-          <GraduationHatIcon className="hidden md:flex absolute -top-10 -left-7" />
-          <div className="flex flex-col md:gap-6 gap-4">
-            <div className="flex flex-col md:gap-4 gap-3">
+    <div className="sm:py-20 py-[60px] w-full px-5 md:px-10 lg:px-24 flex flex-col gap-14 items-center justify-center">
+      <div className="flex sm:flex-row flex-col-reverse bg-neutral-0 rounded-xl ">
+        <div className="relative sm:p-14 p-5 flex flex-col justify-start sm:gap-10 gap-8">
+          <GraduationHatIcon className="hidden sm:flex absolute -top-10 -left-7" />
+          <div className="flex flex-col sm:gap-6 gap-4">
+            <div className="flex flex-col sm:gap-4 gap-3">
               <div className="flex items-center justify-start gap-3">
                 <div className="w-[10px] h-[10px] bg-system-success-600 rounded-full" />
                 <span className="text-brand-primary font-semibold text-body-xl">
@@ -26,15 +26,15 @@ const LimitedScholarships = () => {
               aid.
             </span>
           </div>
-          <div className="flex md:w-fit w-full gap-4">
+          <div className="flex sm:w-fit w-full gap-4">
             <Button className="flex-1">Apply Now</Button>
             <Button className="flex-1" variant="outline">
               Know More
             </Button>
           </div>
         </div>
-        <div className="flex relative p-3 md:p-6 self-center">
-          <GraduationHatIcon className="md:hidden absolute -top-6 -left-5" />
+        <div className="flex relative p-3 sm:p-6 self-center">
+          <GraduationHatIcon className="sm:hidden absolute -top-6 -left-5" />
           <img src="./scholarship.png" />
         </div>
       </div>

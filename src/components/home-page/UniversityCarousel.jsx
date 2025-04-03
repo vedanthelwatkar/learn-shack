@@ -6,7 +6,7 @@ const UniversityCarousel = () => {
   const isMobile = useMediaQuery();
 
   return (
-    <div className="md:py-20 py-[60px] w-full flex items-center justify-center">
+    <div className="sm:py-20 py-[60px] w-full flex items-center justify-center">
       <div className="flex flex-col gap-12">
         <div className="flex flex-col gap-10">
           <span className="text-lg text-neutral-800 font-semibold flex justify-center">

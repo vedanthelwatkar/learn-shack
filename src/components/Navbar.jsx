@@ -1,20 +1,17 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import LogoLight from "@/svgComponents/LogoLight";
 import TopBanner from "./navbar-components/TopBanner";
 import NavigationMenuComponent from "./navbar-components/NavigationMenuComponent";
 import SearchBarComponent from "./navbar-components/SearchBarComponent";
 import MobileDrawer from "./navbar-components/MobileDrawer";
 import { Button } from "./ui/button";
-import { useMediaQuery } from "@/hooks/use-media-query";
 import SearchIcon from "@/svgComponents/SearchIcon";
 import HamburgerIcon from "@/svgComponents/HamburgerIcon";
 import PlusIcon from "@/svgComponents/PlusIcon";
-import { useState } from "react";
 
 const NavBar = () => {
-  const isMobile = useMediaQuery();
   const [navDrawerOpen, setNavDrawerOpen] = useState(false);
   const navRef = useRef(null);
 
@@ -45,40 +42,34 @@ const NavBar = () => {
     <nav className="w-full max-w-[100vw] fixed z-[100]" ref={navRef}>
       <div className="bg-white flex flex-col w-full sticky top-0 z-50">
         <TopBanner />
-        <div className={`${isMobile ? "px-5" : "px-20"} py-2 relative`}>
-          <div className="flex justify-between">
-            <div className="flex-grow flex items-center gap-6">
-              <div
-                style={{
-                  width: isMobile ? "80px" : "100px",
-                  height: isMobile ? "48px" : "60px",
-                }}
-              >
-                <LogoLight />
-              </div>
-              {!isMobile && <SearchBarComponent />}
+        <div className="px-5 lg:px-20 lg:py-2 py-1 relative">
+          <div className="flex justify-between items-center">
+            <div className="w-[80px] h-[48px] lg:w-[100px] lg:h-[60px]">
+              <LogoLight />
             </div>
-            {!isMobile && (
-              <div className="flex items-center gap-6">
-                <NavigationMenuComponent />
-                <Button variant="outline">Evaluate Profile</Button>
-                <Button>Talk to Founders</Button>
+
+            <div className="hidden lg:block">
+              <SearchBarComponent />
+            </div>
+
+            <div className="hidden lg:flex items-center gap-6">
+              <NavigationMenuComponent />
+              <Button variant="outline">Evaluate Profile</Button>
+              <Button>Talk to Founders</Button>
+            </div>
+
+            <div className="flex md:flex gap-4 items-center">
+              <div className="flex h-fit rounded-full bg-brand-secondary p-[6px] items-center justify-center">
+                <SearchIcon />
               </div>
-            )}
-            {isMobile && (
-              <div className="flex gap-4 items-center justify-center">
-                <div className="flex h-fit rounded-full bg-brand-secondary p-[6px] items-center justify-center">
-                  <SearchIcon />
-                </div>
-                <div className="flex" onClick={handleMenu}>
-                  {navDrawerOpen ? (
-                    <PlusIcon className="rotate-45" width={32} height={32} />
-                  ) : (
-                    <HamburgerIcon />
-                  )}
-                </div>
+              <div className="flex" onClick={handleMenu}>
+                {navDrawerOpen ? (
+                  <PlusIcon className="rotate-45" width={32} height={32} />
+                ) : (
+                  <HamburgerIcon />
+                )}
               </div>
-            )}
+            </div>
           </div>
         </div>
       </div>

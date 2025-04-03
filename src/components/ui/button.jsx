@@ -10,19 +10,19 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "w-fit bg-brand-primary text-neutral-0 hover:brightness-110 rounded-sm px-5 py-3 md:text-sm text-xs font-semibold",
+          "w-fit bg-brand-primary text-neutral-0 hover:brightness-110 rounded-sm px-5 py-3 sm:text-sm text-xs font-semibold",
         large:
-          "w-fit bg-brand-primary text-neutral-0 hover:brightness-110 rounded-sm px-6 md:px-10 py-3 md:py-5 capitalize text-base",
+          "w-fit bg-brand-primary text-neutral-0 hover:brightness-110 rounded-sm px-6 sm:px-10 py-3 sm:py-5 capitalize text-base",
         outline:
-          "w-fit border border-brand-primary text-brand-primary hover:bg-purple-50 rounded-sm px-5 py-3 md:text-sm text-xs font-semibold",
+          "w-fit border border-brand-primary text-brand-primary hover:bg-purple-50 rounded-sm px-5 py-3 sm:text-sm text-xs font-semibold",
         secondary:
           "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         ghost: "text-body-xl items-end text-brand-primary font-semibold",
         link: "text-body-xl items-end text-brand-primary underline font-semibold",
       },
       size: {
-        sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-10 rounded-md px-8",
+        sm: "h-8 rounded-sm px-3 text-xs",
+        lg: "h-10 rounded-sm px-8",
         icon: "h-9 w-9",
       },
     },

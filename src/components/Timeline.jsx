@@ -18,7 +18,7 @@ export function TimelineItem({
 }) {
   return (
     <div className={cn("relative flex gap-8", className)}>
-      <div className="hidden md:flex flex-col items-center">
+      <div className="hidden sm:flex flex-col items-center">
         <div
           className={cn(
             "flex h-10 w-10 items-center justify-center rounded-full bg-white text-lg font-semibold text-neutral-800 border-2 border-gray-200 z-10",
@@ -47,20 +47,20 @@ export function TimelineItem({
         )}
       </div>
 
-      <div className="flex-1 md:pb-12 pb-6">
+      <div className="flex-1 sm:pb-12 pb-6">
         <div className="overflow-hidden rounded-lg border border-gray-200 bg-neutral-100 shadow-sm">
           <div className="flex justify-between bg-brand-primary px-6 py-2 text-neutral-0 rounded-t-lg">
-            <span className="font-semibold text-body-md text-neutral-0">
+            <span className="font-semibold text-body-sm text-neutral-0">
               LEARNSHACK
             </span>
-            <span className="font-semibold text-body-md text-neutral-0">
+            <span className="font-semibold text-body-sm text-neutral-0">
               {step}
             </span>
           </div>
 
-          <div className="md:pt-9 md:px-7 md:pb-6 p-5 pb-8 bg-neutral-0 rounded-b-lg relative">
-            <div className="flex flex-col md:flex-row gap-8 md:gap-10">
-              <div className="flex flex-col gap-3 md:gap-4">
+          <div className="sm:pt-9 sm:px-7 sm:pb-6 p-5 pb-8 bg-neutral-0 rounded-b-lg relative">
+            <div className="flex flex-col sm:flex-row gap-8 sm:gap-10">
+              <div className="flex flex-col gap-3 sm:gap-4">
                 <h3 className="text-h6 font-heading font-semibold text-neutral-800">
                   {title}
                 </h3>
@@ -70,7 +70,7 @@ export function TimelineItem({
                 {image}
               </div>
             </div>
-            <span className="inline-flex items-center justify-center p-3 text-body-xl text-neutral-600 bg-neutral-0 rounded-full absolute left-1/2 -translate-x-1/2 -bottom-6 md:left-7 md:translate-x-0 border border-neutral-200 w-12 h-12">
+            <span className="inline-flex items-center justify-center p-3 text-body-xl text-neutral-600 bg-neutral-0 rounded-full absolute left-1/2 -translate-x-1/2 -bottom-6 sm:left-7 sm:translate-x-0 border border-neutral-200 w-12 h-12">
               VS
             </span>
           </div>

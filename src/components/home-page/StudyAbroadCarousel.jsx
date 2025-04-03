@@ -2,6 +2,7 @@
 import { useState, useRef, useId, useEffect } from "react";
 import { Button } from "../ui/button";
 import RightDirection from "@/svgComponents/RightDirection";
+import { useMediaQuery } from "@/hooks/use-media-query";
 
 const Slide = ({ slide, index, current, handleSlideClick }) => {
   const slideRef = useRef(null);
@@ -53,17 +54,17 @@ const Slide = ({ slide, index, current, handleSlideClick }) => {
   const { src, title, description, searches, buttons } = slide;
 
   return (
-    <div className="flex-shrink-0 w-[85%] md:w-1/2 px-2 md:px-4">
+    <div className="flex-shrink-0 w-[85%] md:w-[75%] lg:w-1/2 px-2 sm:px-4">
       <div
         ref={slideRef}
-        className="rounded-md overflow-hidden flex flex-col md:flex-row bg-neutral-50"
+        className="rounded-sm overflow-hidden flex flex-col sm:flex-row bg-neutral-50"
         onClick={() => handleSlideClick(index)}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
       >
-        <div className="relative flex overflow-hidden md:h-[390px] h-[200px] w-full md:w-[240px] shrink-0">
+        <div className="relative flex overflow-hidden sm:h-[390px] h-[200px] w-full lg:w-[240px] md:w-[200px] shrink-0">
           <img
-            className="w-full md:w-[240px] h-full object-cover"
+            className="w-full lg:w-[240px] md:w-[200px] h-full object-cover"
             src={src || "/placeholder.svg"}
             alt={title}
             onLoad={imageLoaded}
@@ -74,7 +75,7 @@ const Slide = ({ slide, index, current, handleSlideClick }) => {
             {title}
           </span>
         </div>
-        <div className="p-6 flex flex-col gap-8 md:gap-10">
+        <div className="p-6 flex flex-col gap-8 sm:gap-10">
           <p className="text-body-lg text-neutral-700">{description}</p>
 
           <div className="flex flex-col gap-3">
@@ -128,7 +129,7 @@ export default function StudyAbroadCarousel() {
       src: "./usa.png",
       title: "Study in USA",
       description:
-        "Enroll in job-oriented programs in USA: Top universities and scholarships on offer",
+        "Explore affordable education in USA with top-ranked universities & scholarships.",
       searches: [
         "MBA in USA",
         "Computer Science in USA",
@@ -143,7 +144,7 @@ export default function StudyAbroadCarousel() {
       src: "./germany.png",
       title: "Study in Germany",
       description:
-        "Enroll in job-oriented programs in Germany: Top universities and scholarships on offer",
+        "Explore affordable education in Germany with top-ranked universities & scholarships.",
       searches: [
         "MBA in Germany",
         "Data Science in Germany",
@@ -158,7 +159,7 @@ export default function StudyAbroadCarousel() {
       src: "./usa.png",
       title: "Study in Canada",
       description:
-        "Enroll in job-oriented programs in Canada: Top universities and scholarships on offer",
+        "Explore affordable education in Canada with top-ranked universities & scholarships",
       searches: [
         "MBA in Canada",
         "Engineering in Canada",
@@ -172,7 +173,8 @@ export default function StudyAbroadCarousel() {
   ];
 
   const [current, setCurrent] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useMediaQuery("(max-width: 767px)");
+  const isTablet = useMediaQuery("(min-width: 768px) and (max-width: 1023px)");
   const carouselRef = useRef(null);
   const touchStartXRef = useRef(0);
   const touchEndXRef = useRef(0);
@@ -182,6 +184,13 @@ export default function StudyAbroadCarousel() {
   const currentTranslateRef = useRef(0);
   const prevTranslateRef = useRef(0);
   const animationRef = useRef(null);
+
+  // Get the correct translation percentage based on screen size
+  const getTranslatePercentage = () => {
+    if (isMobile) return 85;
+    if (isTablet) return 75; // Use slide width for tablet
+    return 50; // Desktop
+  };
 
   const handlePreviousClick = () => {
     const previous = current - 1;
@@ -206,7 +215,7 @@ export default function StudyAbroadCarousel() {
     isDraggingRef.current = true;
 
     if (carouselRef.current) {
-      currentTranslateRef.current = -current * (isMobile ? 85 : 50);
+      currentTranslateRef.current = -current * getTranslatePercentage();
       prevTranslateRef.current = currentTranslateRef.current;
       animationRef.current = requestAnimationFrame(animation);
     }
@@ -247,7 +256,7 @@ export default function StudyAbroadCarousel() {
     isDraggingRef.current = true;
 
     if (carouselRef.current) {
-      currentTranslateRef.current = -current * (isMobile ? 85 : 50);
+      currentTranslateRef.current = -current * getTranslatePercentage();
       prevTranslateRef.current = currentTranslateRef.current;
       animationRef.current = requestAnimationFrame(animation);
       carouselRef.current.style.cursor = "grabbing";
@@ -311,32 +320,24 @@ export default function StudyAbroadCarousel() {
   const id = useId();
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    handleResize(); // Initial check
-    window.addEventListener("resize", handleResize);
-
     // Clean up mouse events on document
     document.addEventListener("mouseup", handleMouseUp);
     document.addEventListener("mousemove", handleMouseMove);
 
     return () => {
-      window.removeEventListener("resize", handleResize);
       document.removeEventListener("mouseup", handleMouseUp);
       document.removeEventListener("mousemove", handleMouseMove);
       cancelAnimationFrame(animationRef.current);
     };
   }, []);
 
-  // Reset animation when current slide changes
+  // Reset animation when current slide changes or screen size changes
   useEffect(() => {
     if (carouselRef.current) {
       // Reset the transform to the current slide position
       carouselRef.current.style.transition = "transform 500ms ease-in-out";
       carouselRef.current.style.transform = `translateX(-${
-        current * (isMobile ? 85 : 50)
+        current * getTranslatePercentage()
       }%)`;
 
       // Clear transition after animation completes
@@ -358,24 +359,24 @@ export default function StudyAbroadCarousel() {
         }
       };
     }
-  }, [current, isMobile]);
+  }, [current, isMobile, isTablet]);
 
   return (
-    <div className="bg-brand-secondary py-[60px] md:py-20 w-full px-5 md:px-24 flex flex-col gap-8 md:gap-12 items-center justify-center max-w-[100vw] overflow-x-hidden">
-      <div className="flex flex-col gap-8 md:gap-12 w-full">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-0">
-          <div className="flex flex-col gap-3 items-center md:items-start">
+    <div className="bg-brand-secondary py-[60px] sm:py-20 w-full px-5 md:px-[60px] lg:px-24 flex flex-col gap-8 sm:gap-12 items-center justify-center max-w-[100vw] overflow-x-hidden">
+      <div className="flex flex-col gap-8 sm:gap-12 w-full">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0">
+          <div className="flex flex-col gap-3 items-center sm:items-start">
             <h2 className="text-h4 font-semibold text-center">
               Top Study{" "}
               <span className="text-h4 font-semibold text-brand-primary">
                 Abroad Destinations
               </span>
             </h2>
-            <p className="text-xl text-neutral-700 md:text-start text-center">
+            <p className="text-xl text-neutral-700 sm:text-start text-center">
               Explore the step by step procedure to study in top destinations
             </p>
           </div>
-          <div className="hidden md:flex gap-4 self-end md:self-auto">
+          <div className="hidden sm:flex gap-4 self-end sm:self-auto">
             <CarouselControl
               type="previous"
               title="Go to previous slide"
@@ -399,10 +400,9 @@ export default function StudyAbroadCarousel() {
         >
           <div
             ref={carouselRef}
-            className="flex pl-2 md:pl-0 cursor-grab"
+            className="flex pl-2 sm:pl-0 cursor-grab transition-transform duration-500 ease-in-out"
             style={{
-              transform: `translateX(-${current * (isMobile ? 85 : 50)}%)`,
-              transition: "transform 500ms ease-in-out",
+              transform: `translateX(-${current * getTranslatePercentage()}%)`,
             }}
           >
             {slides.map((slide, index) => (

@@ -109,9 +109,9 @@ const Footer = () => {
   };
 
   return (
-    <div className="w-full bg-brand-primary md:pt-14 pt-[60px] px-5 md:px-24">
-      <div className="flex md:flex-row flex-col w-full justify-between md:gap-0 gap-10">
-        <div className="flex flex-col md:gap-3 gap-5">
+    <div className="w-full bg-brand-primary sm:pt-14 pt-[60px] px-5 md:px-10 lg:px-24">
+      <div className="flex sm:flex-row flex-col w-full justify-between sm:gap-0 gap-10">
+        <div className="flex flex-col sm:gap-3 gap-5">
           <LogoDark />
           <span className="text-neutral-0 text-body-lg max-w-[450px]">
             At LearnShack Edu, we turn study abroad dreams into reality. As a
@@ -136,8 +136,8 @@ const Footer = () => {
             ))}
           </div>
         </div>
-        <div className="flex flex-col md:gap-6 gap-5">
-          <div className="md:flex hidden gap-3">
+        <div className="flex flex-col sm:gap-6 gap-5">
+          <div className="sm:flex hidden gap-3">
             <QRDemo />
             <div className="flex flex-col gap-2 max-w-60 justify-center">
               <span className="text-neutral-0 text-body-lg">
@@ -148,7 +148,7 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div className="flex md:hidden flex-col gap-3">
+          <div className="flex sm:hidden flex-col gap-3">
             <span className="text-body-lg text-neutral-0">
               Connect with our LSE expert instantly on
             </span>
@@ -167,11 +167,11 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <Separator className="md:my-10 my-8  h-[0.5px] bg-neutral-0 opacity-25" />
+      <Separator className="sm:my-10 my-8  h-[0.5px] bg-neutral-0 opacity-25" />
 
       <div className="flex flex-wrap">
         {/* Get in Touch Column */}
-        <div className="flex-grow flex-shrink-0 md:pr-12 mb-12">
+        <div className="flex-grow flex-shrink-0 pr-80 lg:pr-12 mb-12">
           <h3 className="text-neutral-0 font-semibold text-lg mb-4">
             Get in Touch
           </h3>
@@ -200,7 +200,7 @@ const Footer = () => {
         </div>
 
         {/* Countries Column */}
-        <div className="flex-grow flex-shrink-0 md:basis-48 md:pr-12 mb-12">
+        <div className="flex-grow flex-shrink-0 md:pr-40 lg:basis-48 lg:pr-12 mb-12">
           <h3 className="text-neutral-0 font-semibold text-lg mb-4">
             Countries
           </h3>
@@ -221,7 +221,7 @@ const Footer = () => {
         </div>
 
         {/* Test Preparation Column */}
-        <div className="flex-grow flex-shrink-0 md:basis-48 md:pr-12 mb-12">
+        <div className="flex-grow flex-shrink-0 md:pr-40 lg:basis-48 lg:pr-12 mb-12">
           <h3 className="text-neutral-0 font-semibold text-lg mb-4">
             Test Preparation
           </h3>
@@ -241,7 +241,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="flex-grow flex-shrink-0 md:basis-48 md:pr-12 mb-12">
+        <div className="flex-grow flex-shrink-0 md:pr-40 lg:basis-48 lg:pr-12 mb-12">
           <div className="mb-10">
             {/* Company Column */}
             <h3 className="text-neutral-0 font-semibold text-lg mb-4">
@@ -285,7 +285,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="flex-grow flex-shrink-0 md:basis-48 md:pr-12 mb-12">
+        <div className="flex-grow flex-shrink-0 md:pr-40 lg:basis-48 lg:pr-12 mb-12">
           <div className="mb-10">
             {/* Resources Column */}
             <h3 className="text-neutral-0 font-semibold text-lg mb-4">
@@ -328,9 +328,9 @@ const Footer = () => {
         </div>
       </div>
 
-      <Separator className="md:my-10 my-8 mt-0 h-[0.5px] bg-neutral-0 opacity-25" />
+      <Separator className="sm:my-10 my-8 mt-0 h-[0.5px] bg-neutral-0 opacity-25" />
 
-      <div className="text-center flex md:flex-row flex-col gap-8 md:gap-0 items-center w-full justify-between md:pb-24 pb-8">
+      <div className="text-center flex sm:flex-row flex-col gap-8 sm:gap-0 items-center w-full justify-between sm:pb-24 pb-8">
         <p className="text-neutral-0 text-sm flex gap-1">
           <CopyrightIcon />
           Copyright LearnShack Edu {new Date().getFullYear()}
@@ -344,12 +344,12 @@ const Footer = () => {
       </div>
 
       <div className="w-fit overflow-x-hidden opacity-25 justify-self-center ">
-        <div className="flex justify-between text-neutral-0 items-center font-heading md:text-h3 text-h6 w-full">
-          <span className="md:pb-7">TURNING</span>
+        <div className="flex justify-between text-neutral-0 items-center font-heading sm:text-h3 text-h6 w-full">
+          <span className="md:pl-3 lg:pl-7">TURNING</span>
           <span>ASPIRATIONS</span>
           <span>INTO</span>
         </div>
-        <div className="text-neutral-0 text-center text-[45px] md:text-[120px] lg:text-[161px] font-black leading-none md:leading-[120px] tracking-[2.25px] uppercase overflow-hidden mb-0 pb-0">
+        <div className="text-neutral-0 text-center text-[45px] sm:text-[120px] lg:text-[161px] font-black leading-none sm:leading-[120px] tracking-[2.25px] uppercase overflow-hidden mb-0 pb-0">
           Achievement
         </div>
       </div>

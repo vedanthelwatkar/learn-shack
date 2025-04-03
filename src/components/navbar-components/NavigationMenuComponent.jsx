@@ -19,7 +19,7 @@ const NavigationMenuComponent = () => {
           <NavigationMenuItem key={category}>
             <NavigationMenuTrigger>{category}</NavigationMenuTrigger>
             <NavigationMenuContent>
-              <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+              <ul className="grid w-[400px] gap-3 p-4 sm:w-[500px] sm:grid-cols-2 lg:w-[600px]">
                 {items.map((item) => (
                   <ListItem
                     key={item.title}
@@ -46,7 +46,7 @@ const ListItem = ({ className, title, href, ...props }, ref) => {
           ref={ref}
           href={href}
           className={cn(
-            "group block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground relative",
+            "group block select-none space-y-1 rounded-sm p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground relative",
             className
           )}
           {...props}

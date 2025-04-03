@@ -28,10 +28,10 @@ export default function FaqAccordion({ faqs = [] }) {
         >
           {faqs.map((faq, index) => (
             <AccordionItem key={`item-${index}`} value={`item-${index}`}>
-              <div className="bg-neutral-0 rounded-t-md flex items-center justify-between">
+              <div className="bg-neutral-0 rounded-t-sm flex items-center justify-between">
                 <AccordionTrigger
                   onClick={() => handleToggle(`item-${index}`)}
-                  className="md:py-5 md:px-6 p-5 text-left font-semibold text-neutral-800 hover:text-brand-primary flex-1"
+                  className="sm:py-5 sm:px-6 p-5 text-left font-semibold text-neutral-800 hover:text-brand-primary flex-1"
                 >
                   {faq.question}
                 </AccordionTrigger>
@@ -47,7 +47,7 @@ export default function FaqAccordion({ faqs = [] }) {
                   </motion.div>
                 </button>
               </div>
-              <AccordionContent className="md:px-6 md:pb-5 p-5 pt-0 text-neutral-600 bg-neutral-0 rounded-b-md">
+              <AccordionContent className="sm:px-6 sm:pb-5 p-5 pt-0 text-neutral-600 bg-neutral-0 rounded-b-sm">
                 {openItem === `item-${index}` && (
                   <div className="px-5 -mx-5 mb-4">
                     <Separator className="bg-neutral-200" />

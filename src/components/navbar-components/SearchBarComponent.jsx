@@ -7,7 +7,7 @@ const SearchBarComponent = () => {
   };
 
   return (
-    <div className="flex flex-grow items-center gap-6 mr-6">
+    <div className="flex flex-grow items-center gap-6 mr-6 md:hidden sm:hidden">
       <div className="w-full flex-1">
         <SearchBar
           onSearch={handleSearch}
