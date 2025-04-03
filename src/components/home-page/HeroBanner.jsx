@@ -27,7 +27,7 @@ const HeroBanner = () => {
   const isMobile = useMediaQuery();
 
   return (
-    <div className="w-full py-6 md:px-10 sm:gap-0 gap-8 sm:py-[60px] px-5 lg:px-24 xl:px-36 flex flex-col-reverse sm:flex-row justify-between items-center">
+    <div className="w-full py-6 md:px-10 sm:gap-0 gap-8 sm:py-[60px] px-5 lg:px-24 flex flex-col-reverse sm:flex-row justify-between items-center">
       <div className="flex flex-col gap-8 sm:gap-12 w-full sm:w-1/2 max-w-[600px] sm:my-5 items-center sm:items-start">
         <div className="flex flex-col sm:gap-9 gap-8 items-center justify-center sm:items-start sm:justify-start">
           <div className="flex flex-col gap-3">
