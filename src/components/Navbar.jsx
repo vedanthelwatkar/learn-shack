@@ -47,18 +47,16 @@ const NavBar = () => {
             <div className="w-[80px] h-[48px] lg:w-[100px] lg:h-[60px]">
               <LogoLight />
             </div>
-
-            <div className="hidden lg:block">
+            <div className="lg:flex lg:flex-grow items-center gap-6 mx-6 md:hidden sm:hidden">
               <SearchBarComponent />
             </div>
-
             <div className="hidden lg:flex items-center gap-6">
               <NavigationMenuComponent />
               <Button variant="outline">Evaluate Profile</Button>
               <Button>Talk to Founders</Button>
             </div>
 
-            <div className="flex md:flex gap-4 items-center">
+            <div className="lg:hidden flex gap-4 items-center">
               <div className="flex h-fit rounded-full bg-brand-secondary p-[6px] items-center justify-center">
                 <SearchIcon />
               </div>

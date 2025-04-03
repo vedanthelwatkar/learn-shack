@@ -27,19 +27,19 @@ const HeroBanner = () => {
   const isMobile = useMediaQuery();
 
   return (
-    <div className="w-full py-6 md:px-10 sm:gap-0 gap-8 sm:py-[60px] px-5 sm:px-24 flex flex-col-reverse sm:flex-row justify-between items-center">
+    <div className="w-full py-6 md:px-10 sm:gap-0 gap-8 sm:py-[60px] px-5 lg:px-24 xl:px-36 flex flex-col-reverse sm:flex-row justify-between items-center">
       <div className="flex flex-col gap-8 sm:gap-12 w-full sm:w-1/2 max-w-[600px] sm:my-5 items-center sm:items-start">
         <div className="flex flex-col sm:gap-9 gap-8 items-center justify-center sm:items-start sm:justify-start">
           <div className="flex flex-col gap-3">
             <div className="flex flex-col">
-              <h1 className="text-h1 md:text-h2 font-bold text-neutral-800 font-heading self-center sm:self-start">
+              <h1 className="lg:text-h1 md:text-h2 font-bold text-neutral-800 font-heading self-center sm:self-start">
                 We Guide You To
               </h1>
-              <h1 className="text-h1 md:text-h2 font-bold text-neutral-800 font-heading self-center sm:self-start text-center sm:text-start whitespace-nowrap">
+              <h1 className="lg:text-h1 md:text-h2 font-bold text-neutral-800 font-heading self-center sm:self-start text-center sm:text-start whitespace-nowrap">
                 The Right University
               </h1>
             </div>
-            <span className="text-h6 text-neutral-600 font-medium font-heading text-center sm:text-start">
+            <span className="md:text-h6 lg:text-[28px] text-neutral-600 font-medium font-heading text-center sm:text-start">
               so you can Master your Dreams.
             </span>
           </div>
