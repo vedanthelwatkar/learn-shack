@@ -13,6 +13,7 @@ import PlusIcon from "@/svgComponents/PlusIcon";
 
 const NavBar = () => {
   const [navDrawerOpen, setNavDrawerOpen] = useState(false);
+  const [mobileSearchVisible, setMobileSearchVisible] = useState(false);
   const navRef = useRef(null);
 
   useEffect(() => {
@@ -38,16 +39,27 @@ const NavBar = () => {
     setNavDrawerOpen(!navDrawerOpen);
   };
 
+  const toggleMobileSearch = () => {
+    setMobileSearchVisible(!mobileSearchVisible);
+  };
+
   return (
     <nav className="w-full max-w-[100vw] fixed z-[100]" ref={navRef}>
       <div className="bg-white flex flex-col w-full sticky top-0 z-50">
         <TopBanner />
         <div className="px-5 lg:px-20 lg:py-2 py-1 relative">
           <div className="flex justify-between items-center">
-            <div className="w-[80px] h-[48px] lg:w-[100px] lg:h-[60px]">
+            <div className="w-[80px] h-[48px] lg:w-[100px] lg:h-[60px] flex-shrink-0">
               <LogoLight />
             </div>
-            <div className="lg:flex lg:flex-grow items-center gap-6 mx-6 md:hidden sm:hidden">
+
+            {mobileSearchVisible && (
+              <div className="lg:hidden flex-grow px-3 animate-fadeIn">
+                <SearchBarComponent />
+              </div>
+            )}
+
+            <div className="lg:flex lg:flex-grow items-center gap-6 mx-6 hidden">
               <SearchBarComponent />
             </div>
             <div className="hidden lg:flex items-center gap-6">
@@ -56,9 +68,16 @@ const NavBar = () => {
               <Button>Talk to Founders</Button>
             </div>
 
-            <div className="lg:hidden flex gap-4 items-center">
-              <div className="flex h-fit rounded-full bg-brand-secondary p-[6px] items-center justify-center">
-                <SearchIcon />
+            <div className="lg:hidden flex gap-4 items-center flex-shrink-0">
+              <div
+                className="flex h-fit rounded-full bg-brand-secondary p-[6px] items-center justify-center cursor-pointer"
+                onClick={toggleMobileSearch}
+              >
+                {mobileSearchVisible ? (
+                  <PlusIcon className="rotate-45" width={24} height={24} />
+                ) : (
+                  <SearchIcon />
+                )}
               </div>
               <div className="flex" onClick={handleMenu}>
                 {navDrawerOpen ? (

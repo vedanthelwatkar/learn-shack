@@ -12,7 +12,6 @@ export function SearchBar({
   const [query, setQuery] = useState("");
   const [currentPlaceholder, setCurrentPlaceholder] = useState(0);
 
-  // Rotate placeholders
   const intervalRef = useRef(null);
 
   const startPlaceholderRotation = () => {
@@ -61,11 +60,11 @@ export function SearchBar({
           type="text"
           value={query}
           onChange={handleSearch}
-          className="pl-10 pr-4 py-6 bg-neutral-100 border-none rounded-sm focus-visible:ring-0 focus-visible:ring-offset-0 text-sm w-full"
+          className="pl-10 pr-4 py-3 lg:py-6 bg-neutral-100 border-none rounded-sm focus-visible:ring-0 focus-visible:ring-offset-0 text-sm w-full"
         />
 
         {!query && (
-          <div className="absolute left-10 pointer-events-none">
+          <div className="absolute left-10 max-w-[calc(100%-40%)] overflow-hidden pointer-events-none">
             <AnimatePresence mode="wait">
               <motion.p
                 key={`placeholder-${currentPlaceholder}`}
@@ -73,7 +72,7 @@ export function SearchBar({
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: -15, opacity: 0 }}
                 transition={{ duration: 0.3, ease: "linear" }}
-                className="text-neutral-500 text-sm"
+                className="text-neutral-500 text-sm truncate"
               >
                 {placeholders[currentPlaceholder]}
               </motion.p>
