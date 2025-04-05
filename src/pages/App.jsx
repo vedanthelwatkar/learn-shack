@@ -2,6 +2,7 @@ import Home from "./Home";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NavBar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Test from "@/components/Test";
 
 const App = () => {
   return (

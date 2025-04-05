@@ -71,7 +71,7 @@ const ExpertRoadmap = () => {
   }
 
   return (
-    <div className="bg-brand-secondary py-[60px] pb-[36px] sm:pb-[60px] sm:py-20 w-full px-5 md:px-10 lg:px-24 flex flex-col sm:gap-14 gap-8 items-center justify-center">
+    <div className="bg-brand-secondary py-[60px] pb-[36px] sm:pb-[60px] sm:py-20 w-full md:px-10 lg:px-24 flex flex-col sm:gap-14 gap-8 items-center justify-center">
       <div className="flex flex-col gap-3 w-full items-center">
         <span className="text-brand-primary font-semibold text-lg">
           OUR EXPERT ROADMAP
@@ -80,7 +80,7 @@ const ExpertRoadmap = () => {
           Study Abroad The Right Way With Us
         </h2>
       </div>
-      <div className="w-full max-w-4xl">
+      <div className="w-full max-w-4xl overflow-y-auto h-[600px] md:h-auto scrollbar-hide">
         <Timeline items={timelineItems} />
       </div>
     </div>

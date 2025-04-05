@@ -47,9 +47,9 @@ export function TimelineItem({
         )}
       </div>
 
-      <div className="flex-1 sm:pb-12 pb-6">
-        <div className="overflow-hidden rounded-lg border border-gray-200 bg-neutral-100 shadow-sm">
-          <div className="flex justify-between bg-brand-primary px-6 py-2 text-neutral-0 rounded-t-lg">
+      <div className="flex-1 sm:pb-12 pb-6 w-full px-5 lg:px-0 md:px-0">
+        <div className="w-full rounded-lg border border-gray-200 bg-neutral-100 shadow-sm">
+          <div className="relative z-30 flex justify-between bg-brand-primary px-6 py-2 text-neutral-0 rounded-t-lg">
             <span className="font-semibold text-body-sm text-neutral-0">
               LEARNSHACK
             </span>
@@ -58,7 +58,7 @@ export function TimelineItem({
             </span>
           </div>
 
-          <div className="sm:pt-9 sm:px-7 sm:pb-6 p-5 pb-8 bg-neutral-0 rounded-b-lg relative">
+          <div className="relative z-30 sm:pt-9 sm:px-7 sm:pb-6 p-5 pb-8 bg-neutral-0 rounded-b-lg">
             <div className="flex flex-col sm:flex-row gap-8 sm:gap-10">
               <div className="flex flex-col gap-3 sm:gap-4">
                 <h3 className="text-h6 font-heading font-semibold text-neutral-800">
@@ -75,7 +75,7 @@ export function TimelineItem({
             </span>
           </div>
 
-          <div className="pt-8 pb-6 px-7 flex flex-col gap-3 bg-neutral-50">
+          <div className="sticky bottom-0 z-10 pt-8 pb-6 px-7 flex flex-col gap-3 bg-neutral-50">
             <h4 className="font-medium text-neutral-600 text-body-xl">
               Traditional consultancies
             </h4>
