@@ -48,7 +48,7 @@ export function TimelineItem({
       </div>
 
       <div className="flex-1 sm:pb-12 pb-6 w-full px-5 lg:px-0 md:px-0">
-        <div className="w-full rounded-lg border border-gray-200 bg-neutral-100 shadow-sm">
+        <div className="w-full rounded-lg bg-neutral-50">
           <div className="relative z-30 flex justify-between bg-brand-primary px-6 py-2 text-neutral-0 rounded-t-lg">
             <span className="font-semibold text-body-sm text-neutral-0">
               LEARNSHACK
