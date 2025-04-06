@@ -56,7 +56,7 @@ const MobileDrawer = ({ isOpen }) => {
 
   return (
     <div
-      className={`fixed left-0 w-full h-[calc(100vh-var(--navbar-height))] bg-neutral-0 z-50 overflow-y-auto scrollbar-hide transition-transform duration-300 ease-in-out ${
+      className={`fixed left-0 w-full h-[calc(100dvh-var(--navbar-height))] bg-neutral-0 z-50 overflow-y-auto scrollbar-hide transition-transform duration-300 ease-in-out ${
         isOpen ? "translate-y-0" : "translate-y-full"
       }`}
     >

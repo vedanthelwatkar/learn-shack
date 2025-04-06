@@ -17,36 +17,33 @@ const NavBar = () => {
   const navRef = useRef(null);
 
   useEffect(() => {
-    const updateNavbarHeight = () => {
-      if (navRef.current) {
-        const height = navRef.current.offsetHeight;
-        document.documentElement.style.setProperty(
-          "--navbar-height",
-          `${height}px`
-        );
+    if (!navRef.current) return;
+
+    const updateNavbarHeight = (height) => {
+      document.documentElement.style.setProperty(
+        "--navbar-height",
+        `${height}px`
+      );
+    };
+
+    updateNavbarHeight(navRef.current.getBoundingClientRect().height);
+
+    const observer = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        updateNavbarHeight(entry.contentRect.height);
       }
-    };
+    });
 
-    updateNavbarHeight();
-    window.addEventListener("resize", updateNavbarHeight);
+    observer.observe(navRef.current);
 
-    return () => {
-      window.removeEventListener("resize", updateNavbarHeight);
-    };
+    return () => observer.disconnect();
   }, []);
-
-  const handleMenu = () => {
-    setNavDrawerOpen(!navDrawerOpen);
-  };
-
-  const toggleMobileSearch = () => {
-    setMobileSearchVisible(!mobileSearchVisible);
-  };
 
   return (
     <nav className="w-full max-w-[100vw] fixed z-[100]" ref={navRef}>
       <div className="bg-white flex flex-col w-full sticky top-0 z-50">
         <TopBanner />
+
         <div className="px-5 lg:px-20 lg:py-2 py-1 relative">
           <div className="flex justify-between items-center">
             <div className="w-[80px] h-[48px] lg:w-[100px] lg:h-[60px] flex-shrink-0">
@@ -62,6 +59,7 @@ const NavBar = () => {
             <div className="lg:flex lg:flex-grow items-center gap-6 mx-6 hidden">
               <SearchBarComponent />
             </div>
+
             <div className="hidden lg:flex items-center gap-6">
               <NavigationMenuComponent />
               <Button variant="outline">Evaluate Profile</Button>
@@ -71,7 +69,7 @@ const NavBar = () => {
             <div className="lg:hidden flex gap-4 items-center flex-shrink-0">
               <div
                 className="flex h-fit rounded-full bg-brand-secondary p-[6px] items-center justify-center cursor-pointer"
-                onClick={toggleMobileSearch}
+                onClick={() => setMobileSearchVisible((prev) => !prev)}
               >
                 {mobileSearchVisible ? (
                   <PlusIcon className="rotate-45" width={24} height={24} />
@@ -79,7 +77,11 @@ const NavBar = () => {
                   <SearchIcon />
                 )}
               </div>
-              <div className="flex" onClick={handleMenu}>
+
+              <div
+                className="flex cursor-pointer"
+                onClick={() => setNavDrawerOpen((prev) => !prev)}
+              >
                 {navDrawerOpen ? (
                   <PlusIcon className="rotate-45" width={32} height={32} />
                 ) : (
@@ -90,6 +92,7 @@ const NavBar = () => {
           </div>
         </div>
       </div>
+
       <MobileDrawer isOpen={navDrawerOpen} />
     </nav>
   );
