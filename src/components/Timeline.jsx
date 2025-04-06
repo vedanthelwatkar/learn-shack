@@ -48,8 +48,8 @@ export function TimelineItem({
       </div>
 
       <div className="flex-1 sm:pb-12 pb-6 w-full px-5 lg:px-0 md:px-0">
-        <div className="w-full rounded-lg bg-neutral-50">
-          <div className="relative z-30 flex justify-between bg-brand-primary px-6 py-2 text-neutral-0 rounded-t-lg">
+        <div className="w-full rounded-lg flex flex-col items-center bg-neutral-50 h-fit">
+          <div className="relative z-30 w-full flex justify-between bg-brand-primary px-6 py-2 text-neutral-0 rounded-t-lg">
             <span className="font-semibold text-body-sm text-neutral-0">
               LEARNSHACK
             </span>
@@ -75,7 +75,7 @@ export function TimelineItem({
             </span>
           </div>
 
-          <div className="sticky bottom-0 z-10 pt-8 pb-6 px-7 flex flex-col gap-3 bg-neutral-50 rounded-b-lg">
+          <div className="sticky bottom-6 z-10 pt-8 pb-6 px-7 flex flex-col gap-3 bg-neutral-50 rounded-b-lg ">
             <h4 className="font-medium text-neutral-600 text-body-xl">
               Traditional consultancies
             </h4>
