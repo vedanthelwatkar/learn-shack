@@ -80,7 +80,7 @@ const ExpertRoadmap = () => {
           Study Abroad The Right Way With Us
         </h2>
       </div>
-      <div className="w-full max-w-4xl overflow-y-auto h-[600px] md:h-auto scrollbar-hide">
+      <div className="w-full max-w-4xl">
         <Timeline items={timelineItems} />
       </div>
     </div>
