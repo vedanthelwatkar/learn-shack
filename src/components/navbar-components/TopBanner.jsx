@@ -16,7 +16,7 @@ const TopBanner = () => {
         <div className="w-4 h-4 text-purple-800">
           <Sparkle />
         </div>
-        <span className="flex font-semibold text-center text-body-sm sm:text-body-sm">
+        <span className="flex font-semibold text-center text-body-md">
           Get Full Access to a 2-Month IELTS Prep Course for Only $99!
           {!isMobile && (
             <span className="ml-1">

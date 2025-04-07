@@ -3,27 +3,12 @@ import { motion, useAnimation, useAnimationFrame } from "framer-motion";
 import BoltIcon from "@/svgComponents/BoltIcon";
 
 const UniversityCarousel = () => {
-  const universities = [
-    "./liverpool-uni.svg",
-    "./liverpool-uni.svg",
-    "./liverpool-uni.svg",
-    "./liverpool-uni.svg",
-    "./liverpool-uni.svg",
-    "./liverpool-uni.svg",
-    "./liverpool-uni.svg",
-    "./liverpool-uni.svg",
-    "./liverpool-uni.svg",
-    "./liverpool-uni.svg",
-    "./liverpool-uni.svg",
-    "./liverpool-uni.svg",
-    "./liverpool-uni.svg",
-    "./liverpool-uni.svg",
-    "./liverpool-uni.svg",
-    "./liverpool-uni.svg",
-    "./liverpool-uni.svg",
-    "./liverpool-uni.svg",
-  ];
+  const logos = import.meta.glob("/src/assets/webp-uni-logos/*.webp", {
+    eager: true,
+    as: "url",
+  });
 
+  const universities = Object.values(logos);
   const duplicatedUniversities = [...universities, ...universities];
 
   const carouselRef = useRef(null);
@@ -64,7 +49,7 @@ const UniversityCarousel = () => {
     <div className="sm:py-20 py-[60px] w-full flex items-center justify-center overflow-hidden">
       <div className="flex flex-col gap-12 w-full max-w-6xl">
         <div className="flex flex-col gap-10">
-          <span className="text-lg text-neutral-800 font-semibold flex justify-center">
+          <span className="text-body-xl text-neutral-800 font-semibold flex justify-center">
             850+ university partners & growing
           </span>
 
@@ -85,7 +70,7 @@ const UniversityCarousel = () => {
                   <img
                     src={item}
                     alt={`University logo ${index}`}
-                    className="h-14 w-auto"
+                    className="h-14 w-auto mix-blend-screen"
                   />
                 </div>
               ))}

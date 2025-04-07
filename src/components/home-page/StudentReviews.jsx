@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button } from "../ui/button";
 import PlayIcon from "@/svgComponents/PlayIcon";
 import { Separator } from "../ui/separator";
+import uniLogo from "../../assets/webp-uni-logos/stanford-university.webp";
 
 const testimonials = [
   {
@@ -10,8 +11,8 @@ const testimonials = [
     videoId: "3mDvUkZx2fw",
     testimony:
       "LearnShack turned my visa setback into a success story - now I'm studying in Ireland",
-    logo: "/liverpool-uni.svg",
-    thumbnail: "./usa.png",
+    logo: uniLogo,
+    thumbnail: "./countries/study-in-usa.webp",
   },
   {
     id: 2,
@@ -19,8 +20,8 @@ const testimonials = [
     videoId: "3mDvUkZx2fw",
     testimony:
       "LearnShack helped me get into a world-class university in the UK",
-    logo: "/liverpool-uni.svg",
-    thumbnail: "./germany.png",
+    logo: uniLogo,
+    thumbnail: "./countries/study-in-canada.webp",
   },
   {
     id: 3,
@@ -28,8 +29,8 @@ const testimonials = [
     videoId: "3mDvUkZx2fw",
     testimony:
       "LearnShack helped me secure my dream university in just 3 days + scholarship",
-    logo: "/liverpool-uni.svg",
-    thumbnail: "./usa.png",
+    logo: uniLogo,
+    thumbnail: "./countries/study-in-uk.webp",
   },
   {
     id: 4,
@@ -37,8 +38,8 @@ const testimonials = [
     videoId: "3mDvUkZx2fw",
     testimony:
       "LearnShack secured me a €4,000 scholarship and made my dream affordable",
-    logo: "/liverpool-uni.svg",
-    thumbnail: "./germany.png",
+    logo: uniLogo,
+    thumbnail: "./countries/study-in-australia.webp",
   },
 ];
 
@@ -50,17 +51,17 @@ const StudentReviews = () => {
   };
 
   return (
-    <div className="sm:py-20 py-[60px] w-full px-4 sm:px-24 flex flex-col gap-12 items-center justify-center max-w-[100vw] overflow-x-hidden">
+    <div className="sm:py-20 py-[60px] w-full sm:px-24 flex flex-col gap-12 items-center justify-center max-w-[100vw] overflow-x-hidden">
       <div className="flex flex-col gap-10 items-center">
-        <div className="flex flex-col gap-3 w-full items-center">
-          <span className="text-brand-primary font-semibold text-lg">
+        <div className="flex flex-col gap-3 w-full items-center px-5 md:px-0">
+          <span className="text-brand-primary font-semibold text-body-xl">
             STUDENT REVIEWS
           </span>
           <span className="text-h4 font-heading text-neutral-800 font-semibold max-w-[670px] text-center">
             A Glimpse of 10K+ Students’ Study Abroad Experience
           </span>
         </div>
-        <div className="flex gap-6 overflow-x-auto scrollbar-hide max-w-[80vw]">
+        <div className="flex gap-6 overflow-x-auto scrollbar-hide max-w-[100vw] px-5 md:px-0">
           {testimonials.map((item) => (
             <div
               key={item.name}
@@ -71,7 +72,6 @@ const StudentReviews = () => {
                   className="w-full h-full object-cover rounded-lg"
                   src={`https://www.youtube.com/embed/${item.videoId}?autoplay=1`}
                   title={item.name}
-                  frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 ></iframe>
@@ -79,7 +79,7 @@ const StudentReviews = () => {
                 <>
                   <img
                     src={item.thumbnail || "/placeholder.svg"}
-                    alt={item.name}
+                    alt={item.thumbnail}
                     className="w-full h-full object-cover rounded-lg"
                   />
                   <button
@@ -99,7 +99,11 @@ const StudentReviews = () => {
                   <span className="font-semibold text-body-md text-neutral-800">
                     {item.name}
                   </span>
-                  <img src={item.logo} alt={item.name} />
+                  <img
+                    src={item.logo}
+                    alt={item.name}
+                    className="max-w-[52px] max-h-[22px]"
+                  />
                 </div>
               </div>
             </div>

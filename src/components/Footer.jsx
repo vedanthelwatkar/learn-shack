@@ -123,7 +123,7 @@ const Footer = () => {
           </span>
 
           {/* Social Media Links */}
-          <div className="flex gap-2 self-center">
+          <div className="flex gap-2 md:self-center">
             {socialLinks.map((link) => (
               <a
                 key={link.name}
@@ -172,7 +172,7 @@ const Footer = () => {
       <div className="flex flex-wrap">
         {/* Get in Touch Column */}
         <div className="flex-grow flex-shrink-0 pr-80 lg:pr-12 mb-12">
-          <h3 className="text-neutral-0 font-semibold text-lg mb-4">
+          <h3 className="text-neutral-0 font-semibold text-body-xl mb-4">
             Get in Touch
           </h3>
           <div className="flex flex-col gap-3">
@@ -201,7 +201,7 @@ const Footer = () => {
 
         {/* Countries Column */}
         <div className="flex-grow flex-shrink-0 md:pr-40 lg:basis-48 lg:pr-12 mb-12">
-          <h3 className="text-neutral-0 font-semibold text-lg mb-4">
+          <h3 className="text-neutral-0 font-semibold text-body-xl mb-4">
             Countries
           </h3>
           <div className="flex flex-col gap-3">
@@ -222,7 +222,7 @@ const Footer = () => {
 
         {/* Test Preparation Column */}
         <div className="flex-grow flex-shrink-0 md:pr-40 lg:basis-48 lg:pr-12 mb-12">
-          <h3 className="text-neutral-0 font-semibold text-lg mb-4">
+          <h3 className="text-neutral-0 font-semibold text-body-xl mb-4">
             Test Preparation
           </h3>
           <div className="flex flex-col gap-3">
@@ -244,7 +244,7 @@ const Footer = () => {
         <div className="flex-grow flex-shrink-0 md:pr-40 lg:basis-48 lg:pr-12 mb-12">
           <div className="mb-10">
             {/* Company Column */}
-            <h3 className="text-neutral-0 font-semibold text-lg mb-4">
+            <h3 className="text-neutral-0 font-semibold text-body-xl mb-4">
               Company
             </h3>
             <div className="flex flex-col gap-3">
@@ -265,7 +265,7 @@ const Footer = () => {
 
           {/* Services Column */}
           <div>
-            <h3 className="text-neutral-0 font-semibold text-lg mb-4">
+            <h3 className="text-neutral-0 font-semibold text-body-xl mb-4">
               Services
             </h3>
             <div className="flex flex-col gap-3">
@@ -288,7 +288,7 @@ const Footer = () => {
         <div className="flex-grow flex-shrink-0 md:pr-40 lg:basis-48 lg:pr-12 mb-12">
           <div className="mb-10">
             {/* Resources Column */}
-            <h3 className="text-neutral-0 font-semibold text-lg mb-4">
+            <h3 className="text-neutral-0 font-semibold text-body-xl mb-4">
               Resources
             </h3>
             <div className="flex flex-col gap-3">
@@ -309,7 +309,9 @@ const Footer = () => {
 
           {/* Tools Column */}
           <div>
-            <h3 className="text-neutral-0 font-semibold text-lg mb-4">Tools</h3>
+            <h3 className="text-neutral-0 font-semibold text-body-xl mb-4">
+              Tools
+            </h3>
             <div className="flex flex-col gap-3">
               {navLinks.Tools.map((link, index) => (
                 <a

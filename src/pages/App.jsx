@@ -9,7 +9,7 @@ const App = () => {
   const isMobile = useMediaQuery();
   return (
     <div
-      className={`w-full overflow-auto h-[100dvh] overflow-x-hidden ${
+      className={`w-full overflow-auto md:h-auto h-[100dvh] overflow-x-hidden ${
         isMobile && "scrollbar-hide"
       }`}
     >

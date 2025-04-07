@@ -37,7 +37,7 @@ const Faq = () => {
     <div className="py-20 pt-10 w-full px-4 md:px-10 lg:px-24 flex flex-col gap-12 items-center justify-center max-w-[100vw] overflow-x-hidden">
       <div className="flex flex-col w-full items-center justify-center gap-8 sm:gap-10">
         <div className="flex flex-col gap-3 w-full items-center">
-          <span className="text-brand-primary font-semibold text-lg">
+          <span className="text-brand-primary font-semibold text-body-xl">
             READ OUR FAQS
           </span>
           <span className="text-h4 font-heading text-neutral-800 font-semibold max-w-[670px] text-center">
@@ -46,7 +46,7 @@ const Faq = () => {
         </div>
         <FaqAccordion faqs={faqData} />
         <div className="text-center">
-          <p className="text-neutral-700 text-body-lg">
+          <p className="text-neutral-700 text-body-xl">
             Have More Questions? <Button variant="link">Contact Us Here</Button>
           </p>
         </div>

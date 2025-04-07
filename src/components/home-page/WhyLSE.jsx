@@ -28,7 +28,7 @@ const WhyLSE = () => {
       <div className="flex flex-col gap-8 sm:gap-12 w-full">
         <div className="flex sm:flex-row flex-col sm:gap-10 gap-6 w-full">
           <div className="flex flex-col gap-3 w-full sm:w-1/2">
-            <span className="text-brand-primary font-semibold text-lg self-center sm:self-start">
+            <span className="text-brand-primary font-semibold text-body-xl self-center sm:self-start">
               WHY CHOOSE LSE
             </span>
             <span className="text-h4 font-heading text-neutral-800 font-semibold self-center sm:self-start text-center sm:text-start">
@@ -37,7 +37,7 @@ const WhyLSE = () => {
           </div>
 
           <div className="flex flex-col gap-6 w-full sm:w-1/2">
-            <span className="self-center sm:self-start text-center sm:text-start">
+            <span className="text-body-xl self-center sm:self-start text-center sm:text-start">
               Get dedicated support with LSE Guardian – your personal mentor for
               study abroad success. From expert guidance to answering queries
               and solving challenges, your Guardian ensures a smooth journey

@@ -38,7 +38,7 @@ const CuratedByExperts = () => {
   return (
     <div className="sm:py-20 py-[60px] sm:pb-10 w-full px-4 md:px-10 lg:px-24 flex flex-col gap-8 sm:gap-14 items-center justify-center">
       <div className="flex flex-col gap-3 w-full items-center">
-        <span className="text-brand-primary font-semibold text-lg">
+        <span className="text-brand-primary font-semibold text-body-xl">
           CURATED BY OUR EXPERTS
         </span>
         <span className="text-h4 font-heading text-neutral-800 font-semibold max-w-[670px] text-center">
@@ -59,7 +59,7 @@ const CuratedByExperts = () => {
               <span className="font-medium text-body-lg text-neutral-700">
                 {card.title}
               </span>
-              <span className="font-semibold text-h6 md:text-body-2xl text-neutral-800">
+              <span className="font-semibold text-h6 text-neutral-800">
                 {card.desc}
               </span>
               <div className="flex text-system-info-600 gap-2">

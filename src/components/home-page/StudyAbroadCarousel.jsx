@@ -62,7 +62,7 @@ const Slide = ({ slide, index, current, handleSlideClick }) => {
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
       >
-        <div className="relative flex overflow-hidden sm:h-[390px] h-[200px] w-full lg:w-[240px] md:w-[200px] shrink-0">
+        <div className="relative flex overflow-hidden lg:h-full sm:h-[390px] h-[150px] lg:w-[240px] md:w-[200px] shrink-0">
           <img
             className="w-full lg:w-[240px] md:w-[200px] h-full object-cover"
             src={src || "/placeholder.svg"}
@@ -71,7 +71,7 @@ const Slide = ({ slide, index, current, handleSlideClick }) => {
             loading="eager"
             decoding="sync"
           />
-          <span className="absolute bottom-0 text-h6 text-neutral-0 font-heading px-4 py-6 w-full text-center font-semibold">
+          <span className="absolute bottom-0 text-h6 text-neutral-0 font-heading px-3 md:px-4 py-3 md:py-6 w-full md:text-center font-semibold">
             {title}
           </span>
         </div>
@@ -86,7 +86,7 @@ const Slide = ({ slide, index, current, handleSlideClick }) => {
               {searches.map((search, i) => (
                 <span
                   key={i}
-                  className="text-xs px-3 py-1 font-semibold rounded-full bg-system-info-100 text-system-info-600"
+                  className="text-body-md px-3 py-1 font-semibold rounded-full bg-system-info-100 text-system-info-600"
                 >
                   {search}
                 </span>
@@ -126,14 +126,14 @@ const CarouselControl = ({ type, title, handleClick }) => {
 export default function StudyAbroadCarousel() {
   const slides = [
     {
-      src: "./usa.png",
+      src: "./countries/study-in-usa.webp",
       title: "Study in USA",
       description:
         "Explore affordable education in USA with top-ranked universities & scholarships.",
       searches: [
-        "MBA in USA",
         "Computer Science in USA",
-        "Data Science in USA",
+        "Business & Management in USA",
+        "Social Sciences in USA",
       ],
       buttons: {
         view: "View Country",
@@ -141,14 +141,29 @@ export default function StudyAbroadCarousel() {
       },
     },
     {
-      src: "./germany.png",
+      src: "./countries/study-in-canada.webp",
+      title: "Study in Canada",
+      description:
+        "Explore affordable education in Canada with top-ranked universities & scholarships.",
+      searches: [
+        "Software Engineering in Canada",
+        "Pharmacy in Canada",
+        "Engineering in Canada",
+      ],
+      buttons: {
+        view: "View Country",
+        enquire: "Enquire Now",
+      },
+    },
+    {
+      src: "./countries/study-in-germany.webp",
       title: "Study in Germany",
       description:
         "Explore affordable education in Germany with top-ranked universities & scholarships.",
       searches: [
-        "MBA in Germany",
-        "Data Science in Germany",
-        "Business Schools in Germany",
+        "Automobile Engineering in Germany",
+        "Computer Science & IT in Germany",
+        "Business Management in Germany",
       ],
       buttons: {
         view: "View Country",
@@ -156,14 +171,25 @@ export default function StudyAbroadCarousel() {
       },
     },
     {
-      src: "./usa.png",
-      title: "Study in Canada",
+      src: "./countries/study-in-uk.webp",
+      title: "Study in UK",
       description:
-        "Explore affordable education in Canada with top-ranked universities & scholarships",
+        "Explore affordable education in UK with top-ranked universities & scholarships.",
+      searches: ["MBA in UK", "Data Science in UK", "Psychology in UK"],
+      buttons: {
+        view: "View Country",
+        enquire: "Enquire Now",
+      },
+    },
+    {
+      src: "./countries/study-in-australia.webp",
+      title: "Study in Australia",
+      description:
+        "Explore affordable education in Australia with top-ranked universities & scholarships.",
       searches: [
-        "MBA in Canada",
-        "Engineering in Canada",
-        "Health Sciences in Canada",
+        "Engineering & IT in Australia",
+        "Hospitality in Australia",
+        "Business & Management in Australia",
       ],
       buttons: {
         view: "View Country",
@@ -362,17 +388,17 @@ export default function StudyAbroadCarousel() {
   }, [current, isMobile, isTablet]);
 
   return (
-    <div className="bg-brand-secondary py-[60px] sm:py-20 w-full px-5 md:px-[60px] lg:px-24 flex flex-col gap-8 sm:gap-12 items-center justify-center max-w-[100vw] overflow-x-hidden">
+    <div className="bg-brand-secondary py-[60px] sm:py-20 w-full md:px-[60px] lg:px-24 flex flex-col gap-8 sm:gap-12 items-center justify-center max-w-[100vw] overflow-x-hidden">
       <div className="flex flex-col gap-8 sm:gap-12 w-full">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0">
-          <div className="flex flex-col gap-3 items-center sm:items-start">
+          <div className="flex flex-col gap-3 items-center sm:items-start px-5 md:px-0">
             <h2 className="text-h4 font-semibold text-center">
               Top Study{" "}
               <span className="text-h4 font-semibold text-brand-primary">
                 Abroad Destinations
               </span>
             </h2>
-            <p className="text-xl text-neutral-700 sm:text-start text-center">
+            <p className="text-body-2xl text-neutral-700 sm:text-start text-center">
               Explore the step by step procedure to study in top destinations
             </p>
           </div>
