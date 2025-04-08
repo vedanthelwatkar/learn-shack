@@ -4,6 +4,7 @@ import NavBar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Test from "@/components/Test";
 import { useMediaQuery } from "@/hooks/use-media-query";
+import Contact from "./Contact";
 
 const App = () => {
   const isMobile = useMediaQuery();
@@ -13,16 +14,17 @@ const App = () => {
         isMobile && "scrollbar-hide"
       }`}
     >
-      <NavBar />
-      <div className="mt-[var(--navbar-height)]">
-        <BrowserRouter>
+      <BrowserRouter>
+        <NavBar />
+        <div className="mt-[var(--navbar-height)]">
           <Routes>
             <Route path="/" element={<Home />} errorElement="error" />
+            <Route path="/contact" element={<Contact />} errorElement="error" />
           </Routes>
-        </BrowserRouter>
 
-        <Footer />
-      </div>
+          <Footer />
+        </div>
+      </BrowserRouter>
     </div>
   );
 };
