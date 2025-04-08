@@ -58,7 +58,6 @@ export function TimelineItem({
                 {step}
               </span>
             </div>
-
             <div className="sm:pt-9 sm:px-7 sm:pb-6 p-5 pb-8 bg-neutral-0 rounded-b-lg">
               <div className="flex flex-col sm:flex-row gap-8 sm:gap-10">
                 <div className="flex flex-col gap-3 sm:gap-4">
