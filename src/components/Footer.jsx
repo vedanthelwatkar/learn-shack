@@ -15,97 +15,108 @@ import LinkedinIcon from "@/svgComponents/LinkedinIcon";
 import CopyrightIcon from "@/svgComponents/CopyrightIcon";
 import { useMediaQuery } from "@/hooks/use-media-query";
 
+const socialLinks = [
+  {
+    name: "LinkedIn",
+    href: "https://linkedin.com/company/learnshackedu",
+    icon: <LinkedinIcon />,
+  },
+  {
+    name: "Instagram",
+    href: "https://instagram.com/learnshackedu",
+    icon: <InstagramIcon />,
+  },
+  { name: "Blog", href: "/blog", icon: <ThreadsIcon /> },
+  {
+    name: "Facebook",
+    href: "https://facebook.com/learnshackedu",
+    icon: <FacebookIcon />,
+  },
+  {
+    name: "Twitter",
+    href: "https://twitter.com/learnshackedu",
+    icon: <TwitterIcon />,
+  },
+];
+
+const navLinks = {
+  "Get in Touch": [
+    {
+      name: "Sector 142, Noida, Uttar Pradesh, India - 201304",
+      href: "https://maps.google.com",
+      icon: <LocationIcon />,
+    },
+    {
+      name: "contact@learnshackedu.com",
+      href: "mailto:contact@learnshackedu.com",
+      icon: <MailIcon />,
+    },
+    {
+      name: "+91 81787 59588",
+      href: "tel:+918178759588",
+      icon: <CallIcon />,
+    },
+    {
+      name: <span className="ml-6">(Between 10 AM – 08 PM)</span>,
+      href: null,
+      icon: null,
+    },
+  ],
+  Countries: [
+    { name: "Study in UK", href: "/countries/uk" },
+    { name: "Study in Ireland", href: "/countries/ireland" },
+    { name: "Study in USA", href: "/countries/usa" },
+    { name: "Study in Canada", href: "/countries/canada" },
+    { name: "Study in Germany", href: "/countries/germany" },
+    { name: "Study in Australia", href: "/countries/australia" },
+    { name: "Study in France", href: "/countries/france" },
+    { name: "Study in Spain", href: "/countries/spain" },
+    { name: "Study in Europe", href: "/countries/europe" },
+    { name: "Study in New Zealand", href: "/countries/new-zealand" },
+  ],
+  "Test Preparation": [
+    { name: "IELTS", href: "/test-preparation/ielts" },
+    { name: "Duo Lingo", href: "/test-preparation/duo-lingo" },
+    { name: "PTE", href: "/test-preparation/pte" },
+    { name: "TOEFL", href: "/test-preparation/toefl" },
+    { name: "GRE", href: "/test-preparation/gre" },
+    { name: "GMAT", href: "/test-preparation/gmat" },
+    { name: "SAT", href: "/test-preparation/sat" },
+  ],
+  Company: [
+    { name: "About Us", href: "/about-us" },
+    { name: "Our Services", href: "/services" },
+    { name: "Testimonials & Reviews", href: "/testimonials" },
+  ],
+  Services: [
+    { name: "Profile Evaluator", href: "/services/profile-evaluator" },
+    { name: "Scholarships", href: "/services/scholarships" },
+    { name: "Explore Universities", href: "/services/explore-universities" },
+  ],
+  Resources: [
+    { name: "Blogs", href: "/blogs" },
+    { name: "Refer & Earn", href: "/refer-earn" },
+  ],
+  Tools: [
+    { name: "Expense Calculator", href: "/tools/expense-calculator" },
+    { name: "Loan Calculator", href: "/tools/loan-calculator" },
+    { name: "GPA Calculator", href: "/tools/gpa-calculator" },
+  ],
+};
+
 const Footer = () => {
   const isMobile = useMediaQuery();
+  const isTablet = useMediaQuery("(min-width: 768px) and (max-width: 1023px)");
 
-  const socialLinks = [
-    {
-      name: "LinkedIn",
-      href: "https://linkedin.com/company/learnshackedu",
-      icon: <LinkedinIcon />,
-    },
-    {
-      name: "Instagram",
-      href: "https://instagram.com/learnshackedu",
-      icon: <InstagramIcon />,
-    },
-    { name: "Blog", href: "/blog", icon: <ThreadsIcon /> },
-    {
-      name: "Facebook",
-      href: "https://facebook.com/learnshackedu",
-      icon: <FacebookIcon />,
-    },
-    {
-      name: "Twitter",
-      href: "https://twitter.com/learnshackedu",
-      icon: <TwitterIcon />,
-    },
-  ];
-
-  // Footer navigation links organized by category
-  const navLinks = {
-    "Get in Touch": [
-      {
-        name: "Sector 142, Noida, Uttar Pradesh, India - 201304",
-        href: "https://maps.google.com",
-        icon: <LocationIcon />,
-      },
-      {
-        name: "contact@learnshackedu.com",
-        href: "mailto:contact@learnshackedu.com",
-        icon: <MailIcon />,
-      },
-      {
-        name: "+91 81787 59588",
-        href: "tel:+918178759588",
-        icon: <CallIcon />,
-      },
-      {
-        name: <span className="ml-6">(Between 10 AM – 08 PM)</span>,
-        href: null,
-        icon: null,
-      },
-    ],
-    Countries: [
-      { name: "Study in UK", href: "/countries/uk" },
-      { name: "Study in Ireland", href: "/countries/ireland" },
-      { name: "Study in USA", href: "/countries/usa" },
-      { name: "Study in Canada", href: "/countries/canada" },
-      { name: "Study in Germany", href: "/countries/germany" },
-      { name: "Study in Australia", href: "/countries/australia" },
-      { name: "Study in France", href: "/countries/france" },
-      { name: "Study in Spain", href: "/countries/spain" },
-      { name: "Study in Europe", href: "/countries/europe" },
-      { name: "Study in New Zealand", href: "/countries/new-zealand" },
-    ],
-    "Test Preparation": [
-      { name: "IELTS", href: "/test-preparation/ielts" },
-      { name: "Duo Lingo", href: "/test-preparation/duo-lingo" },
-      { name: "PTE", href: "/test-preparation/pte" },
-      { name: "TOEFL", href: "/test-preparation/toefl" },
-      { name: "GRE", href: "/test-preparation/gre" },
-      { name: "GMAT", href: "/test-preparation/gmat" },
-      { name: "SAT", href: "/test-preparation/sat" },
-    ],
-    Company: [
-      { name: "About Us", href: "/about-us" },
-      { name: "Our Services", href: "/services" },
-      { name: "Testimonials & Reviews", href: "/testimonials" },
-    ],
-    Services: [
-      { name: "Profile Evaluator", href: "/services/profile-evaluator" },
-      { name: "Scholarships", href: "/services/scholarships" },
-      { name: "Explore Universities", href: "/services/explore-universities" },
-    ],
-    Resources: [
-      { name: "Blogs", href: "/blogs" },
-      { name: "Refer & Earn", href: "/refer-earn" },
-    ],
-    Tools: [
-      { name: "Expense Calculator", href: "/tools/expense-calculator" },
-      { name: "Loan Calculator", href: "/tools/loan-calculator" },
-      { name: "GPA Calculator", href: "/tools/gpa-calculator" },
-    ],
+  const getBrandQuoteImg = () => {
+    switch (true) {
+      case isMobile:
+        return "./brand-quote-mobile.png";
+      case isTablet:
+        return "./brand-quote-tablet.png";
+      default:
+        return "./brand-quote-desktop.png";
+    }
   };
 
   return (
@@ -122,7 +133,7 @@ const Footer = () => {
             FREE Counseling Today!
           </span>
 
-          {/* Social Media Links */}
+          {}
           <div className="flex gap-2 md:self-center">
             {socialLinks.map((link) => (
               <a
@@ -170,7 +181,7 @@ const Footer = () => {
       <Separator className="sm:my-10 my-8  h-[0.5px] bg-neutral-0 opacity-25" />
 
       <div className="flex flex-wrap">
-        {/* Get in Touch Column */}
+        {}
         <div className="flex-grow flex-shrink-0 pr-80 lg:pr-12 mb-12">
           <h3 className="text-neutral-0 font-semibold text-body-xl mb-4">
             Get in Touch
@@ -199,7 +210,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Countries Column */}
+        {}
         <div className="flex-grow flex-shrink-0 md:pr-40 lg:basis-48 lg:pr-12 mb-12">
           <h3 className="text-neutral-0 font-semibold text-body-xl mb-4">
             Countries
@@ -220,7 +231,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Test Preparation Column */}
+        {}
         <div className="flex-grow flex-shrink-0 md:pr-40 lg:basis-48 lg:pr-12 mb-12">
           <h3 className="text-neutral-0 font-semibold text-body-xl mb-4">
             Test Preparation
@@ -243,7 +254,7 @@ const Footer = () => {
 
         <div className="flex-grow flex-shrink-0 md:pr-40 lg:basis-48 lg:pr-12 mb-12">
           <div className="mb-10">
-            {/* Company Column */}
+            {}
             <h3 className="text-neutral-0 font-semibold text-body-xl mb-4">
               Company
             </h3>
@@ -263,7 +274,7 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Services Column */}
+          {}
           <div>
             <h3 className="text-neutral-0 font-semibold text-body-xl mb-4">
               Services
@@ -287,7 +298,7 @@ const Footer = () => {
 
         <div className="flex-grow flex-shrink-0 md:pr-40 lg:basis-48 lg:pr-12 mb-12">
           <div className="mb-10">
-            {/* Resources Column */}
+            {}
             <h3 className="text-neutral-0 font-semibold text-body-xl mb-4">
               Resources
             </h3>
@@ -307,7 +318,7 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Tools Column */}
+          {}
           <div>
             <h3 className="text-neutral-0 font-semibold text-body-xl mb-4">
               Tools
@@ -345,16 +356,7 @@ const Footer = () => {
         </Button>
       </div>
 
-      <div className="w-fit overflow-x-hidden opacity-25 justify-self-center ">
-        <div className="flex justify-between text-neutral-0 items-center font-heading sm:text-h3 text-h6 w-full">
-          <span className="md:pl-3 lg:pl-7">TURNING</span>
-          <span>ASPIRATIONS</span>
-          <span>INTO</span>
-        </div>
-        <div className="text-neutral-0 text-center text-[45px] sm:text-[120px] lg:text-[161px] font-black leading-none sm:leading-[120px] tracking-[2.25px] uppercase overflow-hidden mb-0 pb-0">
-          Achievement
-        </div>
-      </div>
+      <img src={getBrandQuoteImg()} alt="brand-quote" className="w-full" />
     </div>
   );
 };
