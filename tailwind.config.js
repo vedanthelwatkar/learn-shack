@@ -102,6 +102,7 @@ export default {
         "2xl": "var(--stroke-2xl)",
         xl: "var(--stroke-xl)",
         lg: "var(--stroke-lg)",
+        md: "var(--stroke-md)",
         sm: "var(--stroke-sm)",
       },
     },
@@ -138,6 +139,7 @@ export default {
           "--stroke-2xl": "4px",
           "--stroke-xl": "2px",
           "--stroke-lg": "1.5px",
+          "--stroke-md": "1px",
           "--stroke-sm": "0.5px",
         },
         "@media (max-width: 768px)": {
@@ -161,13 +163,14 @@ export default {
             "--font-size-body-xl": "16px",
             "--font-size-body-lg": "14px",
             "--font-size-body-md": "12px",
-            "--font-size-body-sm": "10px",
+            "--font-size-body-sm": "12px",
             "--font-size-body-xs": "8px",
 
             // Mobile values for stroke widths
             "--stroke-2xl": "2px",
             "--stroke-xl": "2px",
             "--stroke-lg": "1.5px",
+            "--stroke-md": "1px",
             "--stroke-sm": "0.5px",
           },
         },
