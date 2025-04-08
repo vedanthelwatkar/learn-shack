@@ -63,7 +63,7 @@ const HeroBanner = () => {
                 decimalPlaces={item.decimalPlaces}
                 className="text-h5 font-semibold text-neutral-700 font-heading"
               />
-              <span className="text-body-xl">{item.title}</span>
+              <span className="text-body-xl text-center">{item.title}</span>
             </div>
           ))}
         </div>
@@ -89,13 +89,6 @@ const HeroBanner = () => {
         </span>
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#33333310] to-[#333333]"></div>
       </div>
-      <a
-        href="https://wa.me/918178759588"
-        target="_blank"
-        className="fixed md:right-7 md:bottom-7 right-4 bottom-4 w-16 h-16 cursor-pointer z-50"
-      >
-        <WhatsappIcon />
-      </a>
     </div>
   );
 };

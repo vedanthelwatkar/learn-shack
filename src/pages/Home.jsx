@@ -10,7 +10,7 @@ import Faq from "@/components/home-page/Faq";
 
 const Home = () => {
   return (
-    <div className="bg-neutral-50 w-full flex flex-col">
+    <div className="w-full flex flex-col">
       <HeroBanner />
       <UniversityCarousel />
       <WhyLSE />
