@@ -10,11 +10,13 @@ import { Button } from "./ui/button";
 import SearchIcon from "@/svgComponents/SearchIcon";
 import HamburgerIcon from "@/svgComponents/HamburgerIcon";
 import PlusIcon from "@/svgComponents/PlusIcon";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
   const [navDrawerOpen, setNavDrawerOpen] = useState(false);
   const [mobileSearchVisible, setMobileSearchVisible] = useState(false);
   const navRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!navRef.current) return;
@@ -63,7 +65,9 @@ const NavBar = () => {
             <div className="hidden lg:flex items-center gap-6">
               <NavigationMenuComponent />
               <Button variant="outline">Evaluate Profile</Button>
-              <Button>Talk to Founders</Button>
+              <Button onClick={() => navigate("/contact")}>
+                Talk to Founders
+              </Button>
             </div>
 
             <div className="lg:hidden flex gap-4 items-center flex-shrink-0">
