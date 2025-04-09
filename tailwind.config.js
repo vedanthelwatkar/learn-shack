@@ -163,7 +163,7 @@ export default {
             "--font-size-body-xl": "16px",
             "--font-size-body-lg": "14px",
             "--font-size-body-md": "12px",
-            "--font-size-body-sm": "12px",
+            "--font-size-body-sm": "10px",
             "--font-size-body-xs": "8px",
 
             // Mobile values for stroke widths

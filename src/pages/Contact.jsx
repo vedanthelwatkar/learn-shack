@@ -1,61 +1,95 @@
 import React from "react";
-import WhatsappIcon from "@/svgComponents/WhatsappIcon";
-import QuotesIcon from "@/svgComponents/QuotesIcon";
-import { useMediaQuery } from "@/hooks/use-media-query";
-import { Button } from "@/components/ui/button";
+
 import NumberCountUp from "@/components/NumberCountUp";
+import GreenCheckIcon from "@/svgComponents/GreenCheckIcon";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import ContactFormContainer from "@/components/contact-page/ContactFormContainer";
 
 const numberCountUpData = [
+  {
+    title: "University Partners",
+    data: 850,
+    suffix: "+",
+  },
   {
     title: "Success Rate",
     data: 98,
     suffix: "%",
   },
+];
+
+const sessionData = [
   {
-    title: "Students Placed",
-    data: 10,
-    suffix: "k+",
+    icon: <GreenCheckIcon />,
+    text: "Identify your profile strengths & areas for improvement",
   },
   {
-    title: "Scholarships",
-    data: 1.5,
-    prefix: "₹",
-    suffix: "Cr+",
-    decimalPlaces: 1,
+    icon: <GreenCheckIcon />,
+    text: "Suggest top 5-8 ideal universities to target",
+  },
+  {
+    icon: <GreenCheckIcon />,
+    text: "What GMAT/GRE score you need & waiver eligibility",
+  },
+  {
+    icon: <GreenCheckIcon />,
+    text: "Proven strategy to boost your admit & scholarship chances",
+  },
+];
+
+const avatarData = [
+  {
+    img: "https://github.com/shadcn.png",
+    fallback: "LS",
+  },
+  {
+    img: "https://github.com/shadcn.png",
+    fallback: "LS",
+  },
+  {
+    img: "https://github.com/shadcn.png",
+    fallback: "LS",
+  },
+  {
+    img: "https://github.com/shadcn.png",
+    fallback: "LS",
+  },
+  {
+    img: "https://github.com/shadcn.png",
+    fallback: "LS",
   },
 ];
 
 const Contact = () => {
-  const isMobile = useMediaQuery();
-
   return (
-    <div className="w-full py-6 md:px-10 sm:gap-0 gap-8 sm:py-[60px] px-5 lg:px-24 flex flex-col-reverse sm:flex-row justify-between items-center">
-      <div className="flex flex-col gap-8 sm:gap-12 w-full sm:w-1/2 max-w-[600px] sm:my-5 items-center sm:items-start">
-        <div className="flex flex-col sm:gap-9 gap-8 items-center justify-center sm:items-start sm:justify-start">
-          <div className="flex flex-col gap-3">
-            <div className="flex flex-col">
-              <h1 className="lg:text-h1 md:text-h2 text-h1 font-bold text-neutral-800 font-heading self-center sm:self-start">
-                We Guide You To
-              </h1>
-              <h1 className="lg:text-h1 md:text-h2 text-h1 font-bold text-neutral-800 font-heading self-center sm:self-start text-center sm:text-start whitespace-nowrap">
-                The Right University
-              </h1>
-            </div>
-            <span className="text-h6 lg:text-[28px] text-neutral-600 font-medium font-heading text-center sm:text-start">
-              so you can Master your Dreams.
+    <div className="w-full py-6 sm:gap-0 md:gap-10 gap-8 sm:py-[60px] px-5 lg:px-24 md:px-[60px] flex lg:flex-row flex-col justify-between">
+      <div className="flex flex-col gap-8 sm:gap-12 w-full sm:w-1/2 md:w-full lg:max-w-[600px] my-5 items-center sm:items-start">
+        <div className="flex flex-col sm:gap-6 gap-8 items-center justify-center sm:items-start sm:justify-start md:w-[90%] lg:w-full self-center lg:self-start">
+          <h1 className="lg:text-h1 md:text-h2 text-h1 font-bold text-neutral-800 font-heading text-center lg:text-start self-center ">
+            3X Your Chances To Study Abroad With Learnshack
+          </h1>
+          <div className="flex flex-col gap-4">
+            <span className="text-neutral-800 text-body-xl font-semibold">
+              Here's what we will discuss in your session:
             </span>
-          </div>
-          <div className="flex flex-col gap-5 sm:gap-6">
-            <Button variant="large">Book a FREE counselling today</Button>
-            <div className="flex gap-1 self-center sm:self-start">
-              <span>or,</span>
-              <Button variant="link">Get a FREE Profile Evaluation</Button>
+            <div className="flex flex-col gap-2 self-center lg:self-start">
+              {sessionData.map((item, index) => (
+                <div className="flex gap-3" key={index}>
+                  <div>{item.icon}</div>
+                  <span className="text-body-lg text-neutral-700">
+                    {item.text}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
-        <div className="flex gap-4 sm:gap-12">
-          {numberCountUpData.map((item) => (
-            <div className="flex flex-col gap-2 sm:items-start items-center">
+        <div className="hidden lg:flex gap-4 sm:gap-12">
+          {numberCountUpData.map((item, index) => (
+            <div
+              className="flex flex-col gap-2 sm:items-start items-center"
+              key={index}
+            >
               <NumberCountUp
                 end={item.data}
                 prefix={item.prefix}
@@ -68,34 +102,37 @@ const Contact = () => {
           ))}
         </div>
       </div>
-      <div className="flex w-full h-[300px] sm:w-full sm:h-[300px] md:w-[360px] md:h-[505px] lg:w-[505px] lg:h-[505px] rounded-xl bg-brand-secondary overflow-hidden bg-cover bg-center relative">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: `url('./hero-bg-desktop.svg')`,
-          }}
-        />
-
-        <img
-          src={isMobile ? "./student-mobile.png" : "./student.png"}
-          alt="Student"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <span className="absolute left-6 sm:left-12 bottom-20 font-sofia z-30 text-neutral-0 font-semibold text-[150px]">
-          <QuotesIcon width={isMobile && 40} height={isMobile && 40} />
-        </span>
-        <span className="flex w-full h-full items-end relative z-30 text-neutral-0 font-semibold font-heading text-body-xl md:text-body-2xl lg:text-h6 p-6 sm:px-14 sm:py-10 text-center">
-          Learnshack helped me overcome visa delays and study in Ireland
-        </span>
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#33333310] to-[#333333]"></div>
+      <div className="flex flex-col w-full md:w-[500px] lg:w-[505px] lg:h-full rounded-lg bg-neutral-0 border border-brand-primary overflow-hidden bg-cover bg-center relative self-center lg:self-start">
+        <div className="h-[6px] w-full bg-brand-primary rounded-[10px]"></div>
+        <ContactFormContainer />
+        <div className="bg-system-info-100 px-6 py-4 md:py-5 flex items-center justify-center md:flex-row md:gap-3 flex-col gap-4">
+          <div className="flex -space-x-2">
+            {avatarData.map((avatar, i) => (
+              <Avatar key={i} className="border-2 border-white w-10 h-10">
+                <AvatarImage src={avatar.img} alt={`User ${i + 1}`} />
+                <AvatarFallback>U{i + 1}</AvatarFallback>
+              </Avatar>
+            ))}
+          </div>
+          <span className="text-body-xl text-system-info-600 font-semibold">
+            Trusted by 10,000+ Students
+          </span>
+        </div>
       </div>
-      <a
-        href="https://wa.me/918178759588"
-        target="_blank"
-        className="fixed md:right-7 md:bottom-7 right-4 bottom-4 w-16 h-16 cursor-pointer z-50"
-      >
-        <WhatsappIcon />
-      </a>
+      <div className="flex lg:hidden gap-4 sm:gap-12 self-center">
+        {numberCountUpData.map((item, index) => (
+          <div className="flex flex-col gap-2 items-center" key={index}>
+            <NumberCountUp
+              end={item.data}
+              prefix={item.prefix}
+              suffix={item.suffix}
+              decimalPlaces={item.decimalPlaces}
+              className="text-h5 font-semibold text-neutral-700 font-heading"
+            />
+            <span className="text-body-xl">{item.title}</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

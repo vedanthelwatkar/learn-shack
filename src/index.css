@@ -63,3 +63,19 @@ html {
 .scrollbar-hide::-webkit-scrollbar {
   display: none; /* Chrome, Safari and Opera */
 }
+
+.flag-select {
+  background-color: #f8f8f8;
+  padding-bottom: 0px !important;
+  border-radius: 8px;
+  min-width: none;
+  width: 100%;
+
+  button {
+    border: none !important;
+
+    span {
+      color: black;
+    }
+  }
+}
