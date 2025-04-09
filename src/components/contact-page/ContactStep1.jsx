@@ -14,7 +14,6 @@ const ContactStep1 = ({ initialData = {}, onSubmit }) => {
   const [selectedCountry, setSelectedCountry] = useState(
     initialData.countryCode || "+91"
   );
-  console.log("selectedCountry: ", selectedCountry);
   const [phoneNumber, setPhoneNumber] = useState(initialData.phoneNumber || "");
   const [fullName, setFullName] = useState(initialData.fullName || "");
   const [email, setEmail] = useState(initialData.email || "");

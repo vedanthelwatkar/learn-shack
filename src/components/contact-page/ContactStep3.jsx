@@ -63,7 +63,7 @@ const ContactStep3 = ({ onSubmit }) => {
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-3">
-          <label className="text-neutral-700 text-body-lg font-medium flex gap-2">
+          <label className="text-neutral-700 text-body-lg font-medium">
             Choose your target destination{" "}
             <span className="text-body-lg text-neutral-500">
               (You can choose multiple)
