@@ -4,6 +4,7 @@ import WhatsappIcon from "@/svgComponents/WhatsappIcon";
 import { Button } from "../ui/button";
 import QuotesIcon from "@/svgComponents/QuotesIcon";
 import { useMediaQuery } from "@/hooks/use-media-query";
+import { useNavigate } from "react-router-dom";
 
 const numberCountUpData = [
   {
@@ -27,6 +28,7 @@ const numberCountUpData = [
 
 const HeroBanner = () => {
   const isMobile = useMediaQuery();
+  const navigate = useNavigate();
 
   return (
     <div className="w-full py-6 md:px-10 sm:gap-0 gap-8 sm:py-[60px] px-5 lg:px-24 flex flex-col-reverse sm:flex-row justify-between items-center">
@@ -46,7 +48,9 @@ const HeroBanner = () => {
             </span>
           </div>
           <div className="flex flex-col gap-5 sm:gap-6">
-            <Button variant="large">Book a FREE counselling today</Button>
+            <Button variant="large" onClick={() => navigate("/contact")}>
+              Book a FREE counselling today
+            </Button>
             <div className="flex gap-1 self-center sm:self-start">
               <span>or,</span>
               <Button variant="link">Get a FREE Profile Evaluation</Button>

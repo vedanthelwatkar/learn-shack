@@ -94,6 +94,7 @@ const ContactFormContainer = () => {
           phoneNumber={`${formData.countryCode} ${formData.phoneNumber}`}
           onVerify={handleStep2Submit}
           onResend={handleResendOTP}
+          setCurrentStep={setCurrentStep}
         />
       ),
     },
