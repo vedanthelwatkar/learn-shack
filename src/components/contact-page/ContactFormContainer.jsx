@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ContactStep1 from "@/components/contact-page/ContactStep1";
 import ContactStep2 from "./ContactStep2";
 import ContactStep3 from "./ContactStep3";
 import YoureAllSetCircleCheck from "@/svgComponents/YoureAllSetCircleCheck";
+import useOtpStore, {
+  sendOtp,
+  verifyOtp,
+  resendOtp,
+} from "@/store/useOtpStore";
 
 const ContactFormContainer = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -18,8 +23,21 @@ const ContactFormContainer = () => {
   });
 
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const { isOtpSent, isOtpVerified, isLoading, error } = useOtpStore();
 
-  const handleStep1Submit = (data) => {
+  useEffect(() => {
+    if (isOtpSent) {
+      setCurrentStep(2);
+    }
+  }, [isOtpSent]);
+
+  useEffect(() => {
+    if (isOtpVerified) {
+      setCurrentStep(3);
+    }
+  }, [isOtpVerified]);
+
+  const handleStep1Submit = async (data) => {
     setFormData({
       ...formData,
       fullName: data.fullName,
@@ -27,16 +45,15 @@ const ContactFormContainer = () => {
       phoneNumber: data.phoneNumber,
       countryCode: data.countryCode,
     });
-    setCurrentStep(2);
+    sendOtp(data);
   };
 
-  const handleStep2Submit = () => {
-    setCurrentStep(3);
+  const handleStep2Submit = async (otp) => {
+    return await verifyOtp(otp);
   };
 
-  const handleResendOTP = () => {
-    // Logic to resend OTP
-    console.log("Resending OTP...");
+  const handleResendOTP = async () => {
+    return await resendOtp();
   };
 
   const handleFinalSubmit = (data) => {
@@ -95,6 +112,8 @@ const ContactFormContainer = () => {
           onVerify={handleStep2Submit}
           onResend={handleResendOTP}
           setCurrentStep={setCurrentStep}
+          isLoading={isLoading}
+          error={error}
         />
       ),
     },
@@ -110,17 +129,17 @@ const ContactFormContainer = () => {
         <YoureAllSetCircleCheck />
         <div className="flex flex-col gap-3">
           <h3 className="text-brand-primary font-semibold text-h6 font-heading text-center">
-            You’re All Set!
+            You're All Set!
           </h3>
           <p className="text-neutral-700 text-body-lg font-medium text-center">
-            We’ve received your details and our team is already on it. One of
+            We've received your details and our team is already on it. One of
             our expert counselors will give you a call within the next 24 hours
             to understand your goals and walk you through the best path to study
             abroad.
           </p>
         </div>
         <p className="text-neutral-700 text-body-lg font-medium text-center">
-          In the meantime, feel free to jot down any questions you have — we’ll
+          In the meantime, feel free to jot down any questions you have — we'll
           be happy to answer them all on the call!
         </p>
       </div>

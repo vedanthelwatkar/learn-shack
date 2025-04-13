@@ -3,7 +3,7 @@ import { motion, useAnimation, useAnimationFrame } from "framer-motion";
 import BoltIcon from "@/svgComponents/BoltIcon";
 
 const UniversityCarousel = () => {
-  const logos = import.meta.glob("/src/assets/webp-uni-logos/*.webp", {
+  const logos = import.meta.glob("/src/assets/svg-uni-logos/*.svg", {
     eager: true,
     as: "url",
   });

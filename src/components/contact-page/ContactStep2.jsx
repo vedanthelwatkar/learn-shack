@@ -1,22 +1,62 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import CustomInputOTP from "./CustomInputOtp";
+import useOtpStore from "@/store/useOtpStore";
 
-const ContactStep2 = ({ phoneNumber, onVerify, onResend, setCurrentStep }) => {
+const ContactStep2 = ({
+  phoneNumber,
+  onVerify,
+  onResend,
+  setCurrentStep,
+  isLoading,
+  error,
+}) => {
   const [otp, setOtp] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const { setState } = useOtpStore();
+
+  // Reset error message when OTP changes
+  useEffect(() => {
+    if (otp) {
+      setErrorMessage("");
+    }
+  }, [otp]);
+
+  // Show error from store if exists
+  useEffect(() => {
+    if (error) {
+      setErrorMessage(error);
+      setIsSubmitting(false);
+    }
+  }, [error]);
+
+  // Update submission state based on store loading state
+  useEffect(() => {
+    setIsSubmitting(isLoading);
+  }, [isLoading]);
 
   const handleVerifyOTP = async () => {
     if (otp.length !== 4) return;
 
     setIsSubmitting(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 800));
-      onVerify();
+      await onVerify(otp);
     } catch (error) {
       console.error("OTP verification error:", error);
-    } finally {
-      setIsSubmitting(false);
+      setErrorMessage("Failed to verify OTP. Please try again.");
+    }
+    // Don't set isSubmitting to false here - let the effect handle it based on store
+  };
+
+  const handleResendOTP = async () => {
+    try {
+      await onResend();
+      setOtp(""); // Clear OTP field after resending
+      setErrorMessage(""); // Clear any errors
+    } catch (error) {
+      console.error("Resend OTP error:", error);
+      setErrorMessage("Failed to resend OTP. Please try again.");
     }
   };
 
@@ -27,6 +67,7 @@ const ContactStep2 = ({ phoneNumber, onVerify, onResend, setCurrentStep }) => {
         <button
           className="text-brand-primary text-body-md font-medium"
           onClick={() => {
+            setState({ isOtpSent: false });
             setCurrentStep(1);
           }}
         >
@@ -37,11 +78,16 @@ const ContactStep2 = ({ phoneNumber, onVerify, onResend, setCurrentStep }) => {
       <div className="flex flex-col gap-6">
         <CustomInputOTP maxLength={4} value={otp} onChange={setOtp} />
 
+        {errorMessage && (
+          <p className="text-red-500 text-sm -mt-4">{errorMessage}</p>
+        )}
+
         <p className="text-neutral-600 text-body-lg font-medium flex gap-2">
           Didn't receive the OTP?{" "}
           <button
             className="text-brand-primary text-body-md font-medium"
-            onClick={onResend}
+            onClick={handleResendOTP}
+            disabled={isSubmitting}
           >
             Resend
           </button>

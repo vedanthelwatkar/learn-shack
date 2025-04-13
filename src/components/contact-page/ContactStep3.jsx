@@ -70,23 +70,7 @@ const ContactStep3 = ({ onSubmit }) => {
             </span>
           </label>
           <div className="flex flex-wrap gap-2">
-            {destinations.slice(0, 5).map((destination) => (
-              <button
-                key={destination.id}
-                className={`px-4 py-2 rounded-[6px] border text-neutral-900 ${
-                  selectedDestinations.includes(destination.id)
-                    ? "bg-brand-secondary border-brand-primary"
-                    : "bg-neutral-0  border-neutral-200"
-                }`}
-                onClick={() => toggleDestination(destination.id)}
-                type="button"
-              >
-                {destination.label}
-              </button>
-            ))}
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {destinations.slice(5).map((destination) => (
+            {destinations.map((destination) => (
               <button
                 key={destination.id}
                 className={`px-4 py-2 rounded-[6px] border text-neutral-900 ${
@@ -130,23 +114,7 @@ const ContactStep3 = ({ onSubmit }) => {
             Which admission test have you taken or are planning to take?
           </label>
           <div className="flex flex-wrap gap-2">
-            {examOptions.slice(0, 6).map((option) => (
-              <button
-                key={option.id}
-                className={`px-4 py-2 rounded-[6px] border text-neutral-900 ${
-                  examType === option.id
-                    ? "bg-brand-secondary border-brand-primary"
-                    : "bg-neutral-0  border-neutral-200"
-                }`}
-                onClick={() => setExamType(option.id)}
-                type="button"
-              >
-                {option.label}
-              </button>
-            ))}
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {examOptions.slice(6).map((option) => (
+            {examOptions.map((option) => (
               <button
                 key={option.id}
                 className={`px-4 py-2 rounded-[6px] border text-neutral-900 ${

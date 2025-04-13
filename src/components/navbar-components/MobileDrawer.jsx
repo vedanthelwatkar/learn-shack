@@ -13,18 +13,43 @@ import ReferIcon from "@/svgComponents/ReferIcon";
 import InstagramColouredIcon from "@/svgComponents/InstagramColouredIcon";
 import LinkedinColouredIcon from "@/svgComponents/LinkedinColouredIcon";
 
-const MobileDrawer = ({ isOpen }) => {
+const MobileDrawer = ({ isOpen, isTopBannerVisible }) => {
   const [expandedCategory, setExpandedCategory] = useState(null);
   const contentRefs = useRef({});
   const [contentHeights, setContentHeights] = useState({});
 
-  // Calculate heights for each category's content
+  // Add effect to prevent background scrolling when drawer is open
+  useEffect(() => {
+    if (isOpen) {
+      // Save the current scroll position
+      const scrollY = window.scrollY;
+
+      // Prevent scrolling on the body
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = "100%";
+    } else {
+      // Re-enable scrolling and restore scroll position
+      const scrollY = document.body.style.top;
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      window.scrollTo(0, parseInt(scrollY || "0") * -1);
+    }
+
+    return () => {
+      // Cleanup - ensure scrolling is re-enabled when component unmounts
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+    };
+  }, [isOpen]);
+
   useEffect(() => {
     const heights = {};
     Object.keys(menuData).forEach((category) => {
       if (contentRefs.current[category]) {
         const el = contentRefs.current[category];
-        // Store the full height including padding
         heights[category] = el.scrollHeight;
       }
     });
@@ -56,7 +81,11 @@ const MobileDrawer = ({ isOpen }) => {
 
   return (
     <div
-      className={`fixed left-0 w-full h-[calc(100dvh-var(--navbar-height))] bg-neutral-0 z-50 overflow-y-auto scrollbar-hide transition-transform duration-300 ease-in-out ${
+      className={`fixed left-0 w-full ${
+        isTopBannerVisible
+          ? `sm:h-[calc(100dvh-113px)] md:h-[calc(100dvh-100px)]`
+          : `h-[calc(100dvh-56px)]`
+      } bg-neutral-0 z-50 overflow-y-auto scrollbar-hide transition-transform duration-300 ease-in-out ${
         isOpen ? "translate-y-0" : "translate-y-full"
       }`}
     >
@@ -114,7 +143,6 @@ const MobileDrawer = ({ isOpen }) => {
             </div>
           ))}
         </div>
-
         <div className="mt-auto p-4">
           <div className="bg-brand-secondary rounded-[6px] py-4 px-6">
             <div className="flex items-start justify-between gap-6">

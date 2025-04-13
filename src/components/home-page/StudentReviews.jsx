@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button } from "../ui/button";
 import PlayIcon from "@/svgComponents/PlayIcon";
 import { Separator } from "../ui/separator";
-import uniLogo from "../../assets/webp-uni-logos/stanford-university.webp";
+import uniLogo from "../../assets/svg-uni-logos/stanford-university.svg";
 
 const testimonials = [
   {

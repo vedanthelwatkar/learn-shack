@@ -63,16 +63,16 @@ const avatarData = [
 const Contact = () => {
   return (
     <div className="w-full py-6 sm:gap-0 md:gap-10 gap-8 sm:py-[60px] px-5 lg:px-24 md:px-[60px] flex lg:flex-row flex-col justify-between">
-      <div className="flex flex-col gap-8 sm:gap-12 w-full sm:w-1/2 md:w-full lg:max-w-[600px] my-5 items-center sm:items-start">
-        <div className="flex flex-col sm:gap-6 gap-8 items-center justify-center sm:items-start sm:justify-start md:w-[90%] lg:w-full self-center lg:self-start">
+      <div className="flex flex-col gap-8 sm:gap-12 w-full lg:w-1/2 lg:max-w-[600px] my-5 items-center">
+        <div className="flex flex-col sm:gap-6 gap-8 md:w-[90%] lg:w-full items-center lg:items-start">
           <h1 className="lg:text-h1 md:text-h2 text-h1 font-bold text-neutral-800 font-heading text-center lg:text-start self-center ">
             3X Your Chances To Study Abroad With Learnshack
           </h1>
           <div className="flex flex-col gap-4">
-            <span className="text-neutral-800 text-body-xl font-semibold">
+            <span className="text-neutral-800 text-body-xl font-semibold self-start">
               Here's what we will discuss in your session:
             </span>
-            <div className="flex flex-col gap-2 self-center lg:self-start">
+            <div className="flex flex-col gap-2">
               {sessionData.map((item, index) => (
                 <div className="flex gap-3" key={index}>
                   <div>{item.icon}</div>
@@ -84,7 +84,7 @@ const Contact = () => {
             </div>
           </div>
         </div>
-        <div className="hidden lg:flex gap-4 sm:gap-12">
+        <div className="hidden lg:flex gap-4 sm:gap-12 lg:self-start">
           {numberCountUpData.map((item, index) => (
             <div
               className="flex flex-col gap-2 sm:items-start items-center"

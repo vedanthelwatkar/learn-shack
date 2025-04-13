@@ -36,12 +36,15 @@ const ContactStep1 = ({ initialData = {}, onSubmit }) => {
     (country) => country.phoneCode === selectedCountry
   );
 
-  // Update state when initialData changes
   useEffect(() => {
-    if (initialData.fullName) setFullName(initialData.fullName);
-    if (initialData.email) setEmail(initialData.email);
-    if (initialData.phoneNumber) setPhoneNumber(initialData.phoneNumber);
-    if (initialData.countryCode) setSelectedCountry(initialData.countryCode);
+    if (initialData.fullName && initialData.fullName !== fullName)
+      setFullName(initialData.fullName);
+    if (initialData.email && initialData.email !== email)
+      setEmail(initialData.email);
+    if (initialData.phoneNumber && initialData.phoneNumber !== phoneNumber)
+      setPhoneNumber(initialData.phoneNumber);
+    if (initialData.countryCode && initialData.countryCode !== selectedCountry)
+      setSelectedCountry(initialData.countryCode);
   }, [initialData]);
 
   const validateFullName = (name) => {
@@ -204,7 +207,6 @@ const ContactStep1 = ({ initialData = {}, onSubmit }) => {
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      // Call the onSubmit prop function with form data
       onSubmit({
         fullName,
         email,
@@ -272,7 +274,7 @@ const ContactStep1 = ({ initialData = {}, onSubmit }) => {
               </SelectTrigger>
               <SelectContent className="max-h-[300px] overflow-y-auto">
                 {countries.map((country) => (
-                  <SelectItem key={country.phoneCode} value={country.phoneCode}>
+                  <SelectItem key={country.name} value={country.phoneCode}>
                     <div className="flex items-center gap-2">
                       <span>{country.flag}</span>
                       <span>{country.phoneCode}</span>
