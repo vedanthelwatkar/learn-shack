@@ -79,15 +79,22 @@ const MobileDrawer = ({ isOpen, isTopBannerVisible }) => {
     }
   };
 
+  const getDrawerHeight = () => {
+    if (!isTopBannerVisible) return "calc(100dvh - 56px)";
+    if (typeof window !== "undefined" && window.innerWidth >= 768) {
+      return "calc(100dvh - 100px)";
+    }
+    return "calc(100dvh - 113px)";
+  };
+
   return (
     <div
-      className={`fixed left-0 w-full ${
-        isTopBannerVisible
-          ? `sm:h-[calc(100dvh-113px)] md:h-[calc(100dvh-100px)]`
-          : `h-[calc(100dvh-56px)]`
-      } bg-neutral-0 z-50 overflow-y-auto scrollbar-hide transition-transform duration-300 ease-in-out ${
-        isOpen ? "translate-y-0" : "translate-y-full"
+      className={`absolute left-0 w-full bg-neutral-0 z-50 overflow-y-auto scrollbar-hide transition-transform duration-300 ease-in-out ${
+        isOpen ? "translate-x-0" : "-translate-x-full"
       }`}
+      style={{
+        height: getDrawerHeight(),
+      }}
     >
       <div className="flex flex-col h-full">
         <div className="py-6 px-5">
