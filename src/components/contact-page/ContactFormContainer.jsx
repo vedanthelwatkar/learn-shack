@@ -9,6 +9,7 @@ import useOtpStore, {
   verifyOtp,
   resendOtp,
 } from "@/store/useOtpStore";
+import { postContactInfo } from "@/store/ContactStore";
 
 const ContactFormContainer = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -56,22 +57,24 @@ const ContactFormContainer = () => {
     return await resendOtp();
   };
 
-  const handleFinalSubmit = (data) => {
-    setFormData({
+  const handleFinalSubmit = async (data) => {
+    const updatedFormData = {
       ...formData,
       selectedDestinations: data.destinations,
       intake: data.intake,
       examType: data.examType,
-    });
+    };
+
+    setFormData(updatedFormData);
     setFormSubmitted(true);
 
-    // Here you would typically send the complete form data to your backend
-    console.log("Form submitted:", {
-      ...formData,
-      selectedDestinations: data.destinations,
-      intake: data.intake,
-      examType: data.examType,
-    });
+    const result = await postContactInfo(updatedFormData);
+
+    if (result) {
+      console.log("Form submitted successfully");
+    } else {
+      console.error("Form submission failed");
+    }
   };
 
   const variants = {
