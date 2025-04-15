@@ -14,6 +14,7 @@ import InstagramIcon from "@/svgComponents/InstagramIcon";
 import LinkedinIcon from "@/svgComponents/LinkedinIcon";
 import CopyrightIcon from "@/svgComponents/CopyrightIcon";
 import { useMediaQuery } from "@/hooks/use-media-query";
+import WhatsappSecondaryIcon from "@/svgComponents/WhatsappSecondaryIcon";
 
 const socialLinks = [
   {
@@ -57,7 +58,7 @@ const navLinks = {
       icon: <CallIcon />,
     },
     {
-      name: <span className="ml-6">(Between 10 AM – 08 PM)</span>,
+      name: <span className="ml-6">(Between 9 AM – 9 PM)</span>,
       href: null,
       icon: null,
     },
@@ -125,12 +126,10 @@ const Footer = () => {
         <div className="flex flex-col sm:gap-3 gap-5">
           <LogoDark />
           <span className="text-neutral-0 text-body-lg max-w-[450px]">
-            At LearnShack Edu, we turn study abroad dreams into reality. As a
-            leading consultancy, we provide accurate information and
-            personalized guidance to help you make informed decisions. With
-            expert support at every step, we ensure a seamless journey toward
-            your academic and career goals. Your success starts here. Book Your
-            FREE Counseling Today!
+            Studying abroad is a big step, and we’re here to make it easier for
+            you. From choosing the right university to securing scholarships and
+            visas, we’ll guide you every step of the way. Let’s take this
+            journey together. Book your FREE counseling session today!
           </span>
 
           {}
@@ -163,9 +162,16 @@ const Footer = () => {
             <span className="text-body-lg text-neutral-0">
               Connect with our LSE expert instantly on
             </span>
-            <Button className="w-fit bg-neutral-0 text-brand-primary hover:brightness-110 rounded-sm px-5 py-3">
-              Request a Call Back
-            </Button>
+            <a
+              href="https://wa.me/918178759588"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button className="w-fit bg-neutral-0 text-brand-primary hover:brightness-110 rounded-sm px-5 py-3">
+                <WhatsappSecondaryIcon />
+                Connect on Whatsapp
+              </Button>
+            </a>
           </div>
           <span className="text-body-lg text-neutral-0">OR</span>
           <div className="flex flex-col gap-3">
@@ -346,11 +352,16 @@ const Footer = () => {
       <div className="text-center flex sm:flex-row flex-col gap-8 sm:gap-0 items-center w-full justify-between sm:pb-24 pb-8">
         <p className="text-neutral-0 text-sm flex gap-1">
           <CopyrightIcon />
-          Copyright LearnShack Edu {new Date().getFullYear()}
+          Copyright Learnshack Private Limited {new Date().getFullYear()}
         </p>
         <Button
           className="w-fit bg-transparent border border-neutral-0 text-neutral-0 hover:brightness-110 rounded-sm px-5 py-3"
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          onClick={() => {
+            const mainContent = document.getElementById("main-content");
+            if (mainContent) {
+              mainContent.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          }}
         >
           Back to Top
         </Button>

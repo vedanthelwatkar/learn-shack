@@ -54,10 +54,10 @@ const Slide = ({ slide, index, current, handleSlideClick }) => {
   const { src, title, description, searches, buttons } = slide;
 
   return (
-    <div className="flex-shrink-0 w-[85%] md:w-[75%] lg:w-1/2 px-2 sm:px-4">
+    <div className="flex-shrink-0 w-[300px] md:w-[528px] lg:w-[608px] h-[494px] md:h-[390px] md: px-2 sm:px-4">
       <div
         ref={slideRef}
-        className="rounded-sm overflow-hidden flex flex-col sm:flex-row bg-neutral-50"
+        className="rounded-sm overflow-hidden flex h-full flex-col sm:flex-row bg-neutral-50"
         onClick={() => handleSlideClick(index)}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
@@ -75,7 +75,7 @@ const Slide = ({ slide, index, current, handleSlideClick }) => {
             {title}
           </span>
         </div>
-        <div className="p-6 flex flex-col gap-8 sm:gap-10">
+        <div className="p-6 flex flex-col gap-8 sm:gap-10 h-full">
           <p className="text-body-lg text-neutral-700">{description}</p>
 
           <div className="flex flex-col gap-3">
@@ -211,11 +211,10 @@ export default function StudyAbroadCarousel() {
   const prevTranslateRef = useRef(0);
   const animationRef = useRef(null);
 
-  // Get the correct translation percentage based on screen size
-  const getTranslatePercentage = () => {
-    if (isMobile) return 85;
-    if (isTablet) return 75; // Use slide width for tablet
-    return 50; // Desktop
+  const getTranslateAmount = () => {
+    if (isMobile) return 300;
+    if (isTablet) return 528;
+    return 608;
   };
 
   const handlePreviousClick = () => {
@@ -234,47 +233,27 @@ export default function StudyAbroadCarousel() {
     }
   };
 
-  // Swipe functionality
+  const handleTouchMove = (e) => {
+    if (isDraggingRef.current) {
+      const currentPosition = e.touches[0].clientX;
+      const diff = currentPosition - startPositionRef.current;
+      currentTranslateRef.current = prevTranslateRef.current + diff;
+    }
+  };
+
   const handleTouchStart = (e) => {
     startTimeRef.current = Date.now();
     startPositionRef.current = e.touches[0].clientX;
     isDraggingRef.current = true;
 
     if (carouselRef.current) {
-      currentTranslateRef.current = -current * getTranslatePercentage();
+      const slideWidth = getTranslateAmount();
+      currentTranslateRef.current = -current * slideWidth;
       prevTranslateRef.current = currentTranslateRef.current;
       animationRef.current = requestAnimationFrame(animation);
     }
   };
 
-  const handleTouchMove = (e) => {
-    if (isDraggingRef.current) {
-      const currentPosition = e.touches[0].clientX;
-      const diff = currentPosition - startPositionRef.current;
-      // Convert pixel difference to percentage of container width
-      const containerWidth = carouselRef.current.offsetWidth;
-      const percentageDiff = (diff / containerWidth) * 100;
-
-      currentTranslateRef.current = prevTranslateRef.current + percentageDiff;
-    }
-  };
-
-  const handleTouchEnd = () => {
-    isDraggingRef.current = false;
-    cancelAnimationFrame(animationRef.current);
-
-    const movedPercentage =
-      currentTranslateRef.current - prevTranslateRef.current;
-
-    // Determine if swipe was significant enough to change slide
-    if (movedPercentage > 10) {
-      handlePreviousClick();
-    } else if (movedPercentage < -10) {
-      handleNextClick();
-    }
-  };
-
-  // Mouse drag for desktop
   const handleMouseDown = (e) => {
     e.preventDefault();
     startTimeRef.current = Date.now();
@@ -282,7 +261,8 @@ export default function StudyAbroadCarousel() {
     isDraggingRef.current = true;
 
     if (carouselRef.current) {
-      currentTranslateRef.current = -current * getTranslatePercentage();
+      const slideWidth = getTranslateAmount();
+      currentTranslateRef.current = -current * slideWidth;
       prevTranslateRef.current = currentTranslateRef.current;
       animationRef.current = requestAnimationFrame(animation);
       carouselRef.current.style.cursor = "grabbing";
@@ -293,11 +273,20 @@ export default function StudyAbroadCarousel() {
     if (isDraggingRef.current) {
       const currentPosition = e.clientX;
       const diff = currentPosition - startPositionRef.current;
-      // Convert pixel difference to percentage of container width
-      const containerWidth = carouselRef.current.offsetWidth;
-      const percentageDiff = (diff / containerWidth) * 100;
+      currentTranslateRef.current = prevTranslateRef.current + diff;
+    }
+  };
 
-      currentTranslateRef.current = prevTranslateRef.current + percentageDiff;
+  const handleTouchEnd = () => {
+    isDraggingRef.current = false;
+    cancelAnimationFrame(animationRef.current);
+
+    const movedPixels = currentTranslateRef.current - prevTranslateRef.current;
+
+    if (movedPixels > 50) {
+      handlePreviousClick();
+    } else if (movedPixels < -50) {
+      handleNextClick();
     }
   };
 
@@ -311,13 +300,11 @@ export default function StudyAbroadCarousel() {
       carouselRef.current.style.cursor = "grab";
     }
 
-    const movedPercentage =
-      currentTranslateRef.current - prevTranslateRef.current;
+    const movedPixels = currentTranslateRef.current - prevTranslateRef.current;
 
-    // Determine if swipe was significant enough to change slide
-    if (movedPercentage > 10) {
+    if (movedPixels > 50) {
       handlePreviousClick();
-    } else if (movedPercentage < -10) {
+    } else if (movedPixels < -50) {
       handleNextClick();
     }
   };
@@ -339,14 +326,13 @@ export default function StudyAbroadCarousel() {
 
   const setSliderPosition = () => {
     if (carouselRef.current) {
-      carouselRef.current.style.transform = `translateX(${currentTranslateRef.current}%)`;
+      carouselRef.current.style.transform = `translateX(${currentTranslateRef.current}px)`;
     }
   };
 
   const id = useId();
 
   useEffect(() => {
-    // Clean up mouse events on document
     document.addEventListener("mouseup", handleMouseUp);
     document.addEventListener("mousemove", handleMouseMove);
 
@@ -357,16 +343,15 @@ export default function StudyAbroadCarousel() {
     };
   }, []);
 
-  // Reset animation when current slide changes or screen size changes
   useEffect(() => {
     if (carouselRef.current) {
-      // Reset the transform to the current slide position
-      carouselRef.current.style.transition = "transform 500ms ease-in-out";
-      carouselRef.current.style.transform = `translateX(-${
-        current * getTranslatePercentage()
-      }%)`;
+      const slideWidth = getTranslateAmount();
 
-      // Clear transition after animation completes
+      const translateX = current * slideWidth;
+
+      carouselRef.current.style.transition = "transform 500ms ease-in-out";
+      carouselRef.current.style.transform = `translateX(-${translateX}px)`;
+
       const transitionEndHandler = () => {
         carouselRef.current.style.transition = "";
       };
@@ -428,7 +413,7 @@ export default function StudyAbroadCarousel() {
             ref={carouselRef}
             className="flex pl-2 sm:pl-0 cursor-grab transition-transform duration-500 ease-in-out"
             style={{
-              transform: `translateX(-${current * getTranslatePercentage()}%)`,
+              transform: `translateX(-${current * getTranslateAmount()}px)`,
             }}
           >
             {slides.map((slide, index) => (

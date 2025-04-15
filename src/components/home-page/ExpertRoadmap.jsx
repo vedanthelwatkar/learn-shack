@@ -61,7 +61,6 @@ const timelineItems = [
 const ExpertRoadmap = () => {
   const [mounted, setMounted] = useState(false);
 
-  // Ensure component is mounted before rendering to avoid hydration issues
   useEffect(() => {
     setMounted(true);
   }, []);

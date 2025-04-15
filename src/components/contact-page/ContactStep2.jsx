@@ -16,14 +16,12 @@ const ContactStep2 = ({
   const [errorMessage, setErrorMessage] = useState("");
   const { setState } = useOtpStore();
 
-  // Reset error message when OTP changes
   useEffect(() => {
     if (otp) {
       setErrorMessage("");
     }
   }, [otp]);
 
-  // Show error from store if exists
   useEffect(() => {
     if (error) {
       setErrorMessage(error);
@@ -31,7 +29,6 @@ const ContactStep2 = ({
     }
   }, [error]);
 
-  // Update submission state based on store loading state
   useEffect(() => {
     setIsSubmitting(isLoading);
   }, [isLoading]);
@@ -46,14 +43,13 @@ const ContactStep2 = ({
       console.error("OTP verification error:", error);
       setErrorMessage("Failed to verify OTP. Please try again.");
     }
-    // Don't set isSubmitting to false here - let the effect handle it based on store
   };
 
   const handleResendOTP = async () => {
     try {
       await onResend();
-      setOtp(""); // Clear OTP field after resending
-      setErrorMessage(""); // Clear any errors
+      setOtp("");
+      setErrorMessage("");
     } catch (error) {
       console.error("Resend OTP error:", error);
       setErrorMessage("Failed to resend OTP. Please try again.");

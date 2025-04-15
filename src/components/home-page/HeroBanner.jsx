@@ -85,10 +85,10 @@ const HeroBanner = () => {
           alt="Student"
           className="absolute inset-0 w-full h-full object-cover"
         />
-        <span className="absolute left-6 sm:left-12 bottom-20 font-sofia z-30 text-neutral-0 font-semibold text-[150px]">
+        <span className="absolute left-6 sm:left-12 md:left-5 bottom-20 md:bottom-[104px] font-sofia z-30 text-neutral-0 font-semibold text-[150px]">
           <QuotesIcon width={isMobile && 40} height={isMobile && 40} />
         </span>
-        <span className="flex w-full h-full items-end relative z-30 text-neutral-0 font-semibold font-heading text-body-xl md:text-body-2xl lg:text-h6 p-6 sm:px-14 sm:py-10 text-center">
+        <span className="flex w-full h-full items-end relative z-30 text-neutral-0 font-semibold font-heading text-body-xl md:text-body-2xl lg:text-h6 p-6 md:px-5 md:py-10 sm:px-14 sm:py-10 text-center">
           Learnshack helped me overcome visa delays and study in Ireland
         </span>
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#33333310] to-[#333333]"></div>

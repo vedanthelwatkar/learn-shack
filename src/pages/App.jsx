@@ -47,7 +47,7 @@ const App = () => {
             <a
               href="https://wa.me/918178759588"
               target="_blank"
-              className="fixed md:right-7 md:bottom-7 right-4 bottom-4 w-16 h-16 cursor-pointer z-50"
+              className="fixed md:right-7 md:bottom-7 right-4 bottom-4 w-12 h-12 md:w-16 md:h-16 cursor-pointer z-50"
             >
               <WhatsappIcon />
             </a>

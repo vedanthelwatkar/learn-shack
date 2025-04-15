@@ -45,21 +45,21 @@ const CuratedByExperts = () => {
           We’ve Got the Resources to Make Your Journey Easy
         </span>
       </div>
-      <div className="flex flex-wrap gap-4 sm:gap-6 justify-center">
+      <div className="flex flex-wrap gap-4 justify-center">
         {curatedCardData.map((card, index) => (
           <div
             key={index}
             className="flex flex-col items-center bg-neutral-0 rounded-sm overflow-hidden max-w-[400px]"
           >
             <div className="h-[6px] w-full bg-brand-primary" />
-            <div className="flex flex-col sm:py-9 sm:px-6 p-4 gap-4 sm:gap-6">
+            <div className="flex flex-col sm:py-9 sm:px-7 p-4 gap-4 sm:gap-7">
               <div className="p-3 w-fit flex items-center rounded-2xl bg-brand-secondary">
                 {card.icon}
               </div>
               <span className="font-medium text-body-lg text-neutral-700">
                 {card.title}
               </span>
-              <span className="font-semibold text-h6 text-neutral-800">
+              <span className="font-heading font-semibold text-h6 text-neutral-800">
                 {card.desc}
               </span>
               <div className="flex text-system-info-600 gap-2">

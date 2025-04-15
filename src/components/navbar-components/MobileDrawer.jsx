@@ -18,18 +18,14 @@ const MobileDrawer = ({ isOpen, isTopBannerVisible }) => {
   const contentRefs = useRef({});
   const [contentHeights, setContentHeights] = useState({});
 
-  // Add effect to prevent background scrolling when drawer is open
   useEffect(() => {
     if (isOpen) {
-      // Save the current scroll position
       const scrollY = window.scrollY;
 
-      // Prevent scrolling on the body
       document.body.style.position = "fixed";
       document.body.style.top = `-${scrollY}px`;
       document.body.style.width = "100%";
     } else {
-      // Re-enable scrolling and restore scroll position
       const scrollY = document.body.style.top;
       document.body.style.position = "";
       document.body.style.top = "";
@@ -38,7 +34,6 @@ const MobileDrawer = ({ isOpen, isTopBannerVisible }) => {
     }
 
     return () => {
-      // Cleanup - ensure scrolling is re-enabled when component unmounts
       document.body.style.position = "";
       document.body.style.top = "";
       document.body.style.width = "";
