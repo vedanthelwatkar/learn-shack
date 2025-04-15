@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Button } from "../ui/button";
 import PlayIcon from "@/svgComponents/PlayIcon";
 import { Separator } from "../ui/separator";
-import uniLogo from "../../assets/svg-uni-logos/stanford-university.svg";
 
 const testimonials = [
   {
@@ -11,7 +10,7 @@ const testimonials = [
     videoId: "3mDvUkZx2fw",
     testimony:
       "LearnShack turned my visa setback into a success story - now I'm studying in Ireland",
-    logo: uniLogo,
+    logo: "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/svg-uni-logos/stanford-university.svg",
     thumbnail: "./countries/study-in-usa.webp",
   },
   {
@@ -20,7 +19,7 @@ const testimonials = [
     videoId: "3mDvUkZx2fw",
     testimony:
       "LearnShack helped me get into a world-class university in the UK",
-    logo: uniLogo,
+    logo: "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/svg-uni-logos/stanford-university.svg",
     thumbnail: "./countries/study-in-canada.webp",
   },
   {
@@ -29,7 +28,7 @@ const testimonials = [
     videoId: "3mDvUkZx2fw",
     testimony:
       "LearnShack helped me secure my dream university in just 3 days + scholarship",
-    logo: uniLogo,
+    logo: "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/svg-uni-logos/stanford-university.svg",
     thumbnail: "./countries/study-in-uk.webp",
   },
   {
@@ -38,7 +37,7 @@ const testimonials = [
     videoId: "3mDvUkZx2fw",
     testimony:
       "LearnShack secured me a €4,000 scholarship and made my dream affordable",
-    logo: uniLogo,
+    logo: "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/svg-uni-logos/stanford-university.svg",
     thumbnail: "./countries/study-in-australia.webp",
   },
 ];

@@ -1,14 +1,31 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { motion, useAnimation, useAnimationFrame } from "framer-motion";
 import BoltIcon from "@/svgComponents/BoltIcon";
+import useConstantsStore, { getS3 } from "@/store/useConstantsStore";
 
 const UniversityCarousel = () => {
-  const logos = import.meta.glob("/src/assets/svg-uni-logos/*.svg", {
-    eager: true,
-    as: "url",
-  });
+  const [universities, setUniversities] = useState([]);
+  const { universityLogos } = useConstantsStore();
 
-  const universities = Object.values(logos);
+  useEffect(() => {
+    getS3({
+      bucketName: "learn-shack-new-bucket",
+      prefix: "svg-uni-logos/",
+    });
+
+    return () => {
+      console.log("Component unmounting");
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log("universityLogos changed:", universityLogos);
+    if (universityLogos && universityLogos.length > 0) {
+      const mappedUrls = universityLogos.map((item) => item.url);
+      console.log("Setting universities with:", mappedUrls);
+      setUniversities(mappedUrls);
+    }
+  }, [universityLogos]);
   const duplicatedUniversities = [...universities, ...universities];
 
   const carouselRef = useRef(null);

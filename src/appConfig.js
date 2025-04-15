@@ -4,6 +4,7 @@ export const appConfig = {
 
 export const ApiEndPoints = {
   OTP: "/otp",
+  getS3: "/get-s3",
 };
 
 export const returnHeader = (
