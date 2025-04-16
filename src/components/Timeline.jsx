@@ -21,7 +21,7 @@ export function TimelineItem({
       <div className="hidden sm:flex flex-col items-center">
         <div
           className={cn(
-            "flex h-10 w-10 items-center justify-center rounded-full bg-white text-lg font-semibold text-neutral-800 border-2 border-gray-200 z-10",
+            "flex h-10 w-10 items-center justify-center rounded-full bg-neutral-0 text-lg font-semibold text-neutral-800 border-2 border-gray-200 z-10",
             isActive && "border-brand-primary text-brand-primary",
             isCompleted && "border-brand-primary text-brand-primary"
           )}
@@ -49,7 +49,7 @@ export function TimelineItem({
 
       <div className="flex-1 sm:pb-12 pb-6 w-full px-5 lg:px-0 md:px-0">
         <div className="w-full rounded-lg flex flex-col items-center md:items-start h-fit relative">
-          <div className="relative z-30 bg-neutral-50">
+          <div className="relative z-30 bg-neutral-50 rounded-t-lg">
             <div className="w-full flex justify-between bg-brand-primary px-6 py-2 text-neutral-0 rounded-t-lg">
               <span className="font-semibold text-body-sm text-neutral-0">
                 LEARNSHACK
@@ -75,7 +75,7 @@ export function TimelineItem({
               </span>
             </div>
           </div>
-          <div className="sticky bottom-6 w-full z-10 pt-8 pb-6 px-7 flex flex-col gap-3 bg-neutral-50 rounded-b-lg ">
+          <div className="sticky sm:relative bottom-6 sm:bottom-0 w-full z-10 pt-8 pb-6 px-7 flex flex-col gap-3 bg-neutral-50 rounded-b-lg ">
             <h4 className="font-medium text-neutral-600 text-body-xl">
               Traditional consultancies
             </h4>
@@ -117,11 +117,12 @@ export function Timeline({ items, className }) {
     };
 
     const calculateProgress = () => {
-      const scrollY = window.scrollY;
+      const container = document.getElementById("main-content");
+      container && container.scrollTop > 0
+        ? container.scrollTop
+        : window.scrollY;
+
       const windowHeight = window.innerHeight;
-
-      const adjustedScrollY = scrollY + headerHeight;
-
       const newProgress = [...progressState];
 
       for (let i = 0; i < itemMeasurements.current.length; i++) {
@@ -135,16 +136,16 @@ export function Timeline({ items, className }) {
           continue;
         }
 
-        const viewportPosition = measurement.top - adjustedScrollY;
+        const rect = itemRefs.current[i].getBoundingClientRect();
+        const elementTopRelativeToViewport = rect.top;
 
         const triggerPoint = windowHeight * 0.6;
 
-        if (viewportPosition < triggerPoint) {
+        if (elementTopRelativeToViewport < triggerPoint) {
           const progressRange = measurement.lineHeight;
-          const progressPixels = triggerPoint - viewportPosition;
+          const progressPixels = triggerPoint - elementTopRelativeToViewport;
 
           let calculatedProgress = (progressPixels / progressRange) * 100;
-
           calculatedProgress = Math.min(Math.max(calculatedProgress, 0), 100);
 
           newProgress[i] = calculatedProgress;
@@ -172,14 +173,22 @@ export function Timeline({ items, className }) {
       }
     };
 
-    window.addEventListener("scroll", scrollHandler, { passive: true });
     window.addEventListener("resize", initMeasurements);
+
+    window.addEventListener("scroll", scrollHandler, { passive: true });
+    const container = document.getElementById("main-content");
+    if (container) {
+      container.addEventListener("scroll", scrollHandler, { passive: true });
+    }
 
     return () => {
       window.removeEventListener("scroll", scrollHandler);
+      if (container) {
+        container.removeEventListener("scroll", scrollHandler);
+      }
       window.removeEventListener("resize", initMeasurements);
     };
-  }, [items.length, progressState]);
+  }, [items.length]);
 
   return (
     <div className={cn("relative", className)} ref={timelineRef}>

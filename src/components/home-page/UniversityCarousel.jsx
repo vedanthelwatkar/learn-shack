@@ -8,21 +8,18 @@ const UniversityCarousel = () => {
   const { universityLogos } = useConstantsStore();
 
   useEffect(() => {
-    getS3({
-      bucketName: "learn-shack-new-bucket",
-      prefix: "svg-uni-logos/",
-    });
-
-    return () => {
-      console.log("Component unmounting");
-    };
+    getS3(
+      {
+        bucketName: "learn-shack-new-bucket",
+        prefix: "svg-uni-logos/",
+      },
+      { variable: "universityLogos" }
+    );
   }, []);
 
   useEffect(() => {
-    console.log("universityLogos changed:", universityLogos);
     if (universityLogos && universityLogos.length > 0) {
       const mappedUrls = universityLogos.map((item) => item.url);
-      console.log("Setting universities with:", mappedUrls);
       setUniversities(mappedUrls);
     }
   }, [universityLogos]);
@@ -87,7 +84,7 @@ const UniversityCarousel = () => {
                   <img
                     src={item}
                     alt={`University logo ${index}`}
-                    className="h-14 w-auto mix-blend-screen"
+                    className="h-10 sm:h-[60px] md:h-20 w-auto mix-blend-screen"
                   />
                 </div>
               ))}

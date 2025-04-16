@@ -1,3 +1,4 @@
+// NavBar.jsx
 "use client";
 
 import { useEffect, useRef, useState } from "react";
@@ -11,11 +12,12 @@ import SearchIcon from "@/svgComponents/SearchIcon";
 import HamburgerIcon from "@/svgComponents/HamburgerIcon";
 import PlusIcon from "@/svgComponents/PlusIcon";
 import { useNavigate } from "react-router-dom";
+import { useLayout } from "@/context/LayoutContext";
 
 const NavBar = () => {
   const [navDrawerOpen, setNavDrawerOpen] = useState(false);
   const [mobileSearchVisible, setMobileSearchVisible] = useState(false);
-  const [isTopBannerVisible, setIsTopBannerVisible] = useState(true);
+  const { setIsTopBannerVisible, setNavbarHeight } = useLayout();
   const navRef = useRef(null);
   const bannerRef = useRef(null);
   const navigate = useNavigate();
@@ -28,6 +30,7 @@ const NavBar = () => {
         "--navbar-height",
         `${height}px`
       );
+      setNavbarHeight(height);
     };
 
     updateNavbarHeight(navRef.current.getBoundingClientRect().height);
@@ -41,7 +44,7 @@ const NavBar = () => {
     observer.observe(navRef.current);
 
     return () => observer.disconnect();
-  }, []);
+  }, [setNavbarHeight]);
 
   useEffect(() => {
     if (!bannerRef.current) return;
@@ -61,7 +64,7 @@ const NavBar = () => {
     return () => {
       bannerObserver.disconnect();
     };
-  }, []);
+  }, [setIsTopBannerVisible]);
 
   return (
     <>
@@ -75,7 +78,10 @@ const NavBar = () => {
         <div className="bg-white flex flex-col w-full">
           <div className="px-5 lg:px-20 lg:py-2 py-1 relative">
             <div className="flex justify-between items-center">
-              <div className="w-[80px] h-[48px] lg:w-[100px] lg:h-[60px] flex-shrink-0">
+              <div
+                className="w-[80px] h-[48px] lg:w-[100px] lg:h-[60px] flex-shrink-0"
+                onClick={() => navigate("/")}
+              >
                 <LogoLight />
               </div>
 
@@ -92,7 +98,13 @@ const NavBar = () => {
               <div className="hidden lg:flex items-center gap-6">
                 <NavigationMenuComponent />
                 <Button variant="outline">Evaluate Profile</Button>
-                <Button onClick={() => navigate("/contact")}>
+                <Button
+                  onClick={() =>
+                    navigate("/contact", {
+                      state: { ctaText: "Talk to Founders" },
+                    })
+                  }
+                >
                   Talk to Founders
                 </Button>
               </div>
@@ -124,10 +136,7 @@ const NavBar = () => {
           </div>
         </div>
 
-        <MobileDrawer
-          isOpen={navDrawerOpen}
-          isTopBannerVisible={isTopBannerVisible}
-        />
+        <MobileDrawer isOpen={navDrawerOpen} setIsOpen={setNavDrawerOpen} />
       </nav>
     </>
   );

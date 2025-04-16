@@ -4,13 +4,14 @@ import { ApiEndPoints, appConfig } from "@/appConfig";
 
 const useConstantsStore = create((set) => ({
   universityLogos: null,
+  constantImages: null,
   isLoading: false,
   error: null,
 }));
 
 const { setState } = useConstantsStore;
 
-export const getS3 = async (data) => {
+export const getS3 = async (data, { variable }) => {
   console.log(data, "data");
   setState({ isLoading: true, error: null });
 
@@ -22,7 +23,7 @@ export const getS3 = async (data) => {
 
     if (response.data.success) {
       setState({
-        universityLogos: response.data.data,
+        [variable]: response.data.data,
         isLoading: false,
       });
       return true;

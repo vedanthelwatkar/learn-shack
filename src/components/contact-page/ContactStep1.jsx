@@ -9,8 +9,11 @@ import {
 import { countries } from "@/constants";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useLocation } from "react-router-dom";
 
 const ContactStep1 = ({ initialData = {}, onSubmit }) => {
+  const location = useLocation();
+  const state = location.state;
   const [selectedCountry, setSelectedCountry] = useState(
     initialData.countryCode || "+91"
   );
@@ -303,7 +306,11 @@ const ContactStep1 = ({ initialData = {}, onSubmit }) => {
         </div>
       </div>
       <Button className="flex w-full" type="submit" disabled={isSubmitting}>
-        {isSubmitting ? "Processing..." : "Book a FREE counselling today"}
+        {isSubmitting
+          ? "Processing..."
+          : state?.ctaText
+          ? state?.ctaText
+          : "Book a FREE counselling today"}
       </Button>
     </form>
   );

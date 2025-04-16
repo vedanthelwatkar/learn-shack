@@ -15,6 +15,8 @@ import LinkedinIcon from "@/svgComponents/LinkedinIcon";
 import CopyrightIcon from "@/svgComponents/CopyrightIcon";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import WhatsappSecondaryIcon from "@/svgComponents/WhatsappSecondaryIcon";
+import useConstantsStore from "@/store/useConstantsStore";
+import { getImageFromS3 } from "@/hooks/get-images";
 
 const socialLinks = [
   {
@@ -88,6 +90,8 @@ const navLinks = {
     { name: "About Us", href: "/about-us" },
     { name: "Our Services", href: "/services" },
     { name: "Testimonials & Reviews", href: "/testimonials" },
+    { name: "Privacy Policy", href: "/privacy-policy" },
+    { name: "Terms & Conditions", href: "/terms-and-conditions" },
   ],
   Services: [
     { name: "Profile Evaluator", href: "/services/profile-evaluator" },
@@ -108,15 +112,17 @@ const navLinks = {
 const Footer = () => {
   const isMobile = useMediaQuery();
   const isTablet = useMediaQuery("(min-width: 768px) and (max-width: 1023px)");
+  const { constantImages } = useConstantsStore();
 
   const getBrandQuoteImg = () => {
-    switch (true) {
-      case isMobile:
-        return "./brand-quote-mobile.png";
-      case isTablet:
-        return "./brand-quote-tablet.png";
-      default:
-        return "./brand-quote-desktop.png";
+    if (!constantImages || !constantImages.length) return "";
+
+    if (isMobile) {
+      return getImageFromS3(constantImages, "brand-quote-mobile.png");
+    } else if (isTablet) {
+      return getImageFromS3(constantImages, "brand-quote-tablet.png");
+    } else {
+      return getImageFromS3(constantImages, "brand-quote-desktop.png");
     }
   };
 
@@ -132,8 +138,7 @@ const Footer = () => {
             journey together. Book your FREE counseling session today!
           </span>
 
-          {}
-          <div className="flex gap-2 md:self-center">
+          <div className="flex gap-2">
             {socialLinks.map((link) => (
               <a
                 key={link.name}
@@ -187,7 +192,6 @@ const Footer = () => {
       <Separator className="sm:my-10 my-8  h-[0.5px] bg-neutral-0 opacity-25" />
 
       <div className="flex flex-wrap">
-        {}
         <div className="flex-grow flex-shrink-0 pr-80 lg:pr-12 mb-12">
           <h3 className="text-neutral-0 font-semibold text-body-xl mb-4">
             Get in Touch
@@ -216,7 +220,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {}
         <div className="flex-grow flex-shrink-0 md:pr-40 lg:basis-48 lg:pr-12 mb-12">
           <h3 className="text-neutral-0 font-semibold text-body-xl mb-4">
             Countries
@@ -237,7 +240,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {}
         <div className="flex-grow flex-shrink-0 md:pr-40 lg:basis-48 lg:pr-12 mb-12">
           <h3 className="text-neutral-0 font-semibold text-body-xl mb-4">
             Test Preparation
@@ -260,7 +262,6 @@ const Footer = () => {
 
         <div className="flex-grow flex-shrink-0 md:pr-40 lg:basis-48 lg:pr-12 mb-12">
           <div className="mb-10">
-            {}
             <h3 className="text-neutral-0 font-semibold text-body-xl mb-4">
               Company
             </h3>
@@ -280,7 +281,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {}
           <div>
             <h3 className="text-neutral-0 font-semibold text-body-xl mb-4">
               Services
@@ -304,7 +304,6 @@ const Footer = () => {
 
         <div className="flex-grow flex-shrink-0 md:pr-40 lg:basis-48 lg:pr-12 mb-12">
           <div className="mb-10">
-            {}
             <h3 className="text-neutral-0 font-semibold text-body-xl mb-4">
               Resources
             </h3>
@@ -324,7 +323,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {}
           <div>
             <h3 className="text-neutral-0 font-semibold text-body-xl mb-4">
               Tools

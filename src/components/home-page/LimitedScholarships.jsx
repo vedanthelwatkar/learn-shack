@@ -45,7 +45,7 @@ const LimitedScholarships = () => {
         <div className="flex relative p-3 sm:p-6 self-center">
           <GraduationHatIcon className="sm:hidden absolute -top-6 -left-5" />
           <img
-            src="./scholarship-with-learnshack.webp"
+            src="https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/scholarship-with-learnshack.webp"
             alt="scholarship-with-learnshack"
           />
         </div>

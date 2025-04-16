@@ -12,11 +12,15 @@ import BookIcon from "@/svgComponents/BookIcon";
 import ReferIcon from "@/svgComponents/ReferIcon";
 import InstagramColouredIcon from "@/svgComponents/InstagramColouredIcon";
 import LinkedinColouredIcon from "@/svgComponents/LinkedinColouredIcon";
+import { useLayout } from "@/context/LayoutContext";
+import { useNavigate } from "react-router-dom";
 
-const MobileDrawer = ({ isOpen, isTopBannerVisible }) => {
+const MobileDrawer = ({ isOpen, setIsOpen }) => {
   const [expandedCategory, setExpandedCategory] = useState(null);
   const contentRefs = useRef({});
   const [contentHeights, setContentHeights] = useState({});
+  const { getFullPageHeight } = useLayout();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isOpen) {
@@ -74,26 +78,27 @@ const MobileDrawer = ({ isOpen, isTopBannerVisible }) => {
     }
   };
 
-  const getDrawerHeight = () => {
-    if (!isTopBannerVisible) return "calc(100dvh - 56px)";
-    if (typeof window !== "undefined" && window.innerWidth >= 768) {
-      return "calc(100dvh - 100px)";
-    }
-    return "calc(100dvh - 113px)";
-  };
-
   return (
     <div
       className={`absolute left-0 w-full bg-neutral-0 z-50 overflow-y-auto scrollbar-hide transition-transform duration-300 ease-in-out ${
         isOpen ? "translate-x-0" : "-translate-x-full"
       }`}
       style={{
-        height: getDrawerHeight(),
+        height: getFullPageHeight(),
       }}
     >
       <div className="flex flex-col h-full">
         <div className="py-6 px-5">
-          <Button variant="default" className="w-full">
+          <Button
+            variant="default"
+            className="w-full"
+            onClick={() => {
+              navigate("/contact", {
+                state: { ctaText: "Talk to an Expert" },
+              });
+              setIsOpen(false);
+            }}
+          >
             Talk to an Expert
           </Button>
         </div>

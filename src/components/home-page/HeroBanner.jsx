@@ -38,9 +38,7 @@ const HeroBanner = () => {
             <div className="flex flex-col">
               <h1 className="lg:text-h1 md:text-h2 text-h1 font-bold text-neutral-800 font-heading self-center sm:self-start">
                 We Guide You To
-              </h1>
-              <h1 className="lg:text-h1 md:text-h2 text-h1 font-bold text-neutral-800 font-heading self-center sm:self-start text-center sm:text-start whitespace-nowrap">
-                The Right University
+                <br /> The Right University
               </h1>
             </div>
             <span className="text-h6 lg:text-[28px] text-neutral-600 font-medium font-heading text-center sm:text-start">

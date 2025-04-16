@@ -3,6 +3,7 @@ import { useState, useRef, useId, useEffect } from "react";
 import { Button } from "../ui/button";
 import RightDirection from "@/svgComponents/RightDirection";
 import { useMediaQuery } from "@/hooks/use-media-query";
+import useConstantsStore from "@/store/useConstantsStore";
 
 const Slide = ({ slide, index, current, handleSlideClick }) => {
   const slideRef = useRef(null);
@@ -54,7 +55,7 @@ const Slide = ({ slide, index, current, handleSlideClick }) => {
   const { src, title, description, searches, buttons } = slide;
 
   return (
-    <div className="flex-shrink-0 w-[300px] md:w-[528px] lg:w-[608px] h-[494px] md:h-[390px] md: px-2 sm:px-4">
+    <div className="flex-shrink-0 w-[300px] md:w-[528px] lg:w-[608px] h-[494px] md:h-[390px]">
       <div
         ref={slideRef}
         className="rounded-sm overflow-hidden flex h-full flex-col sm:flex-row bg-neutral-50"
@@ -124,16 +125,29 @@ const CarouselControl = ({ type, title, handleClick }) => {
 };
 
 export default function StudyAbroadCarousel() {
-  const slides = [
+  const { constantImages } = useConstantsStore();
+
+  const baseSlides = [
     {
-      src: "./countries/study-in-usa.webp",
-      title: "Study in USA",
+      src: "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/study-in-uk.webp",
+      title: "Study in UK",
       description:
-        "Explore affordable education in USA with top-ranked universities & scholarships.",
+        "Explore affordable education in UK with top-ranked universities & scholarships.",
+      searches: ["MBA in UK", "Data Science in UK", "Psychology in UK"],
+      buttons: {
+        view: "View Country",
+        enquire: "Enquire Now",
+      },
+    },
+    {
+      src: "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/study-in-australia.webp",
+      title: "Study in Australia",
+      description:
+        "Explore affordable education in Australia with top-ranked universities & scholarships.",
       searches: [
-        "Computer Science in USA",
-        "Business & Management in USA",
-        "Social Sciences in USA",
+        "Engineering & IT in Australia",
+        "Hospitality in Australia",
+        "Business & Management in Australia",
       ],
       buttons: {
         view: "View Country",
@@ -141,22 +155,7 @@ export default function StudyAbroadCarousel() {
       },
     },
     {
-      src: "./countries/study-in-canada.webp",
-      title: "Study in Canada",
-      description:
-        "Explore affordable education in Canada with top-ranked universities & scholarships.",
-      searches: [
-        "Software Engineering in Canada",
-        "Pharmacy in Canada",
-        "Engineering in Canada",
-      ],
-      buttons: {
-        view: "View Country",
-        enquire: "Enquire Now",
-      },
-    },
-    {
-      src: "./countries/study-in-germany.webp",
+      src: "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/study-in-germany.webp",
       title: "Study in Germany",
       description:
         "Explore affordable education in Germany with top-ranked universities & scholarships.",
@@ -171,25 +170,29 @@ export default function StudyAbroadCarousel() {
       },
     },
     {
-      src: "./countries/study-in-uk.webp",
-      title: "Study in UK",
+      src: "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/study-in-usa.webp",
+      title: "Study in USA",
       description:
-        "Explore affordable education in UK with top-ranked universities & scholarships.",
-      searches: ["MBA in UK", "Data Science in UK", "Psychology in UK"],
+        "Explore affordable education in USA with top-ranked universities & scholarships.",
+      searches: [
+        "Computer Science in USA",
+        "Business & Management in USA",
+        "Social Sciences in USA",
+      ],
       buttons: {
         view: "View Country",
         enquire: "Enquire Now",
       },
     },
     {
-      src: "./countries/study-in-australia.webp",
-      title: "Study in Australia",
+      src: "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/study-in-canada.webp",
+      title: "Study in Canada",
       description:
-        "Explore affordable education in Australia with top-ranked universities & scholarships.",
+        "Explore affordable education in Canada with top-ranked universities & scholarships.",
       searches: [
-        "Engineering & IT in Australia",
-        "Hospitality in Australia",
-        "Business & Management in Australia",
+        "Software Engineering in Canada",
+        "Pharmacy in Canada",
+        "Engineering in Canada",
       ],
       buttons: {
         view: "View Country",
@@ -198,12 +201,12 @@ export default function StudyAbroadCarousel() {
     },
   ];
 
-  const [current, setCurrent] = useState(0);
+  const [slideCounter, setSlideCounter] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const isMobile = useMediaQuery("(max-width: 767px)");
   const isTablet = useMediaQuery("(min-width: 768px) and (max-width: 1023px)");
   const carouselRef = useRef(null);
   const touchStartXRef = useRef(0);
-  const touchEndXRef = useRef(0);
   const isDraggingRef = useRef(false);
   const startTimeRef = useRef(0);
   const startPositionRef = useRef(0);
@@ -211,26 +214,59 @@ export default function StudyAbroadCarousel() {
   const prevTranslateRef = useRef(0);
   const animationRef = useRef(null);
 
+  const getVisibleSlideCount = () => {
+    if (isMobile) return 1;
+    if (isTablet) return 2;
+    return 2;
+  };
+
   const getTranslateAmount = () => {
     if (isMobile) return 300;
     if (isTablet) return 528;
     return 608;
   };
 
+  const getFullSlideWidth = () => {
+    const slideWidth = getTranslateAmount();
+    const gapWidth = 24;
+    return slideWidth + gapWidth;
+  };
+
+  const getRelativeIndex = (index) => {
+    return index % baseSlides.length;
+  };
+
+  const getSlidesForRendering = () => {
+    const totalNeeded = slideCounter + getVisibleSlideCount() + 3;
+    const slides = [];
+
+    for (let i = 0; i < totalNeeded; i++) {
+      const slideIndex = getRelativeIndex(i);
+      slides.push({
+        ...baseSlides[slideIndex],
+        key: `slide-${i}`,
+      });
+    }
+
+    return slides;
+  };
+
   const handlePreviousClick = () => {
-    const previous = current - 1;
-    setCurrent(previous < 0 ? slides.length - 1 : previous);
+    if (isTransitioning || slideCounter === 0) return;
+    setIsTransitioning(true);
+    setSlideCounter(slideCounter - 1);
   };
 
   const handleNextClick = () => {
-    const next = current + 1;
-    setCurrent(next === slides.length ? 0 : next);
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setSlideCounter(slideCounter + 1);
   };
 
   const handleSlideClick = (index) => {
-    if (current !== index) {
-      setCurrent(index);
-    }
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setSlideCounter(index);
   };
 
   const handleTouchMove = (e) => {
@@ -242,27 +278,31 @@ export default function StudyAbroadCarousel() {
   };
 
   const handleTouchStart = (e) => {
+    if (isTransitioning) return;
+
     startTimeRef.current = Date.now();
     startPositionRef.current = e.touches[0].clientX;
     isDraggingRef.current = true;
 
     if (carouselRef.current) {
-      const slideWidth = getTranslateAmount();
-      currentTranslateRef.current = -current * slideWidth;
+      const fullSlideWidth = getFullSlideWidth();
+      currentTranslateRef.current = -slideCounter * fullSlideWidth;
       prevTranslateRef.current = currentTranslateRef.current;
       animationRef.current = requestAnimationFrame(animation);
     }
   };
 
   const handleMouseDown = (e) => {
+    if (isTransitioning) return;
+
     e.preventDefault();
     startTimeRef.current = Date.now();
     startPositionRef.current = e.clientX;
     isDraggingRef.current = true;
 
     if (carouselRef.current) {
-      const slideWidth = getTranslateAmount();
-      currentTranslateRef.current = -current * slideWidth;
+      const fullSlideWidth = getFullSlideWidth();
+      currentTranslateRef.current = -slideCounter * fullSlideWidth;
       prevTranslateRef.current = currentTranslateRef.current;
       animationRef.current = requestAnimationFrame(animation);
       carouselRef.current.style.cursor = "grabbing";
@@ -283,7 +323,7 @@ export default function StudyAbroadCarousel() {
 
     const movedPixels = currentTranslateRef.current - prevTranslateRef.current;
 
-    if (movedPixels > 50) {
+    if (movedPixels > 50 && slideCounter > 0) {
       handlePreviousClick();
     } else if (movedPixels < -50) {
       handleNextClick();
@@ -302,7 +342,7 @@ export default function StudyAbroadCarousel() {
 
     const movedPixels = currentTranslateRef.current - prevTranslateRef.current;
 
-    if (movedPixels > 50) {
+    if (movedPixels > 50 && slideCounter > 0) {
       handlePreviousClick();
     } else if (movedPixels < -50) {
       handleNextClick();
@@ -345,15 +385,15 @@ export default function StudyAbroadCarousel() {
 
   useEffect(() => {
     if (carouselRef.current) {
-      const slideWidth = getTranslateAmount();
-
-      const translateX = current * slideWidth;
+      const fullSlideWidth = getFullSlideWidth();
 
       carouselRef.current.style.transition = "transform 500ms ease-in-out";
-      carouselRef.current.style.transform = `translateX(-${translateX}px)`;
+      carouselRef.current.style.transform = `translateX(-${
+        slideCounter * fullSlideWidth
+      }px)`;
 
       const transitionEndHandler = () => {
-        carouselRef.current.style.transition = "";
+        setIsTransitioning(false);
       };
 
       carouselRef.current.addEventListener(
@@ -370,7 +410,9 @@ export default function StudyAbroadCarousel() {
         }
       };
     }
-  }, [current, isMobile, isTablet]);
+  }, [slideCounter, isMobile, isTablet]);
+
+  const slides = getSlidesForRendering();
 
   return (
     <div className="bg-brand-secondary py-[60px] sm:py-20 w-full md:px-[60px] lg:px-24 flex flex-col gap-8 sm:gap-12 items-center justify-center max-w-[100vw] overflow-x-hidden">
@@ -411,17 +453,14 @@ export default function StudyAbroadCarousel() {
         >
           <div
             ref={carouselRef}
-            className="flex pl-2 sm:pl-0 cursor-grab transition-transform duration-500 ease-in-out"
-            style={{
-              transform: `translateX(-${current * getTranslateAmount()}px)`,
-            }}
+            className="flex pl-2 sm:pl-0 cursor-grab transition-transform duration-500 ease-in-out gap-6"
           >
             {slides.map((slide, index) => (
               <Slide
-                key={index}
+                key={slide.key}
                 slide={slide}
                 index={index}
-                current={current}
+                current={slideCounter}
                 handleSlideClick={handleSlideClick}
               />
             ))}
