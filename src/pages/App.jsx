@@ -17,10 +17,21 @@ import PrivacyPolicy from "./PrivacyPolicy";
 import ErrorPage from "./ErrorPage";
 import NotFound from "./NotFound";
 import { LayoutProvider } from "@/context/LayoutContext";
+import { getS3 } from "@/store/useConstantsStore";
 
 const ScrollToTop = ({ children }) => {
   const location = useLocation();
   const navigationType = useNavigationType();
+
+  useEffect(() => {
+    getS3(
+      {
+        bucketName: "learn-shack-new-bucket",
+        prefix: "public/",
+      },
+      { variable: "constantImages" }
+    );
+  }, []);
 
   useLayoutEffect(() => {
     document.documentElement.scrollTo(0, 0);

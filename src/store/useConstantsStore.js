@@ -12,7 +12,6 @@ const useConstantsStore = create((set) => ({
 const { setState } = useConstantsStore;
 
 export const getS3 = async (data, { variable }) => {
-  console.log(data, "data");
   setState({ isLoading: true, error: null });
 
   try {

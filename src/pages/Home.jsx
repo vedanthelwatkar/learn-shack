@@ -7,20 +7,8 @@ import StudyAbroadCarousel from "@/components/home-page/StudyAbroadCarousel";
 import UniversityCarousel from "@/components/home-page/UniversityCarousel";
 import WhyLSE from "@/components/home-page/WhyLSE";
 import Faq from "@/components/home-page/Faq";
-import { getS3 } from "@/store/useConstantsStore";
-import { useEffect } from "react";
 
 const Home = () => {
-  useEffect(() => {
-    getS3(
-      {
-        bucketName: "learn-shack-new-bucket",
-        prefix: "public/",
-      },
-      { variable: "constantImages" }
-    );
-  }, []);
-
   return (
     <div className="w-full flex flex-col">
       <HeroBanner />
