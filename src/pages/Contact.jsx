@@ -61,8 +61,6 @@ const avatarData = [
 ];
 
 const Contact = () => {
-  throw new Error("Test Error from Contact Page");
-
   return (
     <div className="w-full py-6 sm:gap-0 md:gap-10 gap-8 sm:py-[60px] px-5 lg:px-24 md:px-[60px] flex lg:flex-row flex-col justify-between">
       <div className="flex flex-col gap-8 sm:gap-12 w-full lg:w-1/2 lg:max-w-[600px] my-5 items-center">
