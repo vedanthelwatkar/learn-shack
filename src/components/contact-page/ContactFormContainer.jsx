@@ -4,6 +4,7 @@ import ContactStep1 from "@/components/contact-page/ContactStep1";
 import ContactStep2 from "./ContactStep2";
 import ContactStep3 from "./ContactStep3";
 import YoureAllSetCircleCheck from "@/svgComponents/YoureAllSetCircleCheck";
+import { postContactInfo } from "@/store/ContactStore";
 
 const ContactFormContainer = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -160,9 +161,9 @@ const ContactFormContainer = () => {
     };
 
     setFormData(updatedFormData);
+    postContactInfo(updatedFormData);
     setFormSubmitted(true);
 
-    // Perform final submission to backend or other service
     console.log("Form submitted successfully", updatedFormData);
   };
 
