@@ -7,6 +7,7 @@ const ContactStep2 = ({
   phoneNumber,
   onVerify,
   onResend,
+  setIsOtpSent,
   setCurrentStep,
   isLoading,
   error,
@@ -15,7 +16,6 @@ const ContactStep2 = ({
   const [otp, setOtp] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const { setState } = useOtpStore();
 
   useEffect(() => {
     if (otp) {
@@ -64,7 +64,7 @@ const ContactStep2 = ({
         <button
           className="text-brand-primary text-body-md font-medium"
           onClick={() => {
-            setState({ isOtpSent: false });
+            setIsOtpSent(false);
             setCurrentStep(1);
           }}
         >

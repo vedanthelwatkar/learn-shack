@@ -203,6 +203,7 @@ const ContactFormContainer = () => {
           phoneNumber={`${formData.countryCode} ${formData.phoneNumber}`}
           onVerify={handleStep2Submit}
           onResend={handleResendOTP}
+          setIsOtpSent={setIsOtpSent}
           setCurrentStep={setCurrentStep}
           isLoading={isLoading}
           error={error}
