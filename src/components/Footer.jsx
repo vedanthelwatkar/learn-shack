@@ -46,7 +46,7 @@ const navLinks = {
   "Get in Touch": [
     {
       name: "Sector 142, Noida, Uttar Pradesh, India - 201304",
-      href: "https://maps.google.com",
+      href: "https://maps.app.goo.gl/JbMJ6mkJxQTYnewj7",
       icon: <LocationIcon />,
     },
     {
@@ -87,9 +87,18 @@ const navLinks = {
     { name: "SAT", href: "/test-preparation/sat" },
   ],
   Company: [
-    { name: "About Us", href: "/about-us" },
-    { name: "Our Services", href: "/services" },
-    { name: "Testimonials & Reviews", href: "/testimonials" },
+    {
+      name: "About Us",
+      // href: "/about-us"
+    },
+    {
+      name: "Our Services",
+      // href: "/services"
+    },
+    {
+      name: "Testimonials & Reviews",
+      // href: "/testimonials"
+    },
     { name: "Privacy Policy", href: "/privacy-policy" },
     { name: "Terms & Conditions", href: "/terms-and-conditions" },
   ],
@@ -143,6 +152,8 @@ const Footer = () => {
               <a
                 key={link.name}
                 href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label={link.name}
                 className="hover:opacity-80 transition-opacity p-4"
               >
@@ -178,7 +189,7 @@ const Footer = () => {
               </Button>
             </a>
           </div>
-          <span className="text-body-lg text-neutral-0">OR</span>
+          {/* <span className="text-body-lg text-neutral-0">OR</span>
           <div className="flex flex-col gap-3">
             <Button className="w-fit bg-neutral-0 text-brand-primary hover:brightness-110 rounded-sm px-5 py-3">
               Request a Call Back
@@ -186,13 +197,13 @@ const Footer = () => {
             <span className="text-body-lg text-neutral-0">
               We will give you a call between 9 AM to 9 PM
             </span>
-          </div>
+          </div> */}
         </div>
       </div>
       <Separator className="sm:my-10 my-8  h-[0.5px] bg-neutral-0 opacity-25" />
 
       <div className="flex flex-wrap">
-        <div className="flex-grow flex-shrink-0 pr-80 lg:pr-12 mb-12">
+        <div className="flex-grow flex-shrink-0 pr-80 lg:pr-10 mb-12">
           <h3 className="text-neutral-0 font-semibold text-body-xl mb-4">
             Get in Touch
           </h3>
@@ -203,6 +214,8 @@ const Footer = () => {
                 {item.href ? (
                   <a
                     href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-neutral-0 text-body-lg inline-block"
                   >
                     <span className="relative group">
@@ -220,7 +233,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="flex-grow flex-shrink-0 md:pr-40 lg:basis-48 lg:pr-12 mb-12">
+        <div className="flex-grow flex-shrink-0 md:pr-40 lg:basis-48 lg:pr-10 mb-12">
           <h3 className="text-neutral-0 font-semibold text-body-xl mb-4">
             Countries
           </h3>
@@ -228,7 +241,7 @@ const Footer = () => {
             {navLinks.Countries.map((link, index) => (
               <a
                 key={index}
-                href={link.href}
+                // href={link.href}
                 className="text-neutral-0 text-body-lg w-fit"
               >
                 <span className="relative group inline-block">
@@ -240,7 +253,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="flex-grow flex-shrink-0 md:pr-40 lg:basis-48 lg:pr-12 mb-12">
+        <div className="flex-grow flex-shrink-0 md:pr-40 lg:basis-48 lg:pr-10 mb-12">
           <h3 className="text-neutral-0 font-semibold text-body-xl mb-4">
             Test Preparation
           </h3>
@@ -248,7 +261,7 @@ const Footer = () => {
             {navLinks["Test Preparation"].map((link, index) => (
               <a
                 key={index}
-                href={link.href}
+                // href={link.href}
                 className="text-neutral-0 text-body-lg w-fit"
               >
                 <span className="relative group inline-block">
@@ -260,7 +273,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="flex-grow flex-shrink-0 md:pr-40 lg:basis-48 lg:pr-12 mb-12">
+        <div className="flex-grow flex-shrink-0 md:pr-40 lg:basis-48 lg:pr-10 mb-12">
           <div className="mb-10">
             <h3 className="text-neutral-0 font-semibold text-body-xl mb-4">
               Company
@@ -289,7 +302,7 @@ const Footer = () => {
               {navLinks.Services.map((link, index) => (
                 <a
                   key={index}
-                  href={link.href}
+                  // href={link.href}
                   className="text-neutral-0 text-body-lg w-fit"
                 >
                   <span className="relative group inline-block">
@@ -302,7 +315,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="flex-grow flex-shrink-0 md:pr-40 lg:basis-48 lg:pr-12 mb-12">
+        <div className="flex-grow flex-shrink-0 md:pr-40 lg:basis-48 lg:pr-10 mb-12">
           <div className="mb-10">
             <h3 className="text-neutral-0 font-semibold text-body-xl mb-4">
               Resources
@@ -311,7 +324,7 @@ const Footer = () => {
               {navLinks.Resources.map((link, index) => (
                 <a
                   key={index}
-                  href={link.href}
+                  // href={link.href}
                   className="text-neutral-0 text-body-lg w-fit"
                 >
                   <span className="relative group inline-block">
@@ -331,7 +344,7 @@ const Footer = () => {
               {navLinks.Tools.map((link, index) => (
                 <a
                   key={index}
-                  href={link.href}
+                  // href={link.href}
                   className="text-neutral-0 text-body-lg w-fit"
                 >
                   <span className="relative group inline-block">

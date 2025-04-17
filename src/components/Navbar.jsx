@@ -85,19 +85,20 @@ const NavBar = () => {
                 <LogoLight />
               </div>
 
-              {mobileSearchVisible && (
+              {/* {mobileSearchVisible && (
                 <div className="lg:hidden flex-grow px-3 animate-fadeIn">
                   <SearchBarComponent />
                 </div>
-              )}
+              )} */}
 
-              <div className="lg:flex lg:flex-grow items-center gap-6 mx-6 hidden">
+              {/* <div className="lg:flex lg:flex-grow items-center gap-6 mx-6 hidden">
                 <SearchBarComponent />
-              </div>
+              </div> */}
 
-              <div className="hidden lg:flex items-center gap-6">
-                <NavigationMenuComponent />
-                <Button variant="outline">Evaluate Profile</Button>
+              {/* add hidden in class below and flex for lg*/}
+              <div className={`flex items-center gap-6`}>
+                {/* <NavigationMenuComponent /> */}
+                {/* <Button variant="outline">Evaluate Profile</Button> */}
                 <Button
                   onClick={() =>
                     navigate("/contact", {
@@ -109,7 +110,7 @@ const NavBar = () => {
                 </Button>
               </div>
 
-              <div className="lg:hidden flex gap-4 items-center flex-shrink-0">
+              {/* <div className="lg:hidden flex gap-4 items-center flex-shrink-0">
                 <div
                   className="flex h-fit rounded-full bg-brand-secondary p-[6px] items-center justify-center cursor-pointer"
                   onClick={() => setMobileSearchVisible((prev) => !prev)}
@@ -131,7 +132,7 @@ const NavBar = () => {
                     <HamburgerIcon />
                   )}
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

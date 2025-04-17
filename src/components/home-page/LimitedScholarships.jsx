@@ -2,8 +2,11 @@ import React from "react";
 import { Button } from "../ui/button";
 import GraduationHatIcon from "@/svgComponents/GraduationHatIcon";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const LimitedScholarships = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="sm:py-20 py-[60px] w-full px-5 md:px-10 lg:px-24 flex flex-col gap-14 items-center justify-center">
       <div className="flex sm:flex-row flex-col-reverse bg-neutral-0 rounded-xl ">
@@ -36,10 +39,12 @@ const LimitedScholarships = () => {
             </span>
           </div>
           <div className="flex sm:w-fit w-full gap-4">
-            <Button className="flex-1">Apply Now</Button>
-            <Button className="flex-1" variant="outline">
-              Know More
+            <Button className="flex-1" onClick={() => navigate("/contact")}>
+              Apply Now
             </Button>
+            {/* <Button className="flex-1" variant="outline">
+              Know More
+            </Button> */}
           </div>
         </div>
         <div className="flex relative p-3 sm:p-6 self-center">

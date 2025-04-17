@@ -4,9 +4,11 @@ import { Button } from "../ui/button";
 import RightDirection from "@/svgComponents/RightDirection";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import useConstantsStore from "@/store/useConstantsStore";
+import { useNavigate } from "react-router-dom";
 
 const Slide = ({ slide, index, current, handleSlideClick }) => {
   const slideRef = useRef(null);
+  const navigate = useNavigate();
 
   const xRef = useRef(0);
   const yRef = useRef(0);
@@ -96,11 +98,13 @@ const Slide = ({ slide, index, current, handleSlideClick }) => {
           </div>
 
           <div className="flex w-full gap-2 mt-auto">
-            <Button variant="outline" className="flex-1">
+            {/* <Button variant="outline" className="flex-1">
               {buttons.view}
-            </Button>
+            </Button> */}
 
-            <Button className="flex-1">{buttons.enquire}</Button>
+            <Button className="flex-1" onClick={() => navigate("/contact")}>
+              {buttons.enquire}
+            </Button>
           </div>
         </div>
       </div>

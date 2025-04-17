@@ -29,7 +29,7 @@ const UniversityCarousel = () => {
   const containerRef = useRef(null);
   const controls = useAnimation();
   const isHovered = useRef(false);
-  const baseSpeed = useRef(-2);
+  const baseSpeed = useRef(-1.3);
   const xPosition = useRef(0);
   const isFirstRender = useRef(true);
 
@@ -84,7 +84,7 @@ const UniversityCarousel = () => {
                   <img
                     src={item}
                     alt={`University logo ${index}`}
-                    className="h-10 sm:h-[60px] md:h-20 w-auto mix-blend-screen"
+                    className="h-10 sm:h-[60px] w-auto mix-blend-screen"
                   />
                 </div>
               ))}

@@ -16,7 +16,7 @@ const Home = () => {
       <WhyLSE />
       <StudyAbroadCarousel />
       <CuratedByExperts />
-      <StudentReviews />
+      {/* <StudentReviews /> */}
       <ExpertRoadmap />
       <LimitedScholarships />
       <Faq />

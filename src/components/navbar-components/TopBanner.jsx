@@ -17,7 +17,7 @@ const TopBanner = () => {
           <Sparkle />
         </div>
         <span className="flex font-semibold text-center text-body-md">
-          Get Full Access to a 2-Month IELTS Prep Course for Only $99!
+          Admissions open for September 2025 intake!
           {!isMobile && (
             <span className="ml-1">
               <ArrowTopRight />
