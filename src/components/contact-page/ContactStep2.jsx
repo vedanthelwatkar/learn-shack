@@ -10,6 +10,7 @@ const ContactStep2 = ({
   setCurrentStep,
   isLoading,
   error,
+  resendCooldown,
 }) => {
   const [otp, setOtp] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -83,9 +84,11 @@ const ContactStep2 = ({
           <button
             className="text-brand-primary text-body-md font-medium"
             onClick={handleResendOTP}
-            disabled={isSubmitting}
+            disabled={isSubmitting || resendCooldown > 0}
           >
-            Resend
+            {resendCooldown > 0
+              ? `Resend OTP in ${resendCooldown}s`
+              : "Resend OTP"}
           </button>
         </p>
       </div>

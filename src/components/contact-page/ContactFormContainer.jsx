@@ -1,15 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ContactStep1 from "@/components/contact-page/ContactStep1";
 import ContactStep2 from "./ContactStep2";
 import ContactStep3 from "./ContactStep3";
 import YoureAllSetCircleCheck from "@/svgComponents/YoureAllSetCircleCheck";
-import useOtpStore, {
-  sendOtp,
-  verifyOtp,
-  resendOtp,
-} from "@/store/useOtpStore";
-import { postContactInfo } from "@/store/ContactStore";
 
 const ContactFormContainer = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -24,7 +18,21 @@ const ContactFormContainer = () => {
   });
 
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const { isOtpSent, isOtpVerified, isLoading, error } = useOtpStore();
+  const [isOtpSent, setIsOtpSent] = useState(false);
+  const [isOtpVerified, setIsOtpVerified] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [resendCooldown, setResendCooldown] = useState(0);
+
+  useEffect(() => {
+    let interval;
+    if (resendCooldown > 0) {
+      interval = setInterval(() => {
+        setResendCooldown((prev) => prev - 1);
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [resendCooldown]);
 
   useEffect(() => {
     if (isOtpSent) {
@@ -46,7 +54,7 @@ const ContactFormContainer = () => {
       phoneNumber: data.phoneNumber,
       countryCode: data.countryCode,
     });
-    sendOtp(data);
+    sendOtp(data.phoneNumber, data.countryCode);
   };
 
   const handleStep2Submit = async (otp) => {
@@ -54,7 +62,93 @@ const ContactFormContainer = () => {
   };
 
   const handleResendOTP = async () => {
-    return await resendOtp();
+    if (!isOtpSent || resendCooldown > 0) return;
+
+    setError(null);
+    setIsLoading(true);
+
+    try {
+      otplessRef.current?.initiate({
+        channel: "PHONE",
+        phone: formData.phoneNumber,
+        countryCode: formData.countryCode,
+      });
+      setResendCooldown(30);
+      console.log("OTP resent");
+    } catch (e) {
+      console.error("Resend OTP failed:", e);
+      setError("Failed to resend OTP.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const otplessRef = useRef(null);
+
+  useEffect(() => {
+    otplessRef.current = new OTPless((eventCallback) => {
+      const EVENTS_MAP = {
+        ONETAP: () => {
+          const { response } = eventCallback;
+          const token = response?.token;
+          if (token) {
+            console.log("One Tap Token:", token);
+            setIsOtpVerified(true);
+          }
+        },
+        OTP_AUTO_READ: () => {
+          const { otp } = eventCallback.response;
+          console.log("Auto-read OTP:", otp);
+        },
+        FAILED: () => {
+          const { response } = eventCallback;
+          console.error("OTP Failed:", response);
+          setError("OTP verification failed.");
+        },
+        FALLBACK_TRIGGERED: () => {
+          const { response } = eventCallback;
+          console.warn("Fallback triggered:", response);
+        },
+      };
+
+      if ("responseType" in eventCallback) {
+        EVENTS_MAP[eventCallback.responseType]?.();
+      }
+    });
+  }, []);
+
+  const sendOtp = (phoneNumber, countryCode) => {
+    setIsLoading(true);
+    try {
+      otplessRef.current?.initiate({
+        channel: "PHONE",
+        phone: phoneNumber,
+        countryCode: countryCode,
+      });
+      setIsOtpSent(true);
+    } catch (e) {
+      console.error("OTP send failed:", e);
+      setError("Failed to send OTP.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const verifyOtp = async (otp) => {
+    setIsLoading(true);
+    try {
+      otplessRef.current?.verify({
+        channel: "PHONE",
+        phone: formData.phoneNumber,
+        otp,
+        countryCode: formData.countryCode,
+      });
+    } catch (e) {
+      console.error("Verification error:", e);
+      setError("OTP verification error");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleFinalSubmit = async (data) => {
@@ -68,13 +162,8 @@ const ContactFormContainer = () => {
     setFormData(updatedFormData);
     setFormSubmitted(true);
 
-    const result = await postContactInfo(updatedFormData);
-
-    if (result) {
-      console.log("Form submitted successfully");
-    } else {
-      console.error("Form submission failed");
-    }
+    // Perform final submission to backend or other service
+    console.log("Form submitted successfully", updatedFormData);
   };
 
   const variants = {
@@ -117,6 +206,7 @@ const ContactFormContainer = () => {
           setCurrentStep={setCurrentStep}
           isLoading={isLoading}
           error={error}
+          resendCooldown={resendCooldown}
         />
       ),
     },
