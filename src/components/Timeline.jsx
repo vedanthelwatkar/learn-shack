@@ -76,7 +76,7 @@ export function TimelineItem({
             </div>
           </div>
           <div className="sticky sm:relative bottom-6 sm:bottom-0 w-full z-10 pt-8 pb-6 px-7 flex flex-col gap-3 bg-neutral-50 rounded-b-lg ">
-            <h4 className="font-medium text-neutral-600 text-body-xl">
+            <h4 className="font-semibold text-neutral-600 text-body-xl">
               Traditional consultancies
             </h4>
             <p className="text-neutral-600 text-body-xl">{comparison}</p>
