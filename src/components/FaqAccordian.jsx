@@ -43,7 +43,7 @@ export default function FaqAccordion({ faqs = [] }) {
                     animate={{ rotate: openItem === `item-${index}` ? 45 : 0 }}
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                   >
-                    <PlusIcon className="h-5 w-5" />
+                    <PlusIcon className="h-7 w-7" />
                   </motion.div>
                 </button>
               </div>
