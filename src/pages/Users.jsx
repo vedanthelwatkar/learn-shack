@@ -39,7 +39,7 @@ const Users = () => {
 
   return (
     <>
-      <div className="p-4 md:p-20">
+      <div className="p-4 md:p-20 h-[calc(100dvh-113px)] sm:h-[calc(100dvh-100px)] lg:h-[calc(100dvh-120px)] ">
         <span className="w-full flex text-h4 font-heading pb-4 text-neutral-800">
           Users
         </span>
