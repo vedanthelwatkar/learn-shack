@@ -11,6 +11,29 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useLocation } from "react-router-dom";
 
+const tempDomains = [
+  "10minutemail.com",
+  "mailinator.com",
+  "tempmail.com",
+  "guerrillamail.com",
+  "throwawaymail.com",
+  "dispostable.com",
+  "getnada.com",
+  "yopmail.com",
+  "moakt.com",
+  "sharklasers.com",
+  "maildrop.cc",
+  "fakeinbox.com",
+  "trashmail.com",
+  "temp-mail.org",
+  "emailondeck.com",
+  "mintemail.com",
+  "spamgourmet.com",
+  "mytemp.email",
+  "mailcatch.com",
+  "easytrashmail.com",
+];
+
 const ContactStep1 = ({ initialData = {}, onSubmit }) => {
   const location = useLocation();
   const state = location.state;
@@ -53,13 +76,22 @@ const ContactStep1 = ({ initialData = {}, onSubmit }) => {
   const validateFullName = (name) => {
     if (!name.trim()) return "Full name is required";
     if (name.trim().length < 2) return "Name must be at least 2 characters";
+    if (name.trim().length > 59) return "Maximum character limit reached";
+    const nameRegex = /^[A-Za-z\s]+$/;
+    if (!nameRegex.test(name))
+      return "Name can only contain letters and spaces";
     return "";
   };
 
   const validateEmail = (email) => {
     if (!email.trim()) return "Email is required";
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) return "Please enter a valid email address";
+    if (!emailRegex.test(email)) return "Enter a valid email address";
+
+    const domain = email.split("@")[1]?.toLowerCase();
+    if (tempDomains.some((temp) => domain.includes(temp)))
+      return "Temporary email addresses are not allowed";
+
     return "";
   };
 
@@ -68,15 +100,14 @@ const ContactStep1 = ({ initialData = {}, onSubmit }) => {
 
     if (!phoneNumber.trim()) return "Phone number is required";
 
-    if (!/^\d+$/.test(phoneNumber))
-      return "Phone number must contain only digits";
+    if (!/^\d+$/.test(phoneNumber)) return "Enter a valid phone number";
 
     const maxLength = selectedCountryData?.maxNumberLength || 10;
     if (phoneNumber.length > maxLength) {
-      return `Phone number cannot exceed ${maxLength} digits for ${selectedCountryData?.name}`;
+      return `Enter a valid phone number`;
     }
 
-    if (phoneNumber.length < maxLength) return "Phone number is too short";
+    if (phoneNumber.length < maxLength) return "Enter a valid phone number";
 
     return "";
   };
@@ -223,6 +254,8 @@ const ContactStep1 = ({ initialData = {}, onSubmit }) => {
     }
   };
 
+  const hasErrors = !!errors.fullName || !!errors.email || !!errors.phoneNumber;
+
   return (
     <form className="flex flex-col gap-3" onSubmit={handleSubmit} noValidate>
       <div className="flex flex-col gap-4 md:gap-9">
@@ -305,7 +338,11 @@ const ContactStep1 = ({ initialData = {}, onSubmit }) => {
           )}
         </div>
       </div>
-      <Button className="flex w-full" type="submit" disabled={isSubmitting}>
+      <Button
+        className="flex w-full"
+        type="submit"
+        disabled={isSubmitting || hasErrors}
+      >
         {isSubmitting
           ? "Processing..."
           : state?.ctaText

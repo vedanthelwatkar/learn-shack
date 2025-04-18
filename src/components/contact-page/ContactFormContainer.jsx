@@ -23,7 +23,7 @@ const ContactFormContainer = () => {
   const [isOtpVerified, setIsOtpVerified] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [resendCooldown, setResendCooldown] = useState(0);
+  const [resendCooldown, setResendCooldown] = useState(30);
 
   useEffect(() => {
     let interval;
@@ -138,15 +138,29 @@ const ContactFormContainer = () => {
   const verifyOtp = async (otp) => {
     setIsLoading(true);
     try {
-      otplessRef.current?.verify({
+      const response = await otplessRef.current?.verify({
         channel: "PHONE",
         phone: formData.phoneNumber,
         otp,
         countryCode: formData.countryCode,
       });
+      console.log("response: ", response);
+
+      if (!response.success) {
+        const rawMessage =
+          response.response?.errorMessage || "OTP verification failed";
+        const errorMessage = rawMessage.replace(/^Request error:\s*/i, "");
+        setError(errorMessage);
+
+        console.log("Verification failed:", response.response);
+        return { success: false, error: response.response };
+      }
+
+      return { success: true, data: response };
     } catch (e) {
-      console.error("Verification error:", e);
+      console.log("Verification error:", e);
       setError("OTP verification error");
+      return { success: false, error: e };
     } finally {
       setIsLoading(false);
     }
