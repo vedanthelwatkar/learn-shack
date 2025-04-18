@@ -107,7 +107,7 @@ const Contact = () => {
         <ContactFormContainer />
         <div className="bg-system-info-100 px-6 py-4 md:py-5 flex items-center justify-center md:flex-row md:gap-3 flex-col gap-4">
           <div className="flex -space-x-2">
-            <img src="/students-avatar.svg" alt="LS" />
+            <img src="https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/students-avatar.svg" alt="LS" />
           </div>
           <span className="text-body-xl text-system-info-600 font-semibold">
             Trusted by 10,000+ Students
