@@ -18,12 +18,16 @@ import ErrorPage from "./ErrorPage";
 import NotFound from "./NotFound";
 import { LayoutProvider } from "@/context/LayoutContext";
 import { getS3 } from "@/store/useConstantsStore";
+import useContactStore, { getUsers } from "@/store/ContactStore";
+import Users from "./Users";
 
 const ScrollToTop = ({ children }) => {
   const location = useLocation();
   const navigationType = useNavigationType();
+  const { users } = useContactStore();
 
   useEffect(() => {
+    getUsers();
     getS3(
       {
         bucketName: "learn-shack-new-bucket",
@@ -88,6 +92,11 @@ const App = () => {
                 <Route
                   path="/contact"
                   element={<Contact />}
+                  errorElement={<ErrorPage />}
+                />
+                <Route
+                  path="/hidden-contact-table"
+                  element={<Users />}
                   errorElement={<ErrorPage />}
                 />
               </Routes>
