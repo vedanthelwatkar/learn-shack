@@ -84,7 +84,7 @@ const UniversityCarousel = () => {
                   <img
                     src={item}
                     alt={`University logo ${index}`}
-                    className="h-10 sm:h-[80px] w-auto mix-blend-screen"
+                    className="h-10 sm:h-[60px] w-auto mix-blend-screen"
                   />
                 </div>
               ))}

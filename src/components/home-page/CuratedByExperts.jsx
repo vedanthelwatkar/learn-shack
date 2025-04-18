@@ -62,12 +62,12 @@ const CuratedByExperts = () => {
               <span className="font-heading font-semibold text-h6 text-neutral-800">
                 {card.desc}
               </span>
-              <div className="flex text-system-info-600 gap-2">
+              {/* <div className="flex text-system-info-600 gap-2">
                 <button className="font-semibold text-body-md">
                   Learn more
                 </button>
                 <ArrowRight />
-              </div>
+              </div> */}
             </div>
           </div>
         ))}
