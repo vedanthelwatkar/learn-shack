@@ -3,127 +3,116 @@ import React, { useState, useRef, useEffect, forwardRef } from "react";
 const CustomInputOTP = forwardRef(
   ({ maxLength = 4, value = "", onChange, className, onComplete }, ref) => {
     const inputRefs = useRef([]);
+    const hiddenInputRef = useRef(null);
 
+    // Create array of refs for each OTP digit input
     useEffect(() => {
       inputRefs.current = Array(maxLength)
-        .fill(null)
+        .fill()
         .map((_, i) => inputRefs.current[i] || React.createRef());
     }, [maxLength]);
 
-    // Focus the first input when component mounts
+    // Mobile-first focus handling
     useEffect(() => {
-      if (inputRefs.current[0]) {
-        inputRefs.current[0].focus();
-      }
+      const timeout = setTimeout(() => {
+        if (inputRefs.current[0]) {
+          inputRefs.current[0].focus();
+          // Android requires click to show keyboard
+          if (isAndroid()) inputRefs.current[0].click();
+        }
+      }, 350);
+      return () => clearTimeout(timeout);
     }, []);
 
-    // Expose focus method via ref
-    useEffect(() => {
-      if (ref) {
-        ref.current = {
-          focus: () => {
-            if (inputRefs.current[0]) {
-              inputRefs.current[0].focus();
-            }
-          },
-        };
-      }
-    }, [ref]);
+    // Handle mobile paste and autofill
+    const handleInput = (index, e) => {
+      const input = e.target;
+      const newValue = input.value;
 
-    const handleChange = (index, e) => {
-      const digit = e.target.value;
-
-      if (digit && !/^\d$/.test(digit)) return;
-
-      const valueArray = value.split("");
-      valueArray[index] = digit;
-      const newValue = valueArray.join("").slice(0, maxLength);
-      onChange(newValue);
-
-      if (digit && index < maxLength - 1) {
-        inputRefs.current[index + 1].focus();
-      } else if (
-        digit &&
-        index === maxLength - 1 &&
-        newValue.length === maxLength
-      ) {
-        // If the last digit is filled and we have all digits, trigger completion
-        if (onComplete) {
-          onComplete();
-        }
-      }
-    };
-
-    const handleKeyDown = (index, e) => {
-      if (e.key === "Backspace") {
-        const valueArray = value.split("");
-
-        if (!valueArray[index] && index > 0) {
-          valueArray[index - 1] = "";
-          onChange(valueArray.join(""));
-          inputRefs.current[index - 1].focus();
-        } else if (valueArray[index]) {
-          valueArray[index] = "";
-          onChange(valueArray.join(""));
-        }
-      } else if (e.key === "ArrowLeft" && index > 0) {
-        inputRefs.current[index - 1].focus();
-      } else if (e.key === "ArrowRight" && index < maxLength - 1) {
-        inputRefs.current[index + 1].focus();
-      } else if (e.key === "Enter" && value.length === maxLength) {
-        // Handle Enter key press when all digits are filled
-        if (onComplete) {
-          onComplete();
-        }
-      }
-    };
-
-    const handlePaste = (e) => {
-      e.preventDefault();
-      const pastedData = e.clipboardData.getData("text/plain").trim();
-
-      const digits = pastedData.replace(/\D/g, "").slice(0, maxLength);
-
-      if (digits) {
+      // Handle multi-character input (mobile paste/autofill)
+      if (newValue.length > 1) {
+        const digits = newValue.replace(/\D/g, "").slice(0, maxLength);
         onChange(digits);
 
-        const nextEmptyIndex = Math.min(digits.length, maxLength - 1);
-        if (inputRefs.current[nextEmptyIndex]) {
-          inputRefs.current[nextEmptyIndex].focus();
+        if (digits.length === maxLength) {
+          input.blur();
+          if (onComplete) onComplete();
+        } else {
+          const nextIndex = Math.min(digits.length, maxLength - 1);
+          inputRefs.current[nextIndex]?.focus();
         }
+        return;
+      }
 
-        // If all fields are filled after paste, trigger completion
-        if (digits.length === maxLength && onComplete) {
-          onComplete();
+      // Single character input
+      if (newValue && !/^\d$/.test(newValue)) return;
+
+      const updated = value.split("");
+      updated[index] = newValue;
+      const joined = updated.join("").slice(0, maxLength);
+      onChange(joined);
+
+      // Auto-focus next input
+      if (newValue && index < maxLength - 1) {
+        inputRefs.current[index + 1]?.focus();
+      }
+
+      // Submit when complete
+      if (joined.length === maxLength && onComplete) {
+        onComplete();
+      }
+    };
+
+    // Mobile keyboard navigation
+    const handleKeyDown = (index, e) => {
+      if (e.key === "Backspace") {
+        if (!value[index] && index > 0) {
+          inputRefs.current[index - 1]?.focus();
         }
       }
     };
 
     return (
-      <div className={`flex gap-3 justify-center flex-grow ${className || ""}`}>
-        {Array.from({ length: maxLength }).map((_, index) => (
-          <div
-            key={index}
-            className="relative flex h-20 w-20 bg-neutral-100 px-5 py-3 items-center justify-center rounded-md border border-input focus-within:ring-1 focus-within:ring-primary flex-1"
-          >
+      <div className={`flex gap-3 justify-center  ${className || ""}`}>
+        {/* Hidden input for SMS autofill */}
+        <input
+          ref={hiddenInputRef}
+          type="text"
+          inputMode="numeric"
+          autoComplete="one-time-code"
+          className="absolute opacity-0 h-0 w-0"
+          onChange={(e) => {
+            const digits = e.target.value
+              .replace(/\D/g, "")
+              .slice(0, maxLength);
+            if (digits) {
+              onChange(digits);
+              if (digits.length === maxLength && onComplete) onComplete();
+            }
+          }}
+        />
+
+        {Array(maxLength)
+          .fill()
+          .map((_, i) => (
             <input
-              ref={(el) => {
-                if (el) inputRefs.current[index] = el;
-              }}
-              type="text"
+              key={i}
+              ref={(el) => (inputRefs.current[i] = el)}
+              type="tel"
               inputMode="numeric"
-              maxLength={1}
-              value={value[index] || ""}
-              onChange={(e) => handleChange(index, e)}
-              onKeyDown={(e) => handleKeyDown(index, e)}
-              onPaste={index === 0 ? handlePaste : undefined}
-              className="absolute inset-0 w-full h-full text-center text-xl font-medium bg-transparent outline-none"
+              value={value[i] || ""}
+              className="text-center text-xl font-medium bg-neutral-100 outline-none relative flex h-20 w-20 px-5 py-3 items-center justify-center rounded-sm border border-input focus-within:ring-1 focus-within:ring-primary flex-1"
+              onChange={(e) => handleInput(i, e)}
+              onKeyDown={(e) => handleKeyDown(i, e)}
+              onFocus={(e) => e.target.select()}
             />
-          </div>
-        ))}
+          ))}
       </div>
     );
   }
 );
+
+// Helper function for Android detection
+const isAndroid = () => /android/i.test(navigator.userAgent);
 
 export default CustomInputOTP;
