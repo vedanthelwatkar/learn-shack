@@ -419,9 +419,9 @@ export default function StudyAbroadCarousel() {
   const slides = getSlidesForRendering();
 
   return (
-    <div className="bg-brand-secondary py-[60px] sm:py-20 w-full md:px-[60px] lg:px-24 flex flex-col gap-8 sm:gap-12 items-center justify-center max-w-[100vw] overflow-x-hidden">
+    <div className="bg-brand-secondary py-[60px] sm:py-20 w-full md:px-0 lg:px-24 flex flex-col gap-8 sm:gap-12 items-center justify-center max-w-[100vw] overflow-x-hidden">
       <div className="flex flex-col gap-8 sm:gap-12 w-full">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0 md:px-20 lg:px-0">
           <div className="flex flex-col gap-3 items-center sm:items-start px-5 md:px-0">
             <h2 className="text-h4 font-semibold text-center">
               Top Study{" "}
@@ -448,7 +448,7 @@ export default function StudyAbroadCarousel() {
         </div>
 
         <div
-          className="relative overflow-hidden w-full touch-pan-y"
+          className="relative overflow-hidden w-full touch-pan-y md:pl-20 lg:pl-0"
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}

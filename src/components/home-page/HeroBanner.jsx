@@ -7,21 +7,21 @@ import { useNavigate } from "react-router-dom";
 
 const testimonials = [
   {
-    image: "/student.png",
+    image: "/himani-verma-learnshackedu.png",
     quote:
       "I applied to top 6 universities & got offers from all through Learnshack.",
   },
   {
-    image: "/vighnan-thokala.png",
+    image: "/harsh-jaipure-learnshackedu.png",
     quote:
       "I secured my UK visa in weeks at an affordable cost with Learnshack.",
   },
   {
-    image: "/shubhra-pandey.png",
+    image: "/shubhra-pandey-learnshackedu.png",
     quote: "I cracked IELTS with a 7.5 band in just one month with Learnshack",
   },
   {
-    image: "/keyur-sabhani.png",
+    image: "/keyur-sabhani-learnshackedu.png",
     quote: "I got my admission & refund sorted with Learnshack’s support",
   },
 ];
@@ -64,16 +64,16 @@ const HeroBanner = () => {
       <div className="flex flex-col gap-8 sm:gap-12 w-full sm:w-1/2 max-w-[600px] sm:my-5 items-center sm:items-start">
         <div className="flex flex-col sm:gap-9 gap-8 items-center justify-center sm:items-start sm:justify-start">
           <div className="flex flex-col gap-3">
-            <h1 className="lg:text-h1 md:text-h2 text-h1 font-bold text-neutral-800 font-heading self-center sm:self-start text-center sm:text-start">
+            <span className="lg:text-h1 md:text-h2 text-h1 font-bold text-neutral-800 font-heading self-center sm:self-start text-center sm:text-start">
               We Guide You To <br /> The Right University
-            </h1>
+            </span>
             <span className="text-h6 lg:text-[28px] text-neutral-600 font-medium font-heading text-center sm:text-start">
               so you can Master your Dreams.
             </span>
           </div>
           <div className="flex flex-col gap-5 sm:gap-6">
             <Button variant="large" onClick={() => navigate("/contact")}>
-              Book a FREE counselling today
+              Book Your FREE Counseling Today
             </Button>
             {/* <div className="flex gap-1 self-center sm:self-start">
               <span>or,</span>

@@ -310,7 +310,7 @@ const ContactStep1 = ({ initialData = {}, onSubmit }) => {
           ? "Processing..."
           : state?.ctaText
           ? state?.ctaText
-          : "Book a FREE counselling today"}
+          : "Book Your FREE Counseling Today"}
       </Button>
     </form>
   );

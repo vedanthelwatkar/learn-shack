@@ -29,12 +29,16 @@ const socialLinks = [
     href: "https://instagram.com/learnshackedu",
     icon: <InstagramIcon />,
   },
-  { name: "Blog", href: "/blog", icon: <ThreadsIcon /> },
   {
-    name: "Facebook",
-    href: "https://facebook.com/learnshackedu",
-    icon: <FacebookIcon />,
+    name: "Threads",
+    href: "https://www.threads.net/@learnshackedu",
+    icon: <ThreadsIcon />,
   },
+  // {
+  //   name: "Facebook",
+  //   href: "https://facebook.com/learnshackedu",
+  //   icon: <FacebookIcon />,
+  // },
   {
     name: "Twitter",
     href: "https://twitter.com/learnshackedu",
@@ -87,18 +91,18 @@ const navLinks = {
     { name: "SAT", href: "/test-preparation/sat" },
   ],
   Company: [
-    {
-      name: "About Us",
-      // href: "/about-us"
-    },
-    {
-      name: "Our Services",
-      // href: "/services"
-    },
-    {
-      name: "Testimonials & Reviews",
-      // href: "/testimonials"
-    },
+    // {
+    //   name: "About Us",
+    //   href: "/about-us"
+    // },
+    // {
+    //   name: "Our Services",
+    //   href: "/services"
+    // },
+    // {
+    //   name: "Testimonials & Reviews",
+    //   href: "/testimonials"
+    // },
     { name: "Privacy Policy", href: "/privacy-policy" },
     { name: "Terms & Conditions", href: "/terms-and-conditions" },
   ],
@@ -124,7 +128,7 @@ const Footer = () => {
   const { constantImages } = useConstantsStore();
 
   const getBrandQuoteImg = () => {
-    if (!constantImages || !constantImages.length) return "";
+    if (!constantImages || !constantImages.length) return;
 
     if (isMobile) {
       return getImageFromS3(constantImages, "brand-quote-mobile.png");
@@ -203,7 +207,8 @@ const Footer = () => {
       <Separator className="sm:my-10 my-8  h-[0.5px] bg-neutral-0 opacity-25" />
 
       <div className="flex flex-wrap">
-        <div className="flex-grow flex-shrink-0 pr-80 lg:pr-10 mb-12">
+        {/* <div className="flex-grow flex-shrink-0 pr-80 lg:pr-10 mb-10"> */}
+        <div className="flex-1 flex-shrink-0 pr-80 lg:pr-10 mb-10">
           <h3 className="text-neutral-0 font-semibold text-body-xl mb-4">
             Get in Touch
           </h3>
@@ -233,7 +238,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="flex-grow flex-shrink-0 md:pr-40 lg:basis-48 lg:pr-10 mb-12">
+        {/* <div className="flex-grow flex-shrink-0 md:pr-40 lg:basis-48 lg:pr-10 mb-10">
           <h3 className="text-neutral-0 font-semibold text-body-xl mb-4">
             Countries
           </h3>
@@ -253,7 +258,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="flex-grow flex-shrink-0 md:pr-40 lg:basis-48 lg:pr-10 mb-12">
+        <div className="flex-grow flex-shrink-0 md:pr-40 lg:basis-48 lg:pr-10 mb-10">
           <h3 className="text-neutral-0 font-semibold text-body-xl mb-4">
             Test Preparation
           </h3>
@@ -271,9 +276,10 @@ const Footer = () => {
               </a>
             ))}
           </div>
-        </div>
+        </div> */}
 
-        <div className="flex-grow flex-shrink-0 md:pr-40 lg:basis-48 lg:pr-10 mb-12">
+        {/* <div className="flex-grow flex-shrink-0 md:pr-40 lg:basis-48 lg:pr-10 mb-10"> */}
+        <div className="flex-1 flex-shrink-0 md:pr-40 lg:basis-48 lg:pr-10 mb-10">
           <div className="mb-10">
             <h3 className="text-neutral-0 font-semibold text-body-xl mb-4">
               Company
@@ -294,7 +300,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <div>
+          {/* <div>
             <h3 className="text-neutral-0 font-semibold text-body-xl mb-4">
               Services
             </h3>
@@ -312,10 +318,10 @@ const Footer = () => {
                 </a>
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
 
-        <div className="flex-grow flex-shrink-0 md:pr-40 lg:basis-48 lg:pr-10 mb-12">
+        {/* <div className="flex-grow flex-shrink-0 md:pr-40 lg:basis-48 lg:pr-10 mb-10">
           <div className="mb-10">
             <h3 className="text-neutral-0 font-semibold text-body-xl mb-4">
               Resources
@@ -355,7 +361,7 @@ const Footer = () => {
               ))}
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <Separator className="sm:my-10 my-8 mt-0 h-[0.5px] bg-neutral-0 opacity-25" />

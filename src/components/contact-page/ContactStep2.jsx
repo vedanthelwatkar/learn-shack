@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import CustomInputOTP from "./CustomInputOtp";
 import useOtpStore from "@/store/useOtpStore";
@@ -16,6 +16,63 @@ const ContactStep2 = ({
   const [otp, setOtp] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const otpInputRef = useRef(null);
+
+  // Focus OTP input on component mount
+  useEffect(() => {
+    if (otpInputRef.current) {
+      otpInputRef.current.focus();
+    }
+  }, []);
+
+  // Listen for paste events
+  useEffect(() => {
+    const handlePaste = (e) => {
+      const pastedData = e.clipboardData.getData("text");
+      // Check if pasted content is a 4-digit number
+      if (/^\d{4}$/.test(pastedData)) {
+        setOtp(pastedData);
+        e.preventDefault();
+      }
+    };
+
+    document.addEventListener("paste", handlePaste);
+    return () => document.removeEventListener("paste", handlePaste);
+  }, []);
+
+  // Handle enter key press
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Enter" && otp.length === 4 && !isSubmitting) {
+        handleVerifyOTP();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [otp, isSubmitting]);
+
+  // Handle browser auto-fill for OTP
+  useEffect(() => {
+    if ("OTPCredential" in window) {
+      const ac = new AbortController();
+      navigator.credentials
+        .get({
+          otp: { transport: ["sms"] },
+          signal: ac.signal,
+        })
+        .then((otp) => {
+          if (otp && otp.code) {
+            setOtp(otp.code);
+          }
+        })
+        .catch((err) => {
+          console.log("OTP Credential API error:", err);
+        });
+
+      return () => ac.abort();
+    }
+  }, []);
 
   useEffect(() => {
     if (otp) {
@@ -73,7 +130,13 @@ const ContactStep2 = ({
       </p>
 
       <div className="flex flex-col gap-6">
-        <CustomInputOTP maxLength={4} value={otp} onChange={setOtp} />
+        <CustomInputOTP
+          maxLength={4}
+          value={otp}
+          onChange={setOtp}
+          ref={otpInputRef}
+          onComplete={handleVerifyOTP}
+        />
 
         {errorMessage && (
           <p className="text-red-500 text-sm -mt-4">{errorMessage}</p>

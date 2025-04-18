@@ -39,23 +39,23 @@ const sessionData = [
 
 const avatarData = [
   {
-    img: "https://github.com/shadcn.png",
+    img: "/vighnan-thokala-learnshackedu.png",
     fallback: "LS",
   },
   {
-    img: "https://github.com/shadcn.png",
+    img: "/keyur-sabhani-learnshackedu.png",
     fallback: "LS",
   },
   {
-    img: "https://github.com/shadcn.png",
+    img: "/shubhra-pandey-learnshackedu.png",
     fallback: "LS",
   },
   {
-    img: "https://github.com/shadcn.png",
+    img: "/harsh-jaipure-learnshackedu.png",
     fallback: "LS",
   },
   {
-    img: "https://github.com/shadcn.png",
+    img: "/himani-verma-learnshackedu.png",
     fallback: "LS",
   },
 ];
@@ -107,12 +107,7 @@ const Contact = () => {
         <ContactFormContainer />
         <div className="bg-system-info-100 px-6 py-4 md:py-5 flex items-center justify-center md:flex-row md:gap-3 flex-col gap-4">
           <div className="flex -space-x-2">
-            {avatarData.map((avatar, i) => (
-              <Avatar key={i} className="border-2 border-white w-10 h-10">
-                <AvatarImage src={avatar.img} alt={`User ${i + 1}`} />
-                <AvatarFallback>U{i + 1}</AvatarFallback>
-              </Avatar>
-            ))}
+            <img src="/students-avatar.png" alt="LS" />
           </div>
           <span className="text-body-xl text-system-info-600 font-semibold">
             Trusted by 10,000+ Students

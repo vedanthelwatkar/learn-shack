@@ -92,8 +92,8 @@ const TermsConditions = () => {
           </p>
           <p>
             You can contact us by phone at +91 81787 59588, email at
-            contact@learnshack.com, or by mail to ALTF plot no. 21, 21A, Sector
-            142, Gautam Budh Nagar, Uttar Pradesh 201304, India.
+            contact@learnshackedu.com, or by mail to ALTF plot no. 21, 21A,
+            Sector 142, Gautam Budh Nagar, Uttar Pradesh 201304, India.
           </p>
           <p>
             These Legal Terms constitute a legally binding agreement made
@@ -268,12 +268,13 @@ const TermsConditions = () => {
             <p>
               If you wish to make any use of the Services, Content, or Marks
               other than as set out in this section or elsewhere in our Legal
-              Terms, please address your request to: contact@learnshack.com. If
-              we ever grant you the permission to post, reproduce, or publicly
-              display any part of our Services or Content, you must identify us
-              as the owners or licensors of the Services, Content, or Marks and
-              ensure that any copyright or proprietary notice appears or is
-              visible on posting, reproducing, or displaying our Content.
+              Terms, please address your request to: contact@learnshackedu.com.
+              If we ever grant you the permission to post, reproduce, or
+              publicly display any part of our Services or Content, you must
+              identify us as the owners or licensors of the Services, Content,
+              or Marks and ensure that any copyright or proprietary notice
+              appears or is visible on posting, reproducing, or displaying our
+              Content.
             </p>
             <p>
               We reserve all rights not expressly granted to you in and to the
@@ -1041,8 +1042,8 @@ const TermsConditions = () => {
             </span>
             <p>
               If you have any questions or need assistance regarding our SMS
-              communications, please email us at contact@learnshack.com or call
-              at +91 81787 59588.
+              communications, please email us at contact@learnshackedu.com or
+              call at +91 81787 59588.
             </p>
           </div>
 
@@ -1100,7 +1101,7 @@ const TermsConditions = () => {
               <br />
               Phone: +91 81787 59588
               <br />
-              contact@learnshack.com
+              contact@learnshackedu.com
             </p>
           </div>
         </div>

@@ -21,7 +21,7 @@ export function TimelineItem({
       <div className="hidden sm:flex flex-col items-center">
         <div
           className={cn(
-            "flex h-10 w-10 items-center justify-center rounded-full bg-neutral-0 text-lg font-semibold text-neutral-800 border-2 border-gray-200 z-10",
+            "flex h-10 w-10 items-center justify-center rounded-full bg-neutral-0 text-lg font-semibold text-neutral-800 border-2 z-10",
             isActive && "border-brand-primary text-brand-primary",
             isCompleted && "border-brand-primary text-brand-primary"
           )}
