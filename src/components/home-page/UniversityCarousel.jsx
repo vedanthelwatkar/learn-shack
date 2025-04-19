@@ -75,7 +75,7 @@ const UniversityCarousel = () => {
           >
             <motion.div
               ref={carouselRef}
-              className="flex gap-4 sm:gap-2 ml-0"
+              className="flex gap-4 sm:gap-8 ml-0"
               animate={controls}
               initial={{ x: 0 }}
             >
