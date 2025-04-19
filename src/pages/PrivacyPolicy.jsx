@@ -579,7 +579,7 @@ const PrivacyPolicy = () => {
             </p>
             <p>
               If you have questions or comments about your privacy rights, you
-              may email us at contact@learnshacked.com.
+              may email us at contact@learnshackedu.com.
             </p>
           </div>
 
@@ -636,12 +636,12 @@ const PrivacyPolicy = () => {
             </span>
             <p>
               If you have questions or comments about this notice, you may email
-              us at contact@learnshacked.com or contact us by post at:
+              us at contact@learnshackedu.com or contact us by post at:
             </p>
             <p>
               Learnshack Private Limited
               <br />
-              A1/F plot no. 21, 21A, Sector 142, Gautam Budh Nagar, Uttar
+              ALTF plot no. 21, 21A, Sector 142, Gautam Budh Nagar, Uttar
               Pradesh 201304
               <br />
               India
