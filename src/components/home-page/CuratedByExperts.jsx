@@ -56,12 +56,14 @@ const CuratedByExperts = () => {
               <div className="p-3 w-fit flex items-center rounded-2xl bg-brand-secondary">
                 {card.icon}
               </div>
-              <span className="font-medium text-body-lg text-neutral-700">
-                {card.title}
-              </span>
-              <span className="font-heading font-semibold text-h6 text-neutral-800">
-                {card.desc}
-              </span>
+              <div className="flex flex-col gap-4">
+                <span className="font-medium text-body-lg text-neutral-700">
+                  {card.title}
+                </span>
+                <span className="font-heading font-semibold text-h6 text-neutral-800">
+                  {card.desc}
+                </span>
+              </div>
               {/* <div className="flex text-system-info-600 gap-2">
                 <button className="font-semibold text-body-md">
                   Learn more
