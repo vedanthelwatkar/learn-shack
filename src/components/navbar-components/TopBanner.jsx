@@ -4,8 +4,6 @@ import Sparkle from "@/svgComponents/Sparkle";
 import React from "react";
 
 const TopBanner = () => {
-  const isMobile = useMediaQuery();
-
   return (
     <div
       className={`w-full bg-purple-100 sm:py-3  flex items-center justify-center text-purple-800 text-sm`}

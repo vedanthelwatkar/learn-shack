@@ -133,7 +133,7 @@ export default function StudyAbroadCarousel() {
 
   const baseSlides = [
     {
-      src: "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/study-in-uk.webp",
+      src: "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/study-in-uk.png",
       title: "Study in UK",
       description:
         "Explore affordable education in UK with top-ranked universities & scholarships.",
@@ -144,7 +144,7 @@ export default function StudyAbroadCarousel() {
       },
     },
     {
-      src: "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/study-in-australia.webp",
+      src: "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/study-in-australia.png",
       title: "Study in Australia",
       description:
         "Explore affordable education in Australia with top-ranked universities & scholarships.",
@@ -159,7 +159,7 @@ export default function StudyAbroadCarousel() {
       },
     },
     {
-      src: "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/study-in-germany.webp",
+      src: "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/study-in-germany.png",
       title: "Study in Germany",
       description:
         "Explore affordable education in Germany with top-ranked universities & scholarships.",
@@ -174,7 +174,7 @@ export default function StudyAbroadCarousel() {
       },
     },
     {
-      src: "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/study-in-usa.webp",
+      src: "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/study-in-usa.png",
       title: "Study in USA",
       description:
         "Explore affordable education in USA with top-ranked universities & scholarships.",
@@ -189,7 +189,7 @@ export default function StudyAbroadCarousel() {
       },
     },
     {
-      src: "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/study-in-canada.webp",
+      src: "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/study-in-canada.png",
       title: "Study in Canada",
       description:
         "Explore affordable education in Canada with top-ranked universities & scholarships.",

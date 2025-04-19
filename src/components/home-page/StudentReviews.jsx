@@ -12,7 +12,7 @@ const testimonials = [
       "LearnShack turned my visa setback into a success story - now I'm studying in Ireland",
     logo: "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/svg-uni-logos/stanford-university.svg",
     thumbnail:
-      "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/study-in-australia.webp",
+      "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/study-in-australia.png",
   },
   {
     id: 2,
@@ -22,7 +22,7 @@ const testimonials = [
       "LearnShack helped me get into a world-class university in the UK",
     logo: "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/svg-uni-logos/stanford-university.svg",
     thumbnail:
-      "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/study-in-germany.webp",
+      "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/study-in-germany.png",
   },
   {
     id: 3,
@@ -32,7 +32,7 @@ const testimonials = [
       "LearnShack helped me secure my dream university in just 3 days + scholarship",
     logo: "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/svg-uni-logos/stanford-university.svg",
     thumbnail:
-      "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/study-in-uk.webp",
+      "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/study-in-uk.png",
   },
   {
     id: 4,
@@ -42,7 +42,7 @@ const testimonials = [
       "LearnShack secured me a €4,000 scholarship and made my dream affordable",
     logo: "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/svg-uni-logos/stanford-university.svg",
     thumbnail:
-      "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/study-in-canada.webp",
+      "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/study-in-canada.png",
   },
 ];
 

@@ -39,23 +39,23 @@ const sessionData = [
 
 const avatarData = [
   {
-    img: "/vighnan-thokala-learnshackedu.png",
+    img: "/vighnan-thokala-withbg-learnshack.png",
     fallback: "LS",
   },
   {
-    img: "/keyur-sabhani-learnshackedu.png",
+    img: "/keyur-sabhani-withbg-learnshack.png",
     fallback: "LS",
   },
   {
-    img: "/shubhra-pandey-learnshackedu.png",
+    img: "/shubhra-pandey-withbg-learnshack.png",
     fallback: "LS",
   },
   {
-    img: "/harsh-jaipure-learnshackedu.png",
+    img: "/harsh-jaipure-withbg-learnshack.png",
     fallback: "LS",
   },
   {
-    img: "/himani-verma-learnshackedu.png",
+    img: "/himani-verma-withbg-learnshack.png",
     fallback: "LS",
   },
 ];
@@ -107,7 +107,20 @@ const Contact = () => {
         <ContactFormContainer />
         <div className="bg-system-info-100 px-6 py-4 md:py-5 flex items-center justify-center md:flex-row md:gap-3 flex-col gap-4">
           <div className="flex -space-x-2">
-            <img src="https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/students-avatar.svg" alt="LS" />
+            <div className="flex -space-x-4">
+              {avatarData.map((item, index) => (
+                <Avatar
+                  key={index}
+                  className="border-2 border-system-info-100 w-10 h-10 md:w-12 md:h-12"
+                >
+                  <AvatarImage
+                    src={item.img || "/placeholder.svg"}
+                    alt={`Team member ${index + 1}`}
+                  />
+                  <AvatarFallback>{item.fallback}</AvatarFallback>
+                </Avatar>
+              ))}
+            </div>
           </div>
           <span className="text-body-xl text-system-info-600 font-semibold">
             Trusted by 10,000+ Students
