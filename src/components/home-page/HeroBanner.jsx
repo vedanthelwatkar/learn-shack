@@ -88,7 +88,7 @@ const HeroBanner = () => {
         <div className="flex gap-4 sm:gap-12">
           {numberCountUpData.map((item) => (
             <div
-              className="flex flex-col gap-2 sm:items-start items-center"
+              className="flex flex-col gap-2 lg:items-start items-center"
               key={item.title}
             >
               <NumberCountUp

@@ -53,7 +53,7 @@ const App = () => {
   return (
     <LayoutProvider>
       <div
-        className={`w-full overflow-auto h-[100dvh] overflow-x-hidden ${
+        className={`w-full overflow-auto min-h-[100dvh] overflow-x-hidden ${
           isMobile && "scrollbar-hide"
         }`}
         id="main-content"

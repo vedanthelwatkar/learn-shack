@@ -101,7 +101,7 @@ const CustomInputOTP = forwardRef(
               type="tel"
               inputMode="numeric"
               value={value[i] || ""}
-              className="text-center text-xl font-medium bg-neutral-100 outline-none relative flex h-20 w-20 px-5 py-3 items-center justify-center rounded-sm border border-input focus-within:ring-1 focus-within:ring-primary flex-1"
+              className="text-center text-xl font-medium bg-neutral-100 outline-none relative flex h-20 w-14 md:w-20 px-5 py-3 items-center justify-center rounded-sm border border-input focus-within:ring-1 focus-within:ring-primary flex-1 md:flex-none"
               onChange={(e) => handleInput(i, e)}
               onKeyDown={(e) => handleKeyDown(i, e)}
               onFocus={(e) => e.target.select()}

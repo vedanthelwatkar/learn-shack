@@ -7,7 +7,7 @@ import YoureAllSetCircleCheck from "@/svgComponents/YoureAllSetCircleCheck";
 import { postContactInfo } from "@/store/ContactStore";
 
 const ContactFormContainer = () => {
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(2);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
