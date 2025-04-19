@@ -129,15 +129,16 @@ const ContactStep2 = ({
         </button>
       </p>
 
-      <div className="flex flex-col gap-6">
-        <CustomInputOTP
-          maxLength={4}
-          value={otp}
-          onChange={setOtp}
-          ref={otpInputRef}
-          onComplete={handleVerifyOTP}
-        />
-
+      <div className="flex flex-col gap-6 w-full">
+        <div className="w-full">
+          <CustomInputOTP
+            maxLength={4}
+            value={otp}
+            onChange={setOtp}
+            ref={otpInputRef}
+            onComplete={handleVerifyOTP}
+          />
+        </div>
         {errorMessage && (
           <p className="text-red-500 text-sm -mt-4">{errorMessage}</p>
         )}

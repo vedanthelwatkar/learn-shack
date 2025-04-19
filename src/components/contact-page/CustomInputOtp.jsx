@@ -73,7 +73,7 @@ const CustomInputOTP = forwardRef(
     };
 
     return (
-      <div className={`flex gap-3 justify-center  ${className || ""}`}>
+      <div className={`flex gap-3 justify-center w-full  ${className || ""}`}>
         {/* Hidden input for SMS autofill */}
         <input
           ref={hiddenInputRef}
@@ -101,7 +101,7 @@ const CustomInputOTP = forwardRef(
               type="tel"
               inputMode="numeric"
               value={value[i] || ""}
-              className="text-center text-xl font-medium bg-neutral-100 outline-none relative flex h-20 w-14 md:w-20 px-5 py-3 items-center justify-center rounded-sm border border-input focus-within:ring-1 focus-within:ring-primary flex-1 md:flex-none"
+              className="text-center text-xl font-medium bg-neutral-100 outline-none h-20 px-3 py-3 rounded-sm border border-input focus:ring-1 focus:ring-primary flex-1 min-w-0"
               onChange={(e) => handleInput(i, e)}
               onKeyDown={(e) => handleKeyDown(i, e)}
               onFocus={(e) => e.target.select()}
