@@ -119,7 +119,7 @@ const HeroBanner = () => {
           <QuotesIcon width={isMobile && 40} height={isMobile && 40} />
         </span>
         <span
-          className={`flex w-full h-full items-end relative z-30 text-neutral-0 font-semibold font-heading text-body-xl md:text-body-2xl lg:text-h6 p-6 md:px-5 md:py-10 sm:px-14 sm:py-10 text-center transition-opacity duration-500 ${
+          className={`flex w-full h-full items-end relative z-30 text-neutral-0 font-semibold font-heading text-body-xl md:text-body-2xl lg:text-h6 p-6 lg:p-10 sm:py-10 sm:px-5 text-center transition-opacity duration-500 ${
             fade ? "opacity-100" : "opacity-0"
           }`}
         >
