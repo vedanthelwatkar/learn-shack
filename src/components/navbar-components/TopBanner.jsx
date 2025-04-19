@@ -8,9 +8,7 @@ const TopBanner = () => {
 
   return (
     <div
-      className={`w-full bg-purple-100 ${
-        !isMobile && "py-3"
-      } flex items-center justify-center text-purple-800 text-sm`}
+      className={`w-full bg-purple-100 sm:py-3  flex items-center justify-center text-purple-800 text-sm`}
     >
       <div
         className={`flex items-center gap-6 sm:gap-16 px-5 py-3 sm:px-0 sm:py-0`}
@@ -20,11 +18,9 @@ const TopBanner = () => {
         </div>
         <span className="flex font-semibold text-center text-body-md">
           Admissions open for September 2025 Intake
-          {!isMobile && (
-            <span className="ml-1">
-              <ArrowTopRight />
-            </span>
-          )}
+          <span className="hidden sm:flex ml-1 self-center">
+            <ArrowTopRight />
+          </span>
         </span>
         <div className="w-4 h-4 text-purple-800">
           <Sparkle />
