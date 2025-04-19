@@ -58,7 +58,7 @@ const App = () => {
         }`}
         id="main-content"
       >
-        <BrowserRouter>
+        <BrowserRouter basename="https://www.learnshackedu.com/">
           <ScrollToTop>
             <NavBar />
             <div className="bg-neutral-50">
