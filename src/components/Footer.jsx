@@ -215,7 +215,7 @@ const Footer = () => {
           <div className="flex flex-col gap-3">
             {navLinks["Get in Touch"].map((item, index) => (
               <div key={index} className="flex items-start gap-2">
-                {item.icon}
+                <div>{item.icon}</div>
                 {item.href ? (
                   <a
                     href={item.href}
