@@ -62,7 +62,7 @@ const UniversityCarousel = () => {
   return (
     <div className="pt-10 pb-5 md:py-[60px] w-full flex items-center justify-center overflow-hidden">
       <div className="flex flex-col gap-12 w-full max-w-6xl">
-        <div className="flex flex-col gap-10">
+        <div className="flex flex-col gap-8 sm:gap-10">
           <span className="text-body-xl text-neutral-800 font-semibold flex justify-center">
             850+ university partners & growing
           </span>
