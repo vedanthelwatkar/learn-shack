@@ -39,18 +39,20 @@ const PrivacyPolicy = () => {
   return (
     <div className="flex flex-col">
       <div className="lg:px-20 lg:py-10">
-        <div className="bg-brand-primary flex flex-col gap-4 justify-center items-center px-10 py-8 sm:py-[60px] md:px-20 lg:rounded-lg">
-          <span className="text-body-lg text-neutral-100">
-            Last Updated April 10, 2025{" "}
-          </span>
-          <h2 className="text-neutral-0 text-h2 font-heading font-bold text-center">
-            We care about your privacy
-          </h2>
-          <span className="text-body-lg text-neutral-100 text-center">
-            Your privacy is important to us at Learnshack Edu. We respect your
-            privacy regarding any information we may collect from you across our
-            website.
-          </span>
+        <div className="bg-brand-primary px-10 flex flex-col gap-4 justify-center items-center py-8 sm:py-[60px] md:px-20 lg:rounded-lg">
+          <div className="max-w-[700px] flex flex-col gap-4 justify-center items-center ">
+            <span className="text-body-lg text-neutral-100">
+              Last Updated April 10, 2025{" "}
+            </span>
+            <h2 className="text-neutral-0 text-h2 font-heading font-bold text-center">
+              We care about your privacy
+            </h2>
+            <span className="text-body-lg text-neutral-100 text-center">
+              Your privacy is important to us at Learnshack Edu. We respect your
+              privacy regarding any information we may collect from you across
+              our website.
+            </span>
+          </div>
         </div>
       </div>
       <div className="p-5 pb-10 md:p-10 md:pb-20 lg:p-20 lg:pt-5">
