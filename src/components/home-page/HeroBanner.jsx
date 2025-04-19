@@ -8,20 +8,24 @@ import { useNavigate } from "react-router-dom";
 const testimonials = [
   {
     image: "/himani-verma-learnshackedu.png",
+    alt: "himani-verma-learnshackedu",
     quote:
       "I applied to top 6 universities & got offers from all through Learnshack.",
   },
   {
-    image: "/harsh-jaipure-learnshackedu.png",
+    image: "/harsh-jirapure-learnshackedu.png",
+    alt: "harsh-jirapure-learnshackedu",
     quote:
       "I secured my UK visa in weeks at an affordable cost with Learnshack.",
   },
   {
     image: "/shubhra-pandey-learnshackedu.png",
+    alt: "shubhra-pandey-learnshackedu",
     quote: "I cracked IELTS with a 7.5 band in just one month with Learnshack",
   },
   {
     image: "/keyur-sabhani-learnshackedu.png",
+    alt: "keyur-sabhani-learnshackedu",
     quote: "I got my admission & refund sorted with Learnshack’s support",
   },
 ];
@@ -110,7 +114,7 @@ const HeroBanner = () => {
 
         <img
           src={current.image}
-          alt="Student"
+          alt={current.alt}
           className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-500 ${
             fade ? "opacity-100" : "opacity-0"
           }`}

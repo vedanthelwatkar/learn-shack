@@ -13,6 +13,7 @@ const testimonials = [
     logo: "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/svg-uni-logos/stanford-university.svg",
     thumbnail:
       "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/study-in-australia.png",
+    alt: "study-in-australia",
   },
   {
     id: 2,
@@ -23,6 +24,7 @@ const testimonials = [
     logo: "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/svg-uni-logos/stanford-university.svg",
     thumbnail:
       "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/study-in-germany.png",
+    alt: "study-in-germany",
   },
   {
     id: 3,
@@ -33,6 +35,7 @@ const testimonials = [
     logo: "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/svg-uni-logos/stanford-university.svg",
     thumbnail:
       "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/study-in-uk.png",
+    alt: "study-in-uk",
   },
   {
     id: 4,
@@ -43,6 +46,7 @@ const testimonials = [
     logo: "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/svg-uni-logos/stanford-university.svg",
     thumbnail:
       "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/study-in-canada.png",
+    alt: "study-in-canada",
   },
 ];
 
@@ -82,7 +86,7 @@ const StudentReviews = () => {
                 <>
                   <img
                     src={item.thumbnail || "/placeholder.svg"}
-                    alt={item.thumbnail}
+                    alt={item.alt}
                     className="w-full h-full object-cover rounded-lg"
                   />
                   <button
@@ -104,7 +108,7 @@ const StudentReviews = () => {
                   </span>
                   <img
                     src={item.logo}
-                    alt={item.name}
+                    alt={item.alt}
                     className="max-w-[52px] max-h-[22px]"
                   />
                 </div>

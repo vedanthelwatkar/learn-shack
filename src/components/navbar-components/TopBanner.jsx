@@ -16,9 +16,9 @@ const TopBanner = () => {
         </div>
         <span className="flex font-semibold text-center text-body-md">
           Admissions open for September 2025 Intake
-          <span className="hidden sm:flex ml-1 self-center">
+          {/* <span className="hidden sm:flex ml-1 self-center">
             <ArrowTopRight />
-          </span>
+          </span> */}
         </span>
         <div className="w-4 h-4 text-purple-800">
           <Sparkle />

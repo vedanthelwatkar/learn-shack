@@ -66,6 +66,13 @@ const Slide = ({ slide, index, current, handleSlideClick }) => {
         onMouseLeave={handleMouseLeave}
       >
         <div className="relative flex overflow-hidden lg:h-full sm:h-[390px] h-[150px] lg:w-[240px] md:w-[200px] shrink-0">
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(0, 0, 0, 0.00) 50%, #333 100%)",
+            }}
+          />
           <img
             className="w-full lg:w-[240px] md:w-[200px] h-full object-cover"
             src={src || "/placeholder.svg"}

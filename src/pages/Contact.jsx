@@ -40,23 +40,23 @@ const sessionData = [
 const avatarData = [
   {
     img: "/vighnan-thokala-withbg-learnshack.png",
-    fallback: "LS",
+    fallback: "vighnan-thokala-learnshack",
   },
   {
     img: "/keyur-sabhani-withbg-learnshack.png",
-    fallback: "LS",
+    fallback: "keyur-sabhan-learnshack",
   },
   {
     img: "/shubhra-pandey-withbg-learnshack.png",
-    fallback: "LS",
+    fallback: "shubhra-pande-learnshack",
   },
   {
-    img: "/harsh-jaipure-withbg-learnshack.png",
-    fallback: "LS",
+    img: "/harsh-jirapure-withbg-learnshack.png",
+    fallback: "harsh-jirapur-learnshack",
   },
   {
     img: "/himani-verma-withbg-learnshack.png",
-    fallback: "LS",
+    fallback: "himani-verm-learnshack",
   },
 ];
 
@@ -115,7 +115,7 @@ const Contact = () => {
                 >
                   <AvatarImage
                     src={item.img || "/placeholder.svg"}
-                    alt={`Team member ${index + 1}`}
+                    alt={item.fallback}
                   />
                   <AvatarFallback>{item.fallback}</AvatarFallback>
                 </Avatar>
