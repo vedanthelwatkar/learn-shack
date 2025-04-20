@@ -15,7 +15,7 @@ import useUserStore, { fetchUsers } from "@/store/userStore";
 import { ArrowUp, ChevronLeft, ChevronRight, Search } from "react-feather";
 
 const Users = () => {
-  // Use the state from Zustand store instead of local state
+  // Zustand store state
   const {
     users,
     total: totalUsers,
@@ -28,23 +28,17 @@ const Users = () => {
     error,
   } = useUserStore();
 
-  // Use setState from the store to update state
   const setState = useUserStore((state) => state.setState);
-
   const perPage = 10;
 
-  // Update search term in the store
   const handleSearchChange = (e) => {
     setState({ searchTerm: e.target.value });
-
-    // Debounce search
     clearTimeout(window.searchTimeout);
     window.searchTimeout = setTimeout(() => {
       loadUsers(1, e.target.value, sortField, sortOrder);
     }, 500);
   };
 
-  // Load users with the current parameters
   const loadUsers = async (
     pageNum = page,
     search = searchTerm,
@@ -60,20 +54,14 @@ const Users = () => {
     });
   };
 
-  // Initial load
   useEffect(() => {
     loadUsers();
   }, []);
 
   const handleSort = (field) => {
-    // Set loading state immediately to provide visual feedback
     setState({ isLoading: true });
-
-    // Calculate new sort order
     const newOrder =
       sortField === field && sortOrder === "asc" ? "desc" : "asc";
-
-    // Use setTimeout to allow the UI to update before starting the potentially heavy operation
     setTimeout(() => {
       setState({ sortField: field, sortOrder: newOrder });
       loadUsers(1, searchTerm, field, newOrder);
@@ -81,20 +69,17 @@ const Users = () => {
   };
 
   const handleNextPage = () => {
-    if (page < totalPages) {
-      loadUsers(page + 1);
-    }
+    if (page < totalPages) loadUsers(page + 1);
   };
 
   const handlePrevPage = () => {
-    if (page > 1) {
-      loadUsers(page - 1);
-    }
+    if (page > 1) loadUsers(page - 1);
   };
 
   return (
     <div className="p-5 md:p-10 bg-neutral-50 min-h-[calc(100dvh-113px)] sm:min-h-[calc(100dvh-100px)] lg:min-h-[calc(100dvh-120px)]">
       <div className="max-w-7xl mx-auto bg-neutral-0 rounded-lg shadow-sm p-6 md:p-8">
+        {/* Header and search */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
           <h2 className="text-h3 font-heading font-bold text-neutral-900">
             Users
@@ -122,22 +107,20 @@ const Users = () => {
           </div>
         )}
 
-        <div className="rounded-md border-2 border-neutral-200 overflow-hidden mb-6">
+        {/* Table */}
+        <div className="rounded-md border-2 border-neutral-200 overflow-auto mb-6">
           <Table>
             <TableHeader className="bg-neutral-100">
               <TableRow className="border-b-2 border-neutral-200">
-                <TableHead className="py-4 text-body-lg font-semibold text-neutral-800">
-                  Name
-                </TableHead>
-                <TableHead className="py-4 text-body-lg font-semibold text-neutral-800">
-                  Email
-                </TableHead>
-                <TableHead className="py-4 text-body-lg font-semibold text-neutral-800">
-                  Phone
-                </TableHead>
+                <TableHead>Name</TableHead>
+                <TableHead>Email</TableHead>
+                <TableHead>Phone</TableHead>
+                <TableHead>Intake</TableHead>
+                <TableHead>Exam Type</TableHead>
+                <TableHead>Destinations</TableHead>
                 <TableHead
                   onClick={() => handleSort("created_at")}
-                  className="py-4 text-body-lg font-semibold text-neutral-800 cursor-pointer hover:text-brand-primary transition-colors"
+                  className="cursor-pointer hover:text-brand-primary transition-colors"
                 >
                   <div className="flex items-center">
                     Contacted At
@@ -150,27 +133,28 @@ const Users = () => {
                     />
                     {sortField === "created_at" && (
                       <span className="ml-1 text-body-sm font-medium text-brand-primary">
-                        ({sortOrder === "asc" ? "asc" : "desc"})
+                        ({sortOrder})
                       </span>
                     )}
                   </div>
                 </TableHead>
               </TableRow>
             </TableHeader>
+
             <TableBody className="min-h-[400px]">
               {isLoading ? (
                 <TableRow>
-                  <TableCell colSpan={4} className="h-[400px] p-0">
+                  <TableCell colSpan={7} className="h-[400px] p-0">
                     <div className="flex flex-col h-full">
                       {Array.from({ length: 5 }).map((_, index) => (
                         <div
                           key={index}
                           className="flex items-center p-4 animate-pulse"
                         >
-                          <div className="h-6 bg-neutral-200 rounded w-1/4 mr-4"></div>
-                          <div className="h-6 bg-neutral-200 rounded w-1/3 mr-4"></div>
-                          <div className="h-6 bg-neutral-200 rounded w-1/5 mr-4"></div>
-                          <div className="h-6 bg-neutral-200 rounded w-1/6"></div>
+                          <div className="h-6 bg-neutral-200 rounded w-1/6 mr-4" />
+                          <div className="h-6 bg-neutral-200 rounded w-1/6 mr-4" />
+                          <div className="h-6 bg-neutral-200 rounded w-1/6 mr-4" />
+                          <div className="h-6 bg-neutral-200 rounded w-1/6" />
                         </div>
                       ))}
                     </div>
@@ -178,30 +162,29 @@ const Users = () => {
                 </TableRow>
               ) : users?.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={4} className="h-32 text-center">
+                  <TableCell colSpan={7} className="h-32 text-center">
                     <p className="text-body-lg text-neutral-600">
                       No users found.
                     </p>
                   </TableCell>
                 </TableRow>
               ) : (
-                users?.map((user, index) => (
+                users.map((user, index) => (
                   <TableRow
                     key={user.id}
                     className={`hover:bg-neutral-50 transition-all duration-300 ${
                       index % 2 === 0 ? "bg-neutral-0" : "bg-neutral-50"
                     }`}
                   >
-                    <TableCell className="py-4 text-body-lg font-medium text-neutral-800">
-                      {user.full_name}
+                    <TableCell>{user.full_name}</TableCell>
+                    <TableCell>{user.email}</TableCell>
+                    <TableCell>
+                      {user.country_code} {user.phone_number}
                     </TableCell>
-                    <TableCell className="py-4 text-body-lg text-neutral-700">
-                      {user.email}
-                    </TableCell>
-                    <TableCell className="py-4 text-body-lg text-neutral-700">
-                      {user.phone_number}
-                    </TableCell>
-                    <TableCell className="py-4 text-body-lg text-neutral-700">
+                    <TableCell>{user.intake}</TableCell>
+                    <TableCell>{user.exam_type.toUpperCase()}</TableCell>
+                    <TableCell>{user.destinations}</TableCell>
+                    <TableCell>
                       {new Date(user.created_at).toLocaleDateString("en-US", {
                         year: "numeric",
                         month: "short",
@@ -215,6 +198,7 @@ const Users = () => {
           </Table>
         </div>
 
+        {/* Pagination */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <p className="text-body-lg text-neutral-600">
             Showing {users?.length > 0 ? (page - 1) * perPage + 1 : 0} to{" "}
@@ -223,13 +207,13 @@ const Users = () => {
           <div className="flex items-center gap-3">
             <Button
               variant="outline"
+              onClick={handlePrevPage}
+              disabled={page === 1 || isLoading}
               className={`border-2 ${
                 page === 1 || isLoading
                   ? "border-neutral-200 text-neutral-500"
                   : "border-brand-primary text-brand-primary hover:bg-brand-secondary"
               } rounded-md px-4 py-2 font-medium transition-colors`}
-              onClick={handlePrevPage}
-              disabled={page === 1 || isLoading}
             >
               <ChevronLeft className="h-5 w-5 mr-2" />
               Previous
@@ -242,13 +226,13 @@ const Users = () => {
                     <Button
                       key={pageNum}
                       variant={pageNum === page ? "default" : "outline"}
+                      onClick={() => loadUsers(pageNum)}
+                      disabled={isLoading}
                       className={`h-10 w-10 p-0 ${
                         pageNum === page
                           ? "bg-brand-primary text-white"
                           : "border-2 border-neutral-200 text-neutral-700 hover:bg-brand-secondary hover:text-brand-primary hover:border-brand-primary"
                       } rounded-md font-medium`}
-                      onClick={() => loadUsers(pageNum)}
-                      disabled={isLoading}
                     >
                       {pageNum}
                     </Button>
@@ -262,13 +246,13 @@ const Users = () => {
             </div>
             <Button
               variant="outline"
+              onClick={handleNextPage}
+              disabled={page >= totalPages || isLoading}
               className={`border-2 ${
                 page >= totalPages || isLoading
                   ? "border-neutral-200 text-neutral-500"
                   : "border-brand-primary text-brand-primary hover:bg-brand-secondary"
               } rounded-md px-4 py-2 font-medium transition-colors`}
-              onClick={handleNextPage}
-              disabled={page >= totalPages || isLoading}
             >
               Next
               <ChevronRight className="h-5 w-5 ml-2" />
