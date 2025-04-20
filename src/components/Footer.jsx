@@ -374,10 +374,11 @@ const Footer = () => {
         <Button
           className="w-fit bg-transparent border border-neutral-0 text-neutral-0 hover:brightness-110 rounded-sm px-5 py-3"
           onClick={() => {
-            const mainContent = document.getElementById("main-content");
-            if (mainContent) {
-              mainContent.scrollTo({ top: 0, behavior: "smooth" });
-            }
+            // const mainContent = document.getElementById("main-content");
+            // if (mainContent) {
+            // mainContent.scrollTo({ top: 0, behavior: "smooth" });
+            // }
+            window.scrollTo({ top: 0, behavior: "smooth" });
           }}
         >
           Back to Top
