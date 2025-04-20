@@ -14,8 +14,35 @@ import { Input } from "@/components/ui/input";
 import useUserStore, { fetchUsers } from "@/store/userStore";
 import { ArrowUp, ChevronLeft, ChevronRight, Search } from "react-feather";
 
+const destinationMap = {
+  uk: "UK",
+  ireland: "Ireland",
+  usa: "USA",
+  germany: "Germany",
+  canada: "Canada",
+  australia: "Australia",
+  newZealand: "New Zealand",
+  others: "Others",
+};
+
+const intakeMap = {
+  2025: "2025",
+  2026: "2026",
+  "2027+": "2027 & Later",
+  notDecided: "Not Decided",
+};
+
+const examMap = {
+  ielts: "IELTS",
+  gmat: "GMAT",
+  gre: "GRE",
+  toefl: "TOEFL",
+  pte: "PTE",
+  duolingo: "Duo Lingo",
+  none: "None",
+};
+
 const Users = () => {
-  // Zustand store state
   const {
     users,
     total: totalUsers,
@@ -79,7 +106,6 @@ const Users = () => {
   return (
     <div className="p-5 md:p-10 bg-neutral-50 min-h-[calc(100dvh-113px)] sm:min-h-[calc(100dvh-100px)] lg:min-h-[calc(100dvh-120px)]">
       <div className="max-w-7xl mx-auto bg-neutral-0 rounded-lg shadow-sm p-6 md:p-8">
-        {/* Header and search */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
           <h2 className="text-h3 font-heading font-bold text-neutral-900">
             Users
@@ -107,7 +133,6 @@ const Users = () => {
           </div>
         )}
 
-        {/* Table */}
         <div className="rounded-md border-2 border-neutral-200 overflow-auto mb-6">
           <Table>
             <TableHeader className="bg-neutral-100">
@@ -181,9 +206,15 @@ const Users = () => {
                     <TableCell>
                       {user.country_code} {user.phone_number}
                     </TableCell>
-                    <TableCell>{user.intake}</TableCell>
-                    <TableCell>{user.exam_type.toUpperCase()}</TableCell>
-                    <TableCell>{user.destinations}</TableCell>
+                    <TableCell>
+                      {intakeMap[user.intake] || user.intake}
+                    </TableCell>
+                    <TableCell>
+                      {examMap[user.exam_type] || user.exam_type}
+                    </TableCell>
+                    <TableCell>
+                      {destinationMap[user.destinations] || user.destinations}
+                    </TableCell>
                     <TableCell>
                       {new Date(user.created_at).toLocaleDateString("en-US", {
                         year: "numeric",
@@ -198,7 +229,6 @@ const Users = () => {
           </Table>
         </div>
 
-        {/* Pagination */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <p className="text-body-lg text-neutral-600">
             Showing {users?.length > 0 ? (page - 1) * perPage + 1 : 0} to{" "}
