@@ -14,33 +14,42 @@ import { Input } from "@/components/ui/input";
 import useUserStore, { fetchUsers } from "@/store/userStore";
 import { ArrowUp, ChevronLeft, ChevronRight, Search } from "react-feather";
 
-const destinationMap = {
-  uk: "UK",
-  ireland: "Ireland",
-  usa: "USA",
-  germany: "Germany",
-  canada: "Canada",
-  australia: "Australia",
-  newZealand: "New Zealand",
-  others: "Others",
-};
+// Label mappings
+const destinations = [
+  { id: "uk", label: "UK" },
+  { id: "ireland", label: "Ireland" },
+  { id: "usa", label: "USA" },
+  { id: "germany", label: "Germany" },
+  { id: "canada", label: "Canada" },
+  { id: "australia", label: "Australia" },
+  { id: "newZealand", label: "New Zealand" },
+  { id: "others", label: "Others" },
+];
 
-const intakeMap = {
-  2025: "2025",
-  2026: "2026",
-  "2027+": "2027 & Later",
-  notDecided: "Not Decided",
-};
+const intakeOptions = [
+  { id: "2025", label: "2025" },
+  { id: "2026", label: "2026" },
+  { id: "2027+", label: "2027 & Later" },
+  { id: "notDecided", label: "Not Decided" },
+];
 
-const examMap = {
-  ielts: "IELTS",
-  gmat: "GMAT",
-  gre: "GRE",
-  toefl: "TOEFL",
-  pte: "PTE",
-  duolingo: "Duo Lingo",
-  none: "None",
-};
+const examOptions = [
+  { id: "ielts", label: "IELTS" },
+  { id: "gmat", label: "GMAT" },
+  { id: "gre", label: "GRE" },
+  { id: "toefl", label: "TOEFL" },
+  { id: "pte", label: "PTE" },
+  { id: "duolingo", label: "Duo Lingo" },
+  { id: "none", label: "None" },
+];
+
+// Helper functions
+const mapLabel = (list, id) => list.find((item) => item.id === id)?.label || id;
+const mapCommaSeparatedLabels = (list, ids) =>
+  ids
+    .split(",")
+    .map((id) => mapLabel(list, id.trim()))
+    .join(", ");
 
 const Users = () => {
   const {
@@ -105,7 +114,8 @@ const Users = () => {
 
   return (
     <div className="p-5 md:p-10 bg-neutral-50 min-h-[calc(100dvh-113px)] sm:min-h-[calc(100dvh-100px)] lg:min-h-[calc(100dvh-120px)]">
-      <div className="max-w-7xl mx-auto bg-neutral-0 rounded-lg shadow-sm p-6 md:p-8">
+      <div className="max-w-7xl mx-auto bg-white rounded-lg shadow-sm p-6 md:p-8">
+        {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
           <h2 className="text-h3 font-heading font-bold text-neutral-900">
             Users
@@ -133,6 +143,7 @@ const Users = () => {
           </div>
         )}
 
+        {/* Table */}
         <div className="rounded-md border-2 border-neutral-200 overflow-auto mb-6">
           <Table>
             <TableHeader className="bg-neutral-100">
@@ -150,7 +161,7 @@ const Users = () => {
                   <div className="flex items-center">
                     Contacted At
                     <ArrowUp
-                      className={`ml-2 h-4 w-4 transition-transform duration-300 ease-in-out ${
+                      className={`ml-2 h-4 w-4 transition-transform duration-300 ${
                         sortField === "created_at" && sortOrder === "desc"
                           ? "rotate-180"
                           : ""
@@ -197,7 +208,7 @@ const Users = () => {
                 users.map((user, index) => (
                   <TableRow
                     key={user.id}
-                    className={`hover:bg-neutral-50 transition-all duration-300 ${
+                    className={`hover:bg-neutral-50 ${
                       index % 2 === 0 ? "bg-neutral-0" : "bg-neutral-50"
                     }`}
                   >
@@ -207,13 +218,13 @@ const Users = () => {
                       {user.country_code} {user.phone_number}
                     </TableCell>
                     <TableCell>
-                      {intakeMap[user.intake] || user.intake}
+                      {mapLabel(intakeOptions, user.intake)}
                     </TableCell>
                     <TableCell>
-                      {examMap[user.exam_type] || user.exam_type}
+                      {mapLabel(examOptions, user.exam_type)}
                     </TableCell>
                     <TableCell>
-                      {destinationMap[user.destinations] || user.destinations}
+                      {mapCommaSeparatedLabels(destinations, user.destinations)}
                     </TableCell>
                     <TableCell>
                       {new Date(user.created_at).toLocaleDateString("en-US", {
@@ -229,6 +240,7 @@ const Users = () => {
           </Table>
         </div>
 
+        {/* Pagination */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <p className="text-body-lg text-neutral-600">
             Showing {users?.length > 0 ? (page - 1) * perPage + 1 : 0} to{" "}
