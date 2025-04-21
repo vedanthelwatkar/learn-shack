@@ -12,19 +12,22 @@ body,
 html {
   width: 100%;
   max-width: 100vw;
+  overflow-x: hidden;
   margin: 0;
   padding: 0;
+  -webkit-overflow-scrolling: touch;
 }
 
-body {
-  overflow-y: auto; /* Ensure vertical scrolling happens on body */
-}
+/* Fix for iOS Safari 100vh issue */
+@supports (-webkit-touch-callout: none) {
+  body,
+  html {
+    height: -webkit-fill-available;
+  }
 
-.sticky-nav {
-  position: -webkit-sticky !important;
-  position: sticky !important;
-  top: 0 !important;
-  z-index: 1000 !important;
+  body {
+    min-height: -webkit-fill-available;
+  }
 }
 
 /* Custom Scrollbar Styles */
@@ -87,5 +90,11 @@ body {
     span {
       color: black;
     }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  ::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
   }
 }

@@ -68,10 +68,10 @@ const NavBar = () => {
 
   return (
     <>
-      {/* <div ref={bannerRef}>
+      <div ref={bannerRef}>
         <TopBanner />
-      </div> */}
-      <nav className="w-full max-w-[100vw] fixed top-0 z-[100]" ref={navRef}>
+      </div>
+      <nav className="w-full max-w-[100vw] sticky top-0 z-[100]" ref={navRef}>
         <div className="bg-white flex flex-col w-full">
           <div className="px-5 lg:px-20 lg:py-2 py-1 relative">
             <div className="flex justify-between items-center">
