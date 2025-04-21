@@ -47,7 +47,7 @@ const ScrollToTop = ({ children }) => {
 };
 
 const App = () => {
-  const isMobile = useMediaQuery();
+  const isMobile = useMediaQuery("(min-width: 768px) and (max-width: 1023px)");
 
   // For mobile, we need to handle scrolling differently
   if (isMobile) {
