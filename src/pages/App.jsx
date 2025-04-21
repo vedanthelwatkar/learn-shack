@@ -112,15 +112,13 @@ const App = () => {
   // For desktop, keep the original approach
   return (
     <LayoutProvider>
-      <div
-        className={`flex flex-col h-dvh overflow-x-hidden w-full ${"scrollbar-hide"}`}
-      >
+      <div className="flex flex-col h-dvh overflow-x-hidden w-full">
         <BrowserRouter>
           <ScrollToTop>
             <NavBar />
             <div
               id="content-scroll-container"
-              className="flex-1 overflow-y-auto overflow-x-hidden"
+              className="flex-1 overflow-y-auto overflow-x-hidden scrollbar-hide mt-[var(--navbar-height)]"
             >
               <div className="bg-neutral-50 min-h-full">
                 <a
