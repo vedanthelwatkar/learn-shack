@@ -53,7 +53,7 @@ const App = () => {
   if (isMobile) {
     return (
       <LayoutProvider>
-        <div className="flex flex-col min-h-dvh w-full">
+        <div className="flex flex-col min-h-dvh overflow-x-hidden w-full">
           <BrowserRouter>
             <ScrollToTop>
               <NavBar />
@@ -112,7 +112,9 @@ const App = () => {
   // For desktop, keep the original approach
   return (
     <LayoutProvider>
-      <div className="flex flex-col h-dvh w-full">
+      <div
+        className={`flex flex-col h-dvh overflow-x-hidden w-full ${"scrollbar-hide"}`}
+      >
         <BrowserRouter>
           <ScrollToTop>
             <NavBar />
