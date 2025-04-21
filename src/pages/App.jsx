@@ -47,8 +47,7 @@ const App = () => {
   return (
     <LayoutProvider>
       <div
-        className="flex flex-col w-full"
-        id="main-content"
+        className="w-full"
         style={{
           WebkitOverflowScrolling: "touch",
         }}
@@ -93,8 +92,8 @@ const App = () => {
                   errorElement={<ErrorPage />}
                 />
               </Routes>
-              <Footer />
             </div>
+            <Footer />
           </ScrollToTop>
         </BrowserRouter>
       </div>
