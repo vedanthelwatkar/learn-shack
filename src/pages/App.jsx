@@ -69,8 +69,36 @@ const App = () => {
                   <WhatsappIcon />
                 </a>
                 <Routes>
-                  <Route path="/" element={<Home />} errorElement="error" />
-                  {/* Other routes */}
+                  <Route
+                    path="/"
+                    element={<Home />}
+                    errorElement={<ErrorPage />}
+                  />
+                  <Route
+                    path="*"
+                    element={<NotFound />}
+                    errorElement={<ErrorPage />}
+                  />
+                  <Route
+                    path="/terms-and-conditions"
+                    element={<TermsAndConditions />}
+                    errorElement={<ErrorPage />}
+                  />
+                  <Route
+                    path="/privacy-policy"
+                    element={<PrivacyPolicy />}
+                    errorElement={<ErrorPage />}
+                  />
+                  <Route
+                    path="/contact"
+                    element={<Contact />}
+                    errorElement={<ErrorPage />}
+                  />
+                  <Route
+                    path="/hidden-contact-table"
+                    element={<Users />}
+                    errorElement={<ErrorPage />}
+                  />
                 </Routes>
                 <Footer />
               </div>
@@ -101,8 +129,36 @@ const App = () => {
                   <WhatsappIcon />
                 </a>
                 <Routes>
-                  <Route path="/" element={<Home />} errorElement="error" />
-                  {/* Other routes */}
+                  <Route
+                    path="/"
+                    element={<Home />}
+                    errorElement={<ErrorPage />}
+                  />
+                  <Route
+                    path="*"
+                    element={<NotFound />}
+                    errorElement={<ErrorPage />}
+                  />
+                  <Route
+                    path="/terms-and-conditions"
+                    element={<TermsAndConditions />}
+                    errorElement={<ErrorPage />}
+                  />
+                  <Route
+                    path="/privacy-policy"
+                    element={<PrivacyPolicy />}
+                    errorElement={<ErrorPage />}
+                  />
+                  <Route
+                    path="/contact"
+                    element={<Contact />}
+                    errorElement={<ErrorPage />}
+                  />
+                  <Route
+                    path="/hidden-contact-table"
+                    element={<Users />}
+                    errorElement={<ErrorPage />}
+                  />
                 </Routes>
                 <Footer />
               </div>
