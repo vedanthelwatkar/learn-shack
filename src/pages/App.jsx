@@ -47,15 +47,16 @@ const App = () => {
   return (
     <LayoutProvider>
       <div
-        className="flex flex-col w-full bg-neutral-50"
+        className="flex flex-col w-full"
+        id="main-content"
         style={{
           WebkitOverflowScrolling: "touch",
         }}
       >
         <BrowserRouter>
           <ScrollToTop>
-            <NavBar />
             <div className="flex-grow bg-neutral-50">
+              <NavBar />
               <a
                 href="https://wa.me/918178759588"
                 target="_blank"

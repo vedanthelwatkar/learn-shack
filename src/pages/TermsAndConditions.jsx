@@ -36,13 +36,10 @@ const TermsConditions = () => {
 
   const scrollToSection = (ref) => {
     if (sectionRefs[ref]?.current) {
-      const mainContent = document.getElementById("main-content");
-      if (!mainContent) return;
-
       const navbarHeight = getNavbarHeight();
       const sectionTop = sectionRefs[ref].current.offsetTop;
 
-      mainContent.scrollTo({
+      document.body.scrollTo({
         top: sectionTop - navbarHeight,
         behavior: "smooth",
       });

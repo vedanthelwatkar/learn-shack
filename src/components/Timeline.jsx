@@ -40,7 +40,7 @@ export function TimelineItem({
                   : isActive
                   ? `${progressPercent}%`
                   : "0%",
-                transition: "none",
+                transition: "height 0.2s ease-out",
               }}
             ></div>
           </div>
@@ -88,125 +88,105 @@ export function TimelineItem({
 }
 
 export function Timeline({ items, className }) {
-  const [progressState, setProgressState] = useState(
+  const [progressStates, setProgressStates] = useState(
     Array(items.length).fill(0)
   );
   const timelineRef = useRef(null);
   const itemRefs = useRef([]);
-  const headerHeight = 130;
-
-  const itemMeasurements = useRef([]);
 
   useEffect(() => {
-    const initMeasurements = () => {
+    // Initialize refs array with correct length
+    itemRefs.current = itemRefs.current.slice(0, items.length);
+
+    const handleScroll = () => {
       if (!timelineRef.current) return;
 
-      itemMeasurements.current = itemRefs.current.map((item) => {
-        if (!item) return { top: 0, height: 0, lineHeight: 0 };
+      // Get scroll position from document.body or documentElement
+      const scrollTop =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      const viewportHeight = window.innerHeight;
 
-        const rect = item.getBoundingClientRect();
+      const newProgressStates = [...progressStates];
+      let prevCompleted = true; // First item starts with ability to progress
 
-        const absoluteTop = rect.top + window.scrollY;
-        return {
-          top: absoluteTop,
-          height: rect.height,
+      // Process each timeline item
+      itemRefs.current.forEach((itemRef, index) => {
+        if (!itemRef) return;
 
-          lineHeight: rect.height - 40,
-        };
-      });
-    };
+        const rect = itemRef.getBoundingClientRect();
+        const triggerLine = viewportHeight * 0.6; // Trigger line at 60% from top
 
-    const calculateProgress = () => {
-      const container = document.getElementById("main-content");
-      container && container.scrollTop > 0
-        ? container.scrollTop
-        : window.scrollY;
-
-      const windowHeight = window.innerHeight;
-      const newProgress = [...progressState];
-
-      for (let i = 0; i < itemMeasurements.current.length; i++) {
-        const measurement = itemMeasurements.current[i];
-        if (!measurement) continue;
-
-        const previousIsComplete = i === 0 || newProgress[i - 1] >= 100;
-
-        if (!previousIsComplete) {
-          newProgress[i] = 0;
-          continue;
-        }
-
-        const rect = itemRefs.current[i].getBoundingClientRect();
-        const elementTopRelativeToViewport = rect.top;
-
-        const triggerPoint = windowHeight * 0.6;
-
-        if (elementTopRelativeToViewport < triggerPoint) {
-          const progressRange = measurement.lineHeight;
-          const progressPixels = triggerPoint - elementTopRelativeToViewport;
-
-          let calculatedProgress = (progressPixels / progressRange) * 100;
-          calculatedProgress = Math.min(Math.max(calculatedProgress, 0), 100);
-
-          newProgress[i] = calculatedProgress;
+        // Calculate progress only if previous item is completed
+        if (prevCompleted) {
+          if (rect.top <= triggerLine && rect.bottom > triggerLine) {
+            // Item is crossing the trigger line - calculate progress
+            const progressPercentage =
+              ((triggerLine - rect.top) / rect.height) * 100;
+            const clampedProgress = Math.min(
+              100,
+              Math.max(0, progressPercentage)
+            );
+            newProgressStates[index] = clampedProgress;
+            prevCompleted = clampedProgress >= 100;
+          } else if (rect.top > triggerLine) {
+            // Item is below trigger line
+            newProgressStates[index] = 0;
+            prevCompleted = false;
+          } else {
+            // Item is above trigger line
+            newProgressStates[index] = 100;
+            prevCompleted = true;
+          }
         } else {
-          newProgress[i] = 0;
+          // Previous item not completed, so this one stays at 0
+          newProgressStates[index] = 0;
         }
-      }
+      });
 
-      if (JSON.stringify(newProgress) !== JSON.stringify(progressState)) {
-        setProgressState(newProgress);
-      }
-    };
-
-    initMeasurements();
-    calculateProgress();
-
-    let ticking = false;
-    const scrollHandler = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          calculateProgress();
-          ticking = false;
-        });
-        ticking = true;
+      // Update state only if there's a change
+      if (
+        JSON.stringify(newProgressStates) !== JSON.stringify(progressStates)
+      ) {
+        setProgressStates(newProgressStates);
       }
     };
 
-    window.addEventListener("resize", initMeasurements);
+    // Add event listeners to both window and document.body
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    document.body.addEventListener("scroll", handleScroll, { passive: true });
 
-    window.addEventListener("scroll", scrollHandler, { passive: true });
-    const container = document.getElementById("main-content");
-    if (container) {
-      container.addEventListener("scroll", scrollHandler, { passive: true });
-    }
+    // Initial calculation
+    setTimeout(handleScroll, 100); // Small delay to ensure elements are rendered
 
     return () => {
-      window.removeEventListener("scroll", scrollHandler);
-      if (container) {
-        container.removeEventListener("scroll", scrollHandler);
-      }
-      window.removeEventListener("resize", initMeasurements);
+      window.removeEventListener("scroll", handleScroll);
+      document.body.removeEventListener("scroll", handleScroll);
     };
   }, [items.length]);
 
   return (
     <div className={cn("relative", className)} ref={timelineRef}>
-      {items.map((item, index) => (
-        <div
-          key={index}
-          ref={(el) => (itemRefs.current[index] = el)}
-          className={index === items.length - 1 ? "last-of-type:pb-0" : ""}
-        >
-          <TimelineItem
-            {...item}
-            isActive={progressState[index] > 0}
-            isCompleted={progressState[index] >= 100}
-            progressPercent={progressState[index]}
-            isLast={index === items.length - 1}
-          />
-        </div>
-      ))}
+      {items.map((item, index) => {
+        const progress = progressStates[index];
+        const isCompleted = progress >= 100;
+        const isActive = progress > 0 && progress < 100;
+
+        return (
+          <div
+            key={index}
+            ref={(el) => (itemRefs.current[index] = el)}
+            className={index === items.length - 1 ? "last-of-type:pb-0" : ""}
+          >
+            <TimelineItem
+              {...item}
+              isActive={isActive}
+              isCompleted={isCompleted}
+              progressPercent={progress}
+              isLast={index === items.length - 1}
+            />
+          </div>
+        );
+      })}
     </div>
   );
 }

@@ -374,7 +374,7 @@ const Footer = () => {
         <Button
           className="w-fit bg-transparent border border-neutral-0 text-neutral-0 hover:brightness-110 rounded-sm px-5 py-3"
           onClick={() => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
+            document.body.scrollTo({ top: 0, behavior: "smooth" });
           }}
         >
           Back to Top
