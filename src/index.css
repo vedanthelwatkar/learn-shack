@@ -12,9 +12,19 @@ body,
 html {
   width: 100%;
   max-width: 100vw;
-  overflow-x: hidden;
   margin: 0;
   padding: 0;
+}
+
+body {
+  overflow-y: auto; /* Ensure vertical scrolling happens on body */
+}
+
+.sticky-nav {
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
 }
 
 /* Custom Scrollbar Styles */

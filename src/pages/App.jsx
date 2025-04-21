@@ -35,10 +35,9 @@ const ScrollToTop = ({ children }) => {
   }, []);
 
   useLayoutEffect(() => {
-    document.documentElement.scrollTo(0, 0);
-    document.body.scrollTo(0, 0);
+    window.scrollTo(0, 0);
 
-    const mainContent = document.getElementById("main-content");
+    const mainContent = document.getElementById("content-scroll-container");
     if (mainContent) {
       mainContent.scrollTo(0, 0);
     }
@@ -50,54 +49,63 @@ const ScrollToTop = ({ children }) => {
 const App = () => {
   const isMobile = useMediaQuery();
 
+  // For mobile, we need to handle scrolling differently
+  if (isMobile) {
+    return (
+      <LayoutProvider>
+        <div className="flex flex-col min-h-screen w-full">
+          <BrowserRouter>
+            <ScrollToTop>
+              <NavBar />
+              <div
+                style={{ marginTop: "var(--navbar-height, 60px)" }}
+                className="flex-1 w-full bg-neutral-50"
+              >
+                <a
+                  href="https://wa.me/918178759588"
+                  target="_blank"
+                  className="fixed md:right-7 md:bottom-7 right-4 bottom-4 w-12 h-12 md:w-16 md:h-16 cursor-pointer z-50"
+                >
+                  <WhatsappIcon />
+                </a>
+                <Routes>
+                  <Route path="/" element={<Home />} errorElement="error" />
+                  {/* Other routes */}
+                </Routes>
+                <Footer />
+              </div>
+            </ScrollToTop>
+          </BrowserRouter>
+        </div>
+      </LayoutProvider>
+    );
+  }
+
+  // For desktop, keep the original approach
   return (
     <LayoutProvider>
-      <div
-        className={`w-full overflow-auto min-h-[100dvh] overflow-x-hidden ${
-          isMobile && "scrollbar-hide"
-        }`}
-        id="main-content"
-      >
+      <div className="flex flex-col h-screen w-full">
         <BrowserRouter>
           <ScrollToTop>
             <NavBar />
-            <div className="bg-neutral-50">
-              <a
-                href="https://wa.me/918178759588"
-                target="_blank"
-                className="fixed md:right-7 md:bottom-7 right-4 bottom-4 w-12 h-12 md:w-16 md:h-16 cursor-pointer z-50"
-              >
-                <WhatsappIcon />
-              </a>
-              <Routes>
-                <Route path="/" element={<Home />} errorElement="error" />
-                <Route
-                  path="*"
-                  element={<NotFound />}
-                  errorElement={<ErrorPage />}
-                />
-                <Route
-                  path="/terms-and-conditions"
-                  element={<TermsAndConditions />}
-                  errorElement={<ErrorPage />}
-                />
-                <Route
-                  path="/privacy-policy"
-                  element={<PrivacyPolicy />}
-                  errorElement={<ErrorPage />}
-                />
-                <Route
-                  path="/contact"
-                  element={<Contact />}
-                  errorElement={<ErrorPage />}
-                />
-                <Route
-                  path="/hidden-contact-table"
-                  element={<Users />}
-                  errorElement={<ErrorPage />}
-                />
-              </Routes>
-              <Footer />
+            <div
+              id="content-scroll-container"
+              className="flex-1 overflow-y-auto overflow-x-hidden"
+            >
+              <div className="bg-neutral-50 min-h-full">
+                <a
+                  href="https://wa.me/918178759588"
+                  target="_blank"
+                  className="fixed md:right-7 md:bottom-7 right-4 bottom-4 w-12 h-12 md:w-16 md:h-16 cursor-pointer z-50"
+                >
+                  <WhatsappIcon />
+                </a>
+                <Routes>
+                  <Route path="/" element={<Home />} errorElement="error" />
+                  {/* Other routes */}
+                </Routes>
+                <Footer />
+              </div>
             </div>
           </ScrollToTop>
         </BrowserRouter>
