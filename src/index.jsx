@@ -4,10 +4,16 @@ import "./index.css";
 import App from "./pages/App";
 import ErrorBoundary from "@/components/ErrorBoundary";
 
-createRoot(document.getElementById("root")).render(
+const Root = import.meta.env.DEV ? (
   <StrictMode>
     <ErrorBoundary>
       <App />
     </ErrorBoundary>
   </StrictMode>
+) : (
+  <ErrorBoundary>
+    <App />
+  </ErrorBoundary>
 );
+
+createRoot(document.getElementById("root")).render(Root);
