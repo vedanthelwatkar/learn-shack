@@ -7,7 +7,6 @@ const ContactStep2 = ({
   phoneNumber,
   onVerify,
   onResend,
-  setIsOtpSent,
   setCurrentStep,
   isLoading,
   error,
@@ -17,6 +16,7 @@ const ContactStep2 = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const otpInputRef = useRef(null);
+  const { setState } = useOtpStore();
 
   // Focus OTP input on component mount
   useEffect(() => {
@@ -121,7 +121,7 @@ const ContactStep2 = ({
         <button
           className="text-brand-primary text-body-md font-medium"
           onClick={() => {
-            setIsOtpSent(false);
+            setState({ isOtpSent: false });
             setCurrentStep(1);
           }}
         >

@@ -2,6 +2,7 @@ import { create } from "zustand";
 import axios from "axios";
 import { appConfig, ApiEndPoints } from "@/appConfig";
 
+// Create the Zustand store with state and actions
 const useOtpStore = create((set, get) => ({
   isOtpSent: false,
   isOtpVerified: false,
@@ -9,6 +10,10 @@ const useOtpStore = create((set, get) => ({
   error: null,
   phoneNumber: "",
   countryCode: "",
+  resendCooldown: null,
+
+  // Add a setter method to properly update the state
+  setState: (newState) => set((state) => ({ ...state, ...newState })),
 
   resetOtpState: () =>
     set({
@@ -21,34 +26,32 @@ const useOtpStore = create((set, get) => ({
     }),
 }));
 
-const { setState, getState } = useOtpStore;
+// Export send OTP function
+export const sendOtp = async (phoneNumber, countryCode) => {
+  const fullPhone = `${countryCode}${phoneNumber}`;
 
-export const sendOtp = async (phoneData) => {
-  const { phoneNumber, countryCode, email, fullName } = phoneData;
-
-  setState({ isLoading: true, error: null });
+  // Use the store's setState method directly
+  useOtpStore.getState().setState({ isLoading: true, error: null });
 
   try {
     const response = await axios.post(
       `${appConfig.BASE_URL}${ApiEndPoints.OTP}/send`,
       {
-        phoneNumber,
-        countryCode,
-        email,
-        fullName,
+        phoneNumber: fullPhone,
       }
     );
 
     if (response.data.success) {
-      setState({
+      useOtpStore.getState().setState({
         isOtpSent: true,
         isLoading: false,
         phoneNumber,
         countryCode,
+        resendCooldown: 30,
       });
       return true;
     } else {
-      setState({
+      useOtpStore.getState().setState({
         isOtpSent: false,
         isLoading: false,
         error: response.data.message || "Failed to send OTP",
@@ -56,7 +59,7 @@ export const sendOtp = async (phoneData) => {
       return false;
     }
   } catch (error) {
-    setState({
+    useOtpStore.getState().setState({
       isOtpSent: false,
       isLoading: false,
       error: error.response?.data?.message || "Network error while sending OTP",
@@ -65,38 +68,41 @@ export const sendOtp = async (phoneData) => {
   }
 };
 
+// Export resend OTP function
 export const resendOtp = async () => {
-  const { phoneNumber, countryCode } = getState();
+  const state = useOtpStore.getState();
+  const { phoneNumber, countryCode } = state;
 
   if (!phoneNumber || !countryCode) {
-    setState({ error: "Phone number information is missing" });
+    state.setState({ error: "Phone number information is missing" });
     return false;
   }
 
-  setState({ isLoading: true, error: null });
+  const fullPhone = `${countryCode}${phoneNumber}`;
+
+  state.setState({ isLoading: true, error: null });
 
   try {
     const response = await axios.post(
       `${appConfig.BASE_URL}${ApiEndPoints.OTP}/send`,
       {
-        phoneNumber,
-        countryCode,
+        phoneNumber: fullPhone,
         resend: true,
       }
     );
 
     if (response.data.success) {
-      setState({ isLoading: false });
+      state.setState({ isLoading: false, resendCooldown: 30 });
       return true;
     } else {
-      setState({
+      state.setState({
         isLoading: false,
         error: response.data.message || "Failed to resend OTP",
       });
       return false;
     }
   } catch (error) {
-    setState({
+    state.setState({
       isLoading: false,
       error:
         error.response?.data?.message || "Network error while resending OTP",
@@ -105,34 +111,37 @@ export const resendOtp = async () => {
   }
 };
 
+// Export verify OTP function
 export const verifyOtp = async (otp) => {
-  const { phoneNumber, countryCode } = getState();
+  const state = useOtpStore.getState();
+  const { phoneNumber, countryCode } = state;
 
   if (!phoneNumber || !countryCode) {
-    setState({ error: "Phone number information is missing" });
+    state.setState({ error: "Phone number information is missing" });
     return false;
   }
 
-  setState({ isLoading: true, error: null });
+  const fullPhone = `${countryCode}${phoneNumber}`;
+
+  state.setState({ isLoading: true, error: null });
 
   try {
     const response = await axios.post(
       `${appConfig.BASE_URL}${ApiEndPoints.OTP}/verify`,
       {
-        phoneNumber,
-        countryCode,
+        phoneNumber: fullPhone,
         otp,
       }
     );
 
     if (response.data.success) {
-      setState({
+      state.setState({
         isOtpVerified: true,
         isLoading: false,
       });
       return true;
     } else {
-      setState({
+      state.setState({
         isOtpVerified: false,
         isLoading: false,
         error: response.data.message || "Invalid OTP",
@@ -140,7 +149,7 @@ export const verifyOtp = async (otp) => {
       return false;
     }
   } catch (error) {
-    setState({
+    state.setState({
       isOtpVerified: false,
       isLoading: false,
       error:
@@ -150,4 +159,5 @@ export const verifyOtp = async (otp) => {
   }
 };
 
+// Export the entire store as default
 export default useOtpStore;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Select,
   SelectContent,
@@ -10,6 +10,7 @@ import { countries } from "@/constants";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useLocation } from "react-router-dom";
+import useOtpStore from "@/store/useOtpStore";
 
 const tempDomains = [
   "10minutemail.com",
@@ -37,12 +38,18 @@ const tempDomains = [
 const ContactStep1 = ({ initialData = {}, onSubmit }) => {
   const location = useLocation();
   const state = location.state;
+
   const [selectedCountry, setSelectedCountry] = useState(
     initialData.countryCode || "+91"
   );
   const [phoneNumber, setPhoneNumber] = useState(initialData.phoneNumber || "");
   const [fullName, setFullName] = useState(initialData.fullName || "");
   const [email, setEmail] = useState(initialData.email || "");
+
+  // Create refs for the input elements to fix cursor positioning
+  const fullNameRef = useRef(null);
+  const emailRef = useRef(null);
+  const phoneNumberRef = useRef(null);
 
   const [errors, setErrors] = useState({
     fullName: "",
@@ -58,9 +65,20 @@ const ContactStep1 = ({ initialData = {}, onSubmit }) => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const { setState, isLoading, isOtpSent, error } = useOtpStore();
+
   const selectedCountryData = countries.find(
     (country) => country.phoneCode === selectedCountry
   );
+
+  useEffect(() => {
+    if (isLoading) {
+      setIsSubmitting(true);
+    }
+    if (isOtpSent || error) {
+      setIsSubmitting(false);
+    }
+  }, [isLoading, isOtpSent, error]);
 
   useEffect(() => {
     if (initialData.fullName && initialData.fullName !== fullName)
@@ -122,48 +140,75 @@ const ContactStep1 = ({ initialData = {}, onSubmit }) => {
   const handleFullNameChange = (e) => {
     const value = e.target.value;
     setFullName(value);
+
+    // Update error state immediately if field has been touched
     if (touched.fullName) {
       setErrors((prev) => ({
         ...prev,
         fullName: validateFullName(value),
       }));
     }
+
+    // Clear any backend error messages
+    if (error) {
+      setState({ error: null });
+    }
   };
 
   const handleEmailChange = (e) => {
     const value = e.target.value;
     setEmail(value);
+
+    // Update error state immediately if field has been touched
     if (touched.email) {
       setErrors((prev) => ({
         ...prev,
         email: validateEmail(value),
       }));
     }
+
+    // Clear any backend error messages
+    if (error) {
+      setState({ error: null });
+    }
   };
 
   const handlePhoneNumberChange = (e) => {
+    // Get the actual value from the input event
     const value = e.target.value;
 
-    if (value && !/^\d*$/.test(value)) return;
+    // Only continue if input is empty or contains only digits
+    if (value === "" || /^\d*$/.test(value)) {
+      // Enforce max length
+      const maxLength = selectedCountryData?.maxNumberLength || 10;
+      const newValue = value.slice(0, maxLength);
 
-    const maxLength = selectedCountryData?.maxNumberLength || 10;
-    if (value.length <= maxLength) {
-      setPhoneNumber(value);
+      // Set phone number state
+      setPhoneNumber(newValue);
+
+      // Update error state if the field has been touched
       if (touched.phoneNumber) {
         setErrors((prev) => ({
           ...prev,
-          phoneNumber: validatePhoneNumber(value),
+          phoneNumber: validatePhoneNumber(newValue),
         }));
+      }
+
+      // Clear any backend error messages
+      if (error) {
+        setState({ error: null });
       }
     }
   };
 
   const handleBlur = (field) => {
+    // Mark field as touched
     setTouched((prev) => ({
       ...prev,
       [field]: true,
     }));
 
+    // Validate the field on blur
     let errorMessage = "";
     switch (field) {
       case "fullName":
@@ -179,6 +224,7 @@ const ContactStep1 = ({ initialData = {}, onSubmit }) => {
         break;
     }
 
+    // Update errors
     setErrors((prev) => ({
       ...prev,
       [field]: errorMessage,
@@ -188,60 +234,62 @@ const ContactStep1 = ({ initialData = {}, onSubmit }) => {
   const handleCountryChange = (value) => {
     setSelectedCountry(value);
 
-    if (touched.phoneNumber && phoneNumber) {
-      setTimeout(() => {
-        const newSelectedCountryData = countries.find(
-          (country) => country.code === value
-        );
+    // Find the country data for the new selection
+    const newSelectedCountryData = countries.find(
+      (country) => country.phoneCode === value
+    );
 
-        const maxLength = newSelectedCountryData?.maxNumberLength || 10;
+    // Get the max length for phone numbers in the selected country
+    const maxLength = newSelectedCountryData?.maxNumberLength || 10;
 
-        if (phoneNumber.length > maxLength) {
-          const truncatedNumber = phoneNumber.slice(0, maxLength);
-          setPhoneNumber(truncatedNumber);
-          setErrors((prev) => ({
-            ...prev,
-            phoneNumber: validatePhoneNumber(truncatedNumber),
-          }));
-        } else {
-          setErrors((prev) => ({
-            ...prev,
-            phoneNumber: validatePhoneNumber(phoneNumber),
-          }));
-        }
-      }, 0);
+    // If the phone number exceeds the new max length, truncate it
+    if (phoneNumber.length > maxLength) {
+      const truncatedNumber = phoneNumber.slice(0, maxLength);
+      setPhoneNumber(truncatedNumber);
+
+      // Revalidate if the field has been touched
+      if (touched.phoneNumber) {
+        setErrors((prev) => ({
+          ...prev,
+          phoneNumber: validatePhoneNumber(truncatedNumber),
+        }));
+      }
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Mark all fields as touched
     setTouched({
       fullName: true,
       email: true,
       phoneNumber: true,
     });
 
+    // Validate all fields
     const nameError = validateFullName(fullName);
     const emailError = validateEmail(email);
     const phoneError = validatePhoneNumber(phoneNumber);
 
+    // Update all errors
     setErrors({
       fullName: nameError,
       email: emailError,
       phoneNumber: phoneError,
     });
 
+    // Don't proceed if there are validation errors
     if (nameError || emailError || phoneError) {
       return;
     }
 
+    // Set submitting state
     setIsSubmitting(true);
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      onSubmit({
+      // Call the onSubmit function with form data
+      await onSubmit({
         fullName,
         email,
         phoneNumber,
@@ -249,51 +297,82 @@ const ContactStep1 = ({ initialData = {}, onSubmit }) => {
       });
     } catch (error) {
       console.error("Form submission error:", error);
-    } finally {
+      // Make sure to reset submitting state on error
       setIsSubmitting(false);
     }
   };
 
-  const hasErrors = !!errors.fullName || !!errors.email || !!errors.phoneNumber;
+  // Fix for cursor position in input fields
+  const handleInputClick = (e, inputRef) => {
+    // Don't manipulate cursor if there's a text selection
+    if (e.target.selectionStart !== e.target.selectionEnd) {
+      return;
+    }
+
+    // Get the clicked position
+    const clickPosition = e.target.selectionStart;
+
+    // Use setTimeout to ensure this runs after React's event handling
+    setTimeout(() => {
+      if (inputRef.current) {
+        // Set cursor position to where the user clicked
+        inputRef.current.setSelectionRange(clickPosition, clickPosition);
+      }
+    }, 0);
+  };
+
+  // Check if form has errors
+  const hasErrors = Object.values(errors).some((error) => !!error);
 
   return (
     <form className="flex flex-col gap-3" onSubmit={handleSubmit} noValidate>
       <div className="flex flex-col gap-4 md:gap-9">
+        {/* Full Name Field */}
         <div className="flex flex-col gap-3">
           <span className="font-medium text-neutral-700 text-body-lg">
             Full Name
           </span>
           <Input
+            ref={fullNameRef}
             placeholder="Enter full name"
             value={fullName}
             onChange={handleFullNameChange}
             onBlur={() => handleBlur("fullName")}
             onFocus={() => handleFieldFocus("fullName")}
-            className={errors.fullName ? "border-red-500" : ""}
-            aria-invalid={!!errors.fullName}
+            onClick={(e) => handleInputClick(e, fullNameRef)}
+            className={
+              touched.fullName && errors.fullName ? "border-red-500" : ""
+            }
+            aria-invalid={touched.fullName && !!errors.fullName}
           />
-          {errors.fullName && (
+          {touched.fullName && errors.fullName && (
             <span className="text-red-500 text-sm">{errors.fullName}</span>
           )}
         </div>
+
+        {/* Email Field */}
         <div className="flex flex-col gap-3">
           <span className="font-medium text-neutral-700 text-body-lg">
             Email
           </span>
           <Input
+            ref={emailRef}
             placeholder="Enter email id"
             type="email"
             value={email}
             onChange={handleEmailChange}
             onBlur={() => handleBlur("email")}
             onFocus={() => handleFieldFocus("email")}
-            className={errors.email ? "border-red-500" : ""}
-            aria-invalid={!!errors.email}
+            onClick={(e) => handleInputClick(e, emailRef)}
+            className={touched.email && errors.email ? "border-red-500" : ""}
+            aria-invalid={touched.email && !!errors.email}
           />
-          {errors.email && (
+          {touched.email && errors.email && (
             <span className="text-red-500 text-sm">{errors.email}</span>
           )}
         </div>
+
+        {/* Phone Number Field */}
         <div className="flex flex-col gap-3">
           <span className="font-medium text-neutral-700 text-body-lg">
             Phone Number
@@ -323,21 +402,31 @@ const ContactStep1 = ({ initialData = {}, onSubmit }) => {
               </SelectContent>
             </Select>
             <Input
+              ref={phoneNumberRef}
               placeholder="Enter phone number"
               value={phoneNumber}
               onChange={handlePhoneNumberChange}
               onBlur={() => handleBlur("phoneNumber")}
               onFocus={() => handleFieldFocus("phoneNumber")}
-              className={errors.phoneNumber ? "border-red-500" : ""}
-              maxLength={selectedCountryData?.maxNumberLength || 10}
-              aria-invalid={!!errors.phoneNumber}
+              onClick={(e) => handleInputClick(e, phoneNumberRef)}
+              className={
+                touched.phoneNumber && errors.phoneNumber
+                  ? "border-red-500"
+                  : ""
+              }
+              aria-invalid={touched.phoneNumber && !!errors.phoneNumber}
             />
           </div>
-          {errors.phoneNumber && (
+          {touched.phoneNumber && errors.phoneNumber && (
             <span className="text-red-500 text-sm">{errors.phoneNumber}</span>
           )}
         </div>
       </div>
+
+      {/* Backend Error Message */}
+      {error && <span className="text-red-500 text-sm">{error}</span>}
+
+      {/* Submit Button */}
       <Button
         className="flex w-full"
         type="submit"
