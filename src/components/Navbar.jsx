@@ -76,7 +76,7 @@ const NavBar = () => {
           <div className="px-5 lg:px-20 lg:py-2 py-1 relative">
             <div className="flex justify-between items-center">
               <div
-                className="w-[80px] h-[48px] lg:w-[100px] lg:h-[60px] flex-shrink-0"
+                className="w-[80px] h-[48px] lg:w-[100px] lg:h-[60px] flex-shrink-0 cursor-pointer"
                 onClick={() => navigate("/")}
               >
                 <LogoLight />
