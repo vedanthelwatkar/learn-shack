@@ -48,7 +48,7 @@ const ContactFormContainer = () => {
 
   useEffect(() => {
     if (isOtpSent) {
-      setCurrentStep(2);
+      setCurrentStep(3);
     }
   }, [isOtpSent]);
 
@@ -66,7 +66,8 @@ const ContactFormContainer = () => {
       phoneNumber: data.phoneNumber,
       countryCode: data.countryCode,
     });
-    sendOtp(data.phoneNumber, data.countryCode);
+    // sendOtp(data.phoneNumber, data.countryCode);
+    setState({ isOtpSent: true });
   };
 
   const handleStep2Submit = async (otp) => {
@@ -124,20 +125,20 @@ const ContactFormContainer = () => {
         />
       ),
     },
-    {
-      id: 2,
-      component: (
-        <ContactStep2
-          phoneNumber={`${formData.countryCode} ${formData.phoneNumber}`}
-          onVerify={handleStep2Submit}
-          onResend={handleResendOTP}
-          setCurrentStep={setCurrentStep}
-          isLoading={isLoading}
-          error={error}
-          resendCooldown={resendCooldown}
-        />
-      ),
-    },
+    // {
+    //   id: 2,
+    //   component: (
+    //     <ContactStep2
+    //       phoneNumber={`${formData.countryCode} ${formData.phoneNumber}`}
+    //       onVerify={handleStep2Submit}
+    //       onResend={handleResendOTP}
+    //       setCurrentStep={setCurrentStep}
+    //       isLoading={isLoading}
+    //       error={error}
+    //       resendCooldown={resendCooldown}
+    //     />
+    //   ),
+    // },
     {
       id: 3,
       component: <ContactStep3 onSubmit={handleFinalSubmit} />,
