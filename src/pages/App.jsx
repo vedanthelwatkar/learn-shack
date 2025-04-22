@@ -82,7 +82,7 @@ const App = () => {
                   errorElement={<ErrorPage />}
                 />
                 <Route
-                  path="/contact"
+                  path="/contact-us"
                   element={<Contact />}
                   errorElement={<ErrorPage />}
                 />

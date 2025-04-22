@@ -98,7 +98,7 @@ const NavBar = () => {
                 {/* <Button variant="outline">Evaluate Profile</Button> */}
                 <Button
                   onClick={() =>
-                    navigate("/contact", {
+                    navigate("/contact-us", {
                       state: { ctaText: "Talk to Founders" },
                     })
                   }

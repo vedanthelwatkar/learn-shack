@@ -3,6 +3,7 @@ import { Button } from "../ui/button";
 import GraduateIcon from "@/svgComponents/GraduateIcon";
 import AplusIcon from "@/svgComponents/AplusIcon";
 import PersonCheckIcon from "@/svgComponents/PersonCheckIcon";
+import { useNavigate } from "react-router-dom";
 
 const LSECardData = [
   {
@@ -23,6 +24,8 @@ const LSECardData = [
 ];
 
 const WhyLSE = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="lg:py-20 py-[60px] w-full px-5 md:px-10 lg:px-24 flex flex-col gap-12 items-center justify-center">
       <div className="flex flex-col gap-8 sm:gap-12 w-full">
@@ -46,6 +49,7 @@ const WhyLSE = () => {
             <Button
               variant="outline"
               className="self-center sm:self-start text-center sm:text-start"
+              onClick={() => navigate("/contact-us")}
             >
               Explore Services
             </Button>

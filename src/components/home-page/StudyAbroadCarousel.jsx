@@ -109,7 +109,7 @@ const Slide = ({ slide, index, current, handleSlideClick }) => {
               {buttons.view}
             </Button> */}
 
-            <Button className="flex-1" onClick={() => navigate("/contact")}>
+            <Button className="flex-1" onClick={() => navigate("/contact-us")}>
               {buttons.enquire}
             </Button>
           </div>

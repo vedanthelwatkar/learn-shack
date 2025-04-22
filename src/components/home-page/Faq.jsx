@@ -21,7 +21,7 @@ const Faq = () => {
         <div className="text-center">
           <p className="text-neutral-700 text-body-xl">
             Have More Questions?{" "}
-            <Button variant="link" onClick={() => navigate("/contact")}>
+            <Button variant="link" onClick={() => navigate("/contact-us")}>
               Contact Us Here
             </Button>
           </p>

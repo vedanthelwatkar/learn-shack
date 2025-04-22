@@ -39,7 +39,7 @@ const LimitedScholarships = () => {
             </span>
           </div>
           <div className="flex sm:w-fit w-full gap-4">
-            <Button className="flex-1" onClick={() => navigate("/contact")}>
+            <Button className="flex-1" onClick={() => navigate("/contact-us")}>
               Apply Now
             </Button>
             {/* <Button className="flex-1" variant="outline">

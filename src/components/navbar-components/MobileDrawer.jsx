@@ -93,7 +93,7 @@ const MobileDrawer = ({ isOpen, setIsOpen }) => {
             variant="default"
             className="w-full"
             onClick={() => {
-              navigate("/contact", {
+              navigate("/contact-us", {
                 state: { ctaText: "Talk to an Expert" },
               });
               setIsOpen(false);

@@ -76,7 +76,7 @@ const HeroBanner = () => {
             </span>
           </div>
           <div className="flex flex-col gap-5 sm:gap-6">
-            <Button variant="large" onClick={() => navigate("/contact")}>
+            <Button variant="large" onClick={() => navigate("/contact-us")}>
               Book Your FREE Counseling Today
             </Button>
             {/* <div className="flex gap-1 self-center sm:self-start">
