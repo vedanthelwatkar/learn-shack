@@ -120,12 +120,22 @@ const ContactStep1 = ({ initialData = {}, onSubmit }) => {
 
     if (!/^\d+$/.test(phoneNumber)) return "Enter a valid phone number";
 
+    // Strip leading zero for validation against maximum length
+    let numberToValidate = phoneNumber;
+    if (phoneNumber.startsWith("0")) {
+      numberToValidate = phoneNumber.substring(1);
+    }
+
     const maxLength = selectedCountryData?.maxNumberLength || 10;
-    if (phoneNumber.length > maxLength) {
+
+    // Check if the normalized number exceeds max length
+    if (numberToValidate.length > maxLength) {
       return `Enter a valid phone number`;
     }
 
-    if (phoneNumber.length < maxLength) return "Enter a valid phone number";
+    // Check if the normalized number is too short
+    if (numberToValidate.length < maxLength)
+      return "Enter a valid phone number";
 
     return "";
   };
@@ -179,18 +189,14 @@ const ContactStep1 = ({ initialData = {}, onSubmit }) => {
 
     // Only continue if input is empty or contains only digits
     if (value === "" || /^\d*$/.test(value)) {
-      // Enforce max length
-      const maxLength = selectedCountryData?.maxNumberLength || 10;
-      const newValue = value.slice(0, maxLength);
-
-      // Set phone number state
-      setPhoneNumber(newValue);
+      // Display the full number to the user (including leading zero)
+      setPhoneNumber(value);
 
       // Update error state if the field has been touched
       if (touched.phoneNumber) {
         setErrors((prev) => ({
           ...prev,
-          phoneNumber: validatePhoneNumber(newValue),
+          phoneNumber: validatePhoneNumber(value),
         }));
       }
 
@@ -242,9 +248,22 @@ const ContactStep1 = ({ initialData = {}, onSubmit }) => {
     // Get the max length for phone numbers in the selected country
     const maxLength = newSelectedCountryData?.maxNumberLength || 10;
 
-    // If the phone number exceeds the new max length, truncate it
-    if (phoneNumber.length > maxLength) {
-      const truncatedNumber = phoneNumber.slice(0, maxLength);
+    // If the phone number exceeds the new max length, adjust it
+    // Account for potential leading zero
+    let numberToCheck = phoneNumber;
+    let hasLeadingZero = false;
+
+    if (phoneNumber.startsWith("0")) {
+      numberToCheck = phoneNumber.substring(1);
+      hasLeadingZero = true;
+    }
+
+    if (numberToCheck.length > maxLength) {
+      // Truncate while preserving the leading zero in the display
+      const truncatedNumber = hasLeadingZero
+        ? "0" + numberToCheck.slice(0, maxLength)
+        : numberToCheck.slice(0, maxLength);
+
       setPhoneNumber(truncatedNumber);
 
       // Revalidate if the field has been touched
@@ -288,11 +307,17 @@ const ContactStep1 = ({ initialData = {}, onSubmit }) => {
     setIsSubmitting(true);
 
     try {
+      // Normalize phone number by removing leading zero before submission
+      let normalizedPhone = phoneNumber;
+      if (phoneNumber.startsWith("0")) {
+        normalizedPhone = phoneNumber.substring(1);
+      }
+
       // Call the onSubmit function with form data
       await onSubmit({
         fullName,
         email,
-        phoneNumber,
+        phoneNumber: normalizedPhone, // Send normalized number without leading zero
         countryCode: selectedCountry,
       });
     } catch (error) {
