@@ -429,7 +429,7 @@ const Users = () => {
                 page >= totalPages || isLoading
                   ? "border-neutral-200 text-neutral-500"
                   : "border-brand-primary text-brand-primary hover:bg-brand-secondary"
-              } rounded-md px-4 py-2 font-medium transition-colors`}
+              }`}
             >
               Next
               <ChevronRight className="h-5 w-5 ml-2" />
