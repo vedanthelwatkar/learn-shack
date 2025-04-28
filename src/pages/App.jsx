@@ -19,6 +19,7 @@ import NotFound from "./NotFound";
 import { LayoutProvider } from "@/context/LayoutContext";
 import { getS3 } from "@/store/useConstantsStore";
 import Users from "./Users";
+import robots from "../../robots.txt";
 
 const ScrollToTop = ({ children }) => {
   const location = useLocation();
@@ -89,6 +90,11 @@ const App = () => {
                 <Route
                   path="/hidden-contact-table"
                   element={<Users />}
+                  errorElement={<ErrorPage />}
+                />
+                <Route
+                  path="/robots.txt"
+                  element={robots}
                   errorElement={<ErrorPage />}
                 />
               </Routes>
