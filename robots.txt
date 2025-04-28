@@ -1,0 +1,9 @@
+# START LEARNSHACKEDU
+
+user-agent: *
+
+Disallow: /hidden-contact-table
+
+Sitemap: https://learnshackedu.com/sitemap_index.xml
+
+# END LEARNSHACKEDU

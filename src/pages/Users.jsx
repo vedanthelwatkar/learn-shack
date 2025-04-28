@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -12,9 +12,17 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import useUserStore, { fetchUsers } from "@/store/userStore";
-import { ArrowUp, ChevronLeft, ChevronRight, Search } from "react-feather";
+import {
+  ArrowUp,
+  ChevronLeft,
+  ChevronRight,
+  Search,
+  Lock,
+  User,
+  Eye,
+  EyeOff,
+} from "react-feather";
 
-// Label mappings
 const destinations = [
   { id: "uk", label: "UK" },
   { id: "ireland", label: "Ireland" },
@@ -43,7 +51,6 @@ const examOptions = [
   { id: "none", label: "None" },
 ];
 
-// Helper functions
 const mapLabel = (list, id) => list.find((item) => item.id === id)?.label || id;
 const mapCommaSeparatedLabels = (list, ids) =>
   ids
@@ -51,7 +58,17 @@ const mapCommaSeparatedLabels = (list, ids) =>
     .map((id) => mapLabel(list, id.trim()))
     .join(", ");
 
+const AUTH_USERNAME = import.meta.env.VITE_AUTH_USERNAME;
+const AUTH_PASSWORD = import.meta.env.VITE_AUTH_PASSWORD;
+const AUTH_KEY = import.meta.env.VITE_AUTH_KEY;
+
 const Users = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loginError, setLoginError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
   const {
     users,
     total: totalUsers,
@@ -66,6 +83,37 @@ const Users = () => {
 
   const setState = useUserStore((state) => state.setState);
   const perPage = 10;
+
+  useEffect(() => {
+    const authStatus = sessionStorage.getItem(AUTH_KEY);
+    if (authStatus === "true") {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      loadUsers();
+    }
+  }, [isAuthenticated]);
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    setLoginError("");
+    if (username === AUTH_USERNAME && password === AUTH_PASSWORD) {
+      sessionStorage.setItem(AUTH_KEY, "true");
+      setIsAuthenticated(true);
+    } else {
+      setLoginError("Invalid username or password");
+    }
+  };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem(AUTH_KEY);
+    setIsAuthenticated(false);
+    setUsername("");
+    setPassword("");
+  };
 
   const handleSearchChange = (e) => {
     setState({ searchTerm: e.target.value });
@@ -90,10 +138,6 @@ const Users = () => {
     });
   };
 
-  useEffect(() => {
-    loadUsers();
-  }, []);
-
   const handleSort = (field) => {
     setState({ isLoading: true });
     const newOrder =
@@ -112,14 +156,94 @@ const Users = () => {
     if (page > 1) loadUsers(page - 1);
   };
 
+  if (!isAuthenticated) {
+    return (
+      <div className="flex items-center justify-center min-h-[calc(100dvh-113px)] sm:min-h-[calc(100dvh-100px)] lg:min-h-[calc(100dvh-120px)] bg-neutral-50">
+        <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-sm border-2">
+          <div className="flex flex-col items-center mb-6">
+            <div className="w-16 h-16 bg-brand-secondary rounded-full flex items-center justify-center mb-4">
+              <Lock className="w-8 h-8 text-brand-primary" />
+            </div>
+            <h1 className="text-2xl font-bold font-heading">Login</h1>
+            <p className="text-neutral-600 mt-2">
+              Enter your credentials to access user data
+            </p>
+          </div>
+
+          {loginError && (
+            <div className="p-4 mb-6 text-red-600 bg-red-100 rounded-md">
+              {loginError}
+            </div>
+          )}
+
+          <form onSubmit={handleLogin} className="space-y-6">
+            <div>
+              <label htmlFor="username" className="block mb-2 font-medium">
+                Username
+              </label>
+              <div className="relative">
+                <User className="absolute h-4 left-3 top-1/2 transform -translate-y-1/2 text-neutral-500" />
+                <Input
+                  id="username"
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  className="pl-10 w-full"
+                  placeholder="Enter username"
+                  required
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="password" className="block mb-2 font-medium">
+                Password
+              </label>
+              <div className="relative">
+                <Lock className="absolute left-3 h-4 top-1/2 transform -translate-y-1/2 text-neutral-500" />
+                <Input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="pl-10 pr-10 w-full"
+                  placeholder="Enter password"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-neutral-500 hover:text-neutral-700"
+                >
+                  {showPassword ? <Eye /> : <EyeOff />}
+                </button>
+              </div>
+            </div>
+
+            <Button type="submit" className="w-full bg-brand-primary">
+              Login
+            </Button>
+          </form>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="p-5 md:p-10 bg-neutral-50 min-h-[calc(100dvh-113px)] sm:min-h-[calc(100dvh-100px)] lg:min-h-[calc(100dvh-120px)]">
       <div className="max-w-7xl mx-auto bg-white rounded-lg shadow-sm p-6 md:p-8">
-        {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-          <h2 className="text-h3 font-heading font-bold text-neutral-900">
-            Users
-          </h2>
+          <div className="flex items-center justify-between">
+            <h2 className="text-h3 font-heading font-bold text-neutral-900">
+              Users
+            </h2>
+            <Button
+              onClick={handleLogout}
+              className="md:hidden bg-red-600 hover:bg-red-700 text-white"
+            >
+              Logout
+            </Button>
+          </div>
           <div className="flex flex-col md:flex-row md:items-center gap-4">
             <div className="bg-brand-secondary text-brand-primary font-medium px-4 py-2 rounded-md">
               <p className="text-body-lg">Total Users: {totalUsers}</p>
@@ -134,6 +258,12 @@ const Users = () => {
                 onChange={handleSearchChange}
               />
             </div>
+            <Button
+              onClick={handleLogout}
+              className="hidden md:block bg-red-600 hover:bg-red-700 text-white"
+            >
+              Logout
+            </Button>
           </div>
         </div>
 
@@ -143,7 +273,6 @@ const Users = () => {
           </div>
         )}
 
-        {/* Table */}
         <div className="rounded-md border-2 border-neutral-200 overflow-auto mb-6">
           <Table>
             <TableHeader className="bg-neutral-100">
@@ -243,7 +372,6 @@ const Users = () => {
           </Table>
         </div>
 
-        {/* Pagination */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <p className="text-body-lg text-neutral-600">
             Showing {users?.length > 0 ? (page - 1) * perPage + 1 : 0} to{" "}
