@@ -234,8 +234,8 @@ const Users = () => {
   }
 
   return (
-    <div className="p-5 md:p-10 bg-neutral-50 min-h-[calc(100dvh-96px)] sm:min-h-[calc(100dvh-100px)] lg:min-h-[calc(100dvh-120px)]">
-      <div className="max-w-7xl bg-white rounded-lg shadow-sm p-6 md:p-8">
+    <div className="p-5 md:p-10 bg-neutral-50 min-h-[calc(100dvh-96px)] sm:min-h-[calc(100dvh-100px)] lg:min-h-[calc(100dvh-120px)] ">
+      <div className="max-w-7xl mx-auto bg-white rounded-lg shadow-sm p-6 md:p-8">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
           <div className="flex items-center justify-between">
             <h2 className="text-h3 font-heading font-bold text-neutral-900">
