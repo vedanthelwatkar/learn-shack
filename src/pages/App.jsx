@@ -9,7 +9,6 @@ import {
 import { useEffect, useLayoutEffect } from "react";
 import NavBar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { useMediaQuery } from "@/hooks/use-media-query";
 import Contact from "./Contact";
 import WhatsappIcon from "@/svgComponents/WhatsappIcon";
 import TermsAndConditions from "./TermsAndConditions";
@@ -19,7 +18,6 @@ import NotFound from "./NotFound";
 import { LayoutProvider } from "@/context/LayoutContext";
 import { getS3 } from "@/store/useConstantsStore";
 import Users from "./Users";
-import robots from "../../robots.txt";
 
 const ScrollToTop = ({ children }) => {
   const location = useLocation();
@@ -90,11 +88,6 @@ const App = () => {
                 <Route
                   path="/hidden-contact-table"
                   element={<Users />}
-                  errorElement={<ErrorPage />}
-                />
-                <Route
-                  path="/robots.txt"
-                  element={robots}
                   errorElement={<ErrorPage />}
                 />
               </Routes>
