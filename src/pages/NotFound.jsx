@@ -6,7 +6,7 @@ const NotFound = () => {
   const navigate = useNavigate();
   return (
     <div
-      className={`w-full h-[calc(100dvh-113px)] sm:h-[calc(100dvh-100px)] lg:h-[calc(100dvh-120px)] flex flex-col items-center justify-center relative`}
+      className={`w-full h-[calc(100dvh-96px)] sm:h-[calc(100dvh-100px)] lg:h-[calc(100dvh-120px)] flex flex-col items-center justify-center relative`}
     >
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <div className="font-heading text-9xl sm:text-[200px] md:text-[300px] lg:text-[400px] font-bold text-brand-primary opacity-5">
