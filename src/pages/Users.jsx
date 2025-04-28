@@ -159,7 +159,7 @@ const Users = () => {
   if (!isAuthenticated) {
     return (
       <div className="flex items-center justify-center min-h-[calc(100dvh-113px)] sm:min-h-[calc(100dvh-100px)] lg:min-h-[calc(100dvh-120px)] bg-neutral-50">
-        <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-sm border-2">
+        <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-sm border-2 mx-4 sm:mx-0">
           <div className="flex flex-col items-center mb-6">
             <div className="w-16 h-16 bg-brand-secondary rounded-full flex items-center justify-center mb-4">
               <Lock className="w-8 h-8 text-brand-primary" />
@@ -215,7 +215,11 @@ const Users = () => {
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 text-neutral-500 hover:text-neutral-700"
                 >
-                  {showPassword ? <Eye /> : <EyeOff />}
+                  {showPassword ? (
+                    <Eye className="h-4" />
+                  ) : (
+                    <EyeOff className="h-4" />
+                  )}
                 </button>
               </div>
             </div>
@@ -231,7 +235,7 @@ const Users = () => {
 
   return (
     <div className="p-5 md:p-10 bg-neutral-50 min-h-[calc(100dvh-113px)] sm:min-h-[calc(100dvh-100px)] lg:min-h-[calc(100dvh-120px)]">
-      <div className="max-w-7xl mx-auto bg-white rounded-lg shadow-sm p-6 md:p-8">
+      <div className="max-w-7xl bg-white rounded-lg shadow-sm p-6 md:p-8">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
           <div className="flex items-center justify-between">
             <h2 className="text-h3 font-heading font-bold text-neutral-900">
