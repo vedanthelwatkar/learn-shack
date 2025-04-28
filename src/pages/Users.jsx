@@ -158,7 +158,7 @@ const Users = () => {
 
   if (!isAuthenticated) {
     return (
-      <div className="flex items-center justify-center min-h-[calc(100dvh-113px)] sm:min-h-[calc(100dvh-100px)] lg:min-h-[calc(100dvh-120px)] bg-neutral-50">
+      <div className="flex items-center justify-center min-h-[calc(100dvh-96px)] sm:min-h-[calc(100dvh-100px)] lg:min-h-[calc(100dvh-120px)] bg-neutral-50">
         <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-sm border-2 mx-4 sm:mx-0">
           <div className="flex flex-col items-center mb-6">
             <div className="w-16 h-16 bg-brand-secondary rounded-full flex items-center justify-center mb-4">
