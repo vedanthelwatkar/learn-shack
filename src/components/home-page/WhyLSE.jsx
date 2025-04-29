@@ -61,7 +61,7 @@ const WhyLSE = () => {
           <div className="bg-neutral-0 rounded-sm sm:py-9 sm:px-7 p-5 flex flex-col justify-start items-end sm:gap-4 gap-3">
             <div className="flex w-full justify-between sm:gap-6 lg:gap-0 flex-row-reverse sm:flex-col lg:flex-row-reverse ">
               <div className="flex">{item.icon}</div>
-              <span className="text-h6 font-heading font-semibold text-neutral-800">
+              <span className="text-h6 font-heading font-semibold text-neutral-800 pr-4">
                 {item.title}
               </span>
             </div>
