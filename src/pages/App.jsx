@@ -1,4 +1,3 @@
-import Home from "./Home";
 import {
   BrowserRouter,
   Route,
@@ -6,18 +5,21 @@ import {
   useLocation,
   useNavigationType,
 } from "react-router-dom";
-import { useEffect, useLayoutEffect } from "react";
+import { lazy, Suspense, useEffect, useLayoutEffect } from "react";
 import NavBar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import Contact from "./Contact";
 import WhatsappIcon from "@/svgComponents/WhatsappIcon";
-import TermsAndConditions from "./TermsAndConditions";
-import PrivacyPolicy from "./PrivacyPolicy";
-import ErrorPage from "./ErrorPage";
-import NotFound from "./NotFound";
+const Home = lazy(() => import("./Home"));
+const Contact = lazy(() => import("./Contact"));
+const TermsAndConditions = lazy(() => import("./TermsAndConditions"));
+const PrivacyPolicy = lazy(() => import("./PrivacyPolicy"));
+const ErrorPage = lazy(() => import("./ErrorPage"));
+const NotFound = lazy(() => import("./NotFound"));
+const Users = lazy(() => import("./Users"));
+const About = lazy(() => import("./About"));
+
 import { LayoutProvider } from "@/context/LayoutContext";
 import { getS3 } from "@/store/useConstantsStore";
-import Users from "./Users";
 
 const ScrollToTop = ({ children }) => {
   const location = useLocation();
@@ -63,34 +65,43 @@ const App = () => {
               >
                 <WhatsappIcon />
               </a>
-              <Routes>
-                <Route path="/" element={<Home />} errorElement="error" />
-                <Route
-                  path="*"
-                  element={<NotFound />}
-                  errorElement={<ErrorPage />}
-                />
-                <Route
-                  path="/terms-and-conditions"
-                  element={<TermsAndConditions />}
-                  errorElement={<ErrorPage />}
-                />
-                <Route
-                  path="/privacy-policy"
-                  element={<PrivacyPolicy />}
-                  errorElement={<ErrorPage />}
-                />
-                <Route
-                  path="/contact-us"
-                  element={<Contact />}
-                  errorElement={<ErrorPage />}
-                />
-                <Route
-                  path="/hidden-contact-table"
-                  element={<Users />}
-                  errorElement={<ErrorPage />}
-                />
-              </Routes>
+              <Suspense
+                fallback={<div className="p-8 text-center">Loading...</div>}
+              >
+                <Routes>
+                  <Route path="/" element={<Home />} errorElement="error" />
+                  <Route
+                    path="*"
+                    element={<NotFound />}
+                    errorElement={<ErrorPage />}
+                  />
+                  <Route
+                    path="/about"
+                    element={<About />}
+                    errorElement={<ErrorPage />}
+                  />
+                  <Route
+                    path="/terms-and-conditions"
+                    element={<TermsAndConditions />}
+                    errorElement={<ErrorPage />}
+                  />
+                  <Route
+                    path="/privacy-policy"
+                    element={<PrivacyPolicy />}
+                    errorElement={<ErrorPage />}
+                  />
+                  <Route
+                    path="/contact-us"
+                    element={<Contact />}
+                    errorElement={<ErrorPage />}
+                  />
+                  <Route
+                    path="/hidden-contact-table"
+                    element={<Users />}
+                    errorElement={<ErrorPage />}
+                  />
+                </Routes>
+              </Suspense>
             </div>
             <Footer />
           </ScrollToTop>

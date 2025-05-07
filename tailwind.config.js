@@ -4,6 +4,9 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      screens: {
+        xs: "22rem",
+      },
       colors: {
         brand: {
           primary: "#60279e",
@@ -111,63 +114,59 @@ export default {
     require("tailwindcss-animate"),
     function ({ addBase }) {
       addBase({
-        // Add CSS variables that change based on media queries
+        // 👇 Default (mobile-first, applies to phones and up)
         ":root": {
-          // CSS variables for border radius
           "--radius-xs": "4px",
-          "--radius-sm": "8px",
-          "--radius-md": "12px",
-          "--radius-lg": "16px",
-          "--radius-xl": "24px",
+          "--radius-sm": "6px",
+          "--radius-md": "8px",
+          "--radius-lg": "12px",
+          "--radius-xl": "16px",
           "--radius-2xl": "100px",
 
-          // CSS variables for font sizes
-          "--font-size-h1": "60px",
-          "--font-size-h2": "52px",
-          "--font-size-h3": "48px",
-          "--font-size-h4": "40px",
-          "--font-size-h5": "32px",
-          "--font-size-h6": "24px",
-          "--font-size-body-2xl": "20px",
-          "--font-size-body-xl": "18px",
-          "--font-size-body-lg": "16px",
-          "--font-size-body-md": "14px",
+          "--font-size-h1": "38px",
+          "--font-size-h2": "36px",
+          "--font-size-h3": "32px",
+          "--font-size-h4": "24px",
+          "--font-size-h5": "22px",
+          "--font-size-h6": "20px",
+          "--font-size-body-2xl": "18px",
+          "--font-size-body-xl": "16px",
+          "--font-size-body-lg": "14px",
+          "--font-size-body-md": "12px",
           "--font-size-body-sm": "12px",
-          "--font-size-body-xs": "10px",
+          "--font-size-body-xs": "8px",
 
-          // CSS variables for stroke widths
-          "--stroke-2xl": "4px",
+          "--stroke-2xl": "2px",
           "--stroke-xl": "2px",
           "--stroke-lg": "1.5px",
           "--stroke-md": "1px",
           "--stroke-sm": "0.5px",
         },
-        "@media (max-width: 768px)": {
+
+        // 👇 Override for laptops and up (min-width: 1024px)
+        "@media (min-width: 640px)": {
           ":root": {
-            // Mobile values for border radius
             "--radius-xs": "4px",
-            "--radius-sm": "6px",
-            "--radius-md": "8px",
-            "--radius-lg": "12px",
-            "--radius-xl": "16px",
+            "--radius-sm": "8px",
+            "--radius-md": "12px",
+            "--radius-lg": "16px",
+            "--radius-xl": "24px",
             "--radius-2xl": "100px",
 
-            // Mobile values for font sizes
-            "--font-size-h1": "38px",
-            "--font-size-h2": "36px",
-            "--font-size-h3": "32px",
-            "--font-size-h4": "24px",
-            "--font-size-h5": "22px",
-            "--font-size-h6": "20px",
-            "--font-size-body-2xl": "18px",
-            "--font-size-body-xl": "16px",
-            "--font-size-body-lg": "14px",
-            "--font-size-body-md": "12px",
+            "--font-size-h1": "60px",
+            "--font-size-h2": "52px",
+            "--font-size-h3": "48px",
+            "--font-size-h4": "40px",
+            "--font-size-h5": "32px",
+            "--font-size-h6": "24px",
+            "--font-size-body-2xl": "20px",
+            "--font-size-body-xl": "18px",
+            "--font-size-body-lg": "16px",
+            "--font-size-body-md": "14px",
             "--font-size-body-sm": "12px",
-            "--font-size-body-xs": "8px",
+            "--font-size-body-xs": "10px",
 
-            // Mobile values for stroke widths
-            "--stroke-2xl": "2px",
+            "--stroke-2xl": "4px",
             "--stroke-xl": "2px",
             "--stroke-lg": "1.5px",
             "--stroke-md": "1px",

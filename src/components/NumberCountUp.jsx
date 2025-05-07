@@ -78,7 +78,7 @@ const NumberCountUp = ({
   }, [end, start, duration, easingFunction]);
 
   // Format number with separators and decimal places
-  const formattedNumber = count.toLocaleString("en-US", {
+  const formattedNumber = count?.toLocaleString("en-US", {
     minimumFractionDigits: decimalPlaces,
     maximumFractionDigits: decimalPlaces,
   });
