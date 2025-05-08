@@ -221,7 +221,7 @@ const About = () => {
       </div>
       <div className="behind-it-all pt-16 px-5 pb-12 sm:p-12 sm:pt-16 xl:p-20 xl:pb-16">
         <div className="flex flex-col gap-8 items-center justify-center">
-          <div className="flex flex-col gap-6 sm:gap-9 items-center justify-center">
+          <div className="flex flex-col gap-6 sm:gap-8 items-center justify-center">
             <div className="flex flex-col gap-4 items-center justify-center">
               <span className="text-brand-primary text-body-xl font-semibold">
                 MEET OUR FOUNDERS
@@ -238,8 +238,8 @@ const About = () => {
                 />
                 <div className="flex flex-col gap-4 p-6">
                   <span className="text-neutral-900 text-body-2xl font-semibold">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam
-                    beatae ea ratione!
+                    "Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Nam beatae ea ratione!"
                   </span>
                   <div className="flex flex-col gap-2">
                     <span className="text-neutral-900 text-body-xl font-semibold">
@@ -258,8 +258,8 @@ const About = () => {
                 />
                 <div className="flex flex-col gap-4 p-6">
                   <span className="text-neutral-900 text-body-2xl font-semibold">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam
-                    beatae ea ratione!
+                    "Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Nam beatae ea ratione!"
                   </span>
                   <div className="flex flex-col gap-2">
                     <span className="text-neutral-900 text-body-xl font-semibold">
@@ -275,15 +275,15 @@ const About = () => {
           </div>
         </div>
       </div>
-      <div className="our-progress flex flex-col xl:flex-row gap-6 sm:gap-16 px-5 py-12 sm:px-16 sm:py-20">
-        <div className="flex flex-col gap-4 flex-1 items-center justify-center">
+      <div className="our-progress flex flex-col xl:flex-row gap-6 sm:gap-8 xl:gap-16 px-5 py-12 sm:p-12 xl:px-16 xl:py-20">
+        <div className="flex flex-col gap-4 flex-1 items-center justify-center xl:items-start xl:justify-start">
           <span className="text-brand-primary text-body-xl font-semibold">
             OUR PROGRESS
           </span>
-          <span className="text-neutral-800 text-h4 font-semibold text-center">
+          <span className="text-neutral-800 text-h4 font-semibold text-center xl:text-start">
             Numbers That Matter For Big Dreams
           </span>
-          <span className="text-neutral-700 text-body-xl text-center">
+          <span className="text-neutral-700 text-body-xl text-center xl:text-start">
             These aren’t just stats. They’re stories of students who once
             started just like you. Unlike traditional study abroad consultants,
             we invest real time to understand your academic goals, career
@@ -293,27 +293,51 @@ const About = () => {
           </span>
           <Button>Connect with Our Counsellors</Button>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1">
-          {progressCardData.map((item) => (
-            <div className="border border-neutral-200 rounded-md bg-neutral-0 p-6 flex flex-col gap-2">
-              <span className="text-brand-primary text-h4 font-semibold">
-                <NumberCountUp
-                  prefix={item.prefix}
-                  suffix={item.suffix}
-                  end={item.data}
-                  decimalPlaces={item.decimalPlaces}
-                />
-              </span>
-              <span className="text-body-2xl font-semibold text-neutral-800">
-                {item.title}
-              </span>
-              <span className="text-body-lg text-neutral-700">{item.desc}</span>
-            </div>
-          ))}
+        <div className="flex flex-col gap-4 flex-1">
+          <div className="flex gap-4">
+            {progressCardData.slice(0, 2).map((item) => (
+              <div className="border border-neutral-200 rounded-md bg-neutral-0 p-6 flex flex-col gap-2 flex-1">
+                <span className="text-brand-primary text-h4 font-semibold">
+                  <NumberCountUp
+                    prefix={item.prefix}
+                    suffix={item.suffix}
+                    end={item.data}
+                    decimalPlaces={item.decimalPlaces}
+                  />
+                </span>
+                <span className="text-body-2xl font-semibold text-neutral-800">
+                  {item.title}
+                </span>
+                <span className="text-body-lg text-neutral-700 min-w-[250px]">
+                  {item.desc}
+                </span>
+              </div>
+            ))}
+          </div>
+          <div className="flex gap-4">
+            {progressCardData.slice(2).map((item) => (
+              <div className="border border-neutral-200 rounded-md bg-neutral-0 p-6 flex flex-col gap-2 flex-1">
+                <span className="text-brand-primary text-h4 font-semibold">
+                  <NumberCountUp
+                    prefix={item.prefix}
+                    suffix={item.suffix}
+                    end={item.data}
+                    decimalPlaces={item.decimalPlaces}
+                  />
+                </span>
+                <span className="text-body-2xl font-semibold text-neutral-800">
+                  {item.title}
+                </span>
+                <span className="text-body-lg text-neutral-700 min-w-[250px]">
+                  {item.desc}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-      <div className="what-we-offer flex flex-col gap-12 py-12 sm:py-16 items-center justify-center">
-        <div className="flex flex-col gap-4 items-center justify-center px-5 sm:px-16">
+      <div className="what-we-offer flex flex-col gap-6 sm:gap-8 xl:gap-12 py-12 xl:py-16 items-center justify-center">
+        <div className="flex flex-col gap-4 items-center justify-center px-5 sm:px-12 xl:px-16">
           <span className="text-brand-primary text-body-xl font-semibold">
             WHAT WE OFFER
           </span>
@@ -321,7 +345,7 @@ const About = () => {
             The Heart of Learnshack Edu
           </span>
         </div>
-        <div className="flex gap-4 self-start overflow-auto scrollbar-hide w-dvw px-5 sm:px-16">
+        <div className="flex gap-4 self-start overflow-auto scrollbar-hide w-dvw px-5 sm:px-12 xl:px-16">
           {whatWeOfferData.map((card, index) => (
             <div
               key={index}
@@ -345,7 +369,7 @@ const About = () => {
           ))}
         </div>
       </div>
-      <div className="student-reviews flex flex-col gap-12 py-12 sm:p-16 items-center justify-center">
+      <div className="student-reviews flex flex-col gap-6 sm:gap-8 xl:gap-12 py-12 sm:p-12 xl:p-16 items-center justify-center">
         <div className="flex flex-col gap-4 items-center justify-center px-5">
           <span className="text-brand-primary text-body-xl font-semibold">
             STUDENT REVIEWS
@@ -398,7 +422,7 @@ const About = () => {
           ))}
         </div>
       </div>
-      <div className="life-at-ls relative flex flex-col gap-6 sm:gap-12 p-12 sm:p-16  items-center justify-center">
+      <div className="life-at-ls relative flex flex-col gap-6 sm:gap-8 p-12 sm:px-20 xl:p-16  items-center justify-center">
         <div className="flex flex-col gap-4 items-center justify-center z-10">
           <span className="text-brand-primary text-body-xl font-semibold">
             BEHIND THE SCENES
@@ -449,12 +473,12 @@ const About = () => {
         <img src="/about-female.png" className="h-[360px] self-end mb-[-1px]" />
       </div>
       <div
-        className="xl:hidden flex items-center flex-col what-we-believe z-10 bg-brand-secondary px-5 pt-12 gap-4 justify-center"
+        className="xl:hidden flex items-center flex-col what-we-believe z-10 bg-brand-secondary px-5 pt-12 sm:px-12 gap-4 justify-center"
         style={{
           backgroundImage: `url("/about-bg.png")`,
         }}
       >
-        <div className="flex flex-col gap-10 items-center justify-center flex-1 max-w-[680px]">
+        <div className="flex flex-col gap-6 sm:gap-8 xl:gap-10 items-center justify-center flex-1 max-w-[680px]">
           <div className="flex flex-col gap-4 items-center justify-center">
             <span className="text-brand-primary text-body-xl font-semibold">
               WHAT WE BELIEVE
