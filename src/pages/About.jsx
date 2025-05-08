@@ -5,6 +5,7 @@ import DiamondIcon from "@/svgComponents/DiamondIcon";
 import TargetIcon from "@/svgComponents/TargetIcon";
 import ThinRightArrow from "@/svgComponents/ThinRightArrow";
 import React, { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 const progressCardData = [
   {
@@ -139,18 +140,20 @@ const reviewData = [
 ];
 
 const lifeAtLearnshackImages = [
-  "/about-learnshackedu-1.png",
-  "/about-learnshackedu-2.png",
-  "/about-learnshackedu-3.png",
-  "/about-learnshackedu-1.png",
-  "/about-learnshackedu-2.png",
-  "/about-learnshackedu-3.png",
-  "/about-learnshackedu-1.png",
-  "/about-learnshackedu-2.png",
-  "/about-learnshackedu-3.png",
+  "/about/about-learnshackedu-1.png",
+  "/about/about-learnshackedu-2.png",
+  "/about/about-learnshackedu-3.png",
+  "/about/about-learnshackedu-1.png",
+  "/about/about-learnshackedu-2.png",
+  "/about/about-learnshackedu-3.png",
+  "/about/about-learnshackedu-1.png",
+  "/about/about-learnshackedu-2.png",
+  "/about/about-learnshackedu-3.png",
 ];
 
 const About = () => {
+  const navigate = useNavigate();
+
   const reviewContainerRef = useRef(null);
   const lifeAtLearnshackRef = useRef(null);
   const middleImageRef = useRef(null);
@@ -190,15 +193,15 @@ const About = () => {
     <div className="relative flex flex-col">
       <div className="banner relative bg-brand-secondary px-5 pt-12 pb-40 sm:px-20 sm:py-24 flex items-center justify-center">
         <img
-          src="/map.png"
+          src="/about/map.png"
           className="absolute max-w-none top-[178px] w-[360px] h-[174px] sm:top-[101px] sm:w-[786px] sm:h-[380px] xl:top-6 xl:h-[450px] xl:w-[931px]"
         />
         <img
-          src="/castle-image-1.png"
+          src="/about/castle-image-1.png"
           className="absolute left-0 bottom-0 h-[175px] sm:h-[208px] xl:h-[368px]"
         />
         <img
-          src="/castle-image-2.png"
+          src="/about/castle-image-2.png"
           className="absolute right-0 bottom-0 h-[175px] sm:h-[208px] xl:h-[368px]"
         />
         <div className="max-w-[720px]">
@@ -215,7 +218,9 @@ const About = () => {
               deserves guidance, care, and protection - just like a guardian
               would provide.
             </span>
-            <Button>Get Started With Us</Button>
+            <Button onClick={() => navigate("/contact-us")}>
+              Get Started With Us
+            </Button>
           </div>
         </div>
       </div>
@@ -233,8 +238,8 @@ const About = () => {
             <div className="flex gap-4 flex-col sm:flex-row items-center justify-center">
               <div className="bg-neutral-0 flex flex-col rounded-md border border-neutral-200 xl:min-w-[280px] flex-1">
                 <img
-                  src="/placeholder.png"
-                  className="h-[200px] xl:h-[260px] object-contain"
+                  src="/image-placeholder.png"
+                  className="h-[200px] xl:h-[260px] object-cover"
                 />
                 <div className="flex flex-col gap-4 p-6">
                   <span className="text-neutral-900 text-body-2xl font-semibold">
@@ -253,8 +258,8 @@ const About = () => {
               </div>
               <div className="bg-neutral-0 flex flex-col rounded-md border border-neutral-200 xl:min-w-[280px] flex-1">
                 <img
-                  src="/placeholder.png"
-                  className="h-[200px] xl:h-[260px] object-contain"
+                  src="/image-placeholder.png"
+                  className="h-[200px] xl:h-[260px] object-cover"
                 />
                 <div className="flex flex-col gap-4 p-6">
                   <span className="text-neutral-900 text-body-2xl font-semibold">
@@ -291,7 +296,9 @@ const About = () => {
             rooted in what's best for your future — not in partnerships or
             shortcuts.
           </span>
-          <Button>Connect with Our Counsellors</Button>
+          <Button onClick={() => navigate("/contact-us")}>
+            Connect with Our Counsellors
+          </Button>
         </div>
         <div className="flex flex-col gap-4 flex-1">
           <div className="flex gap-4">
@@ -391,13 +398,13 @@ const About = () => {
               <span className="text-brand-primary font-semibold text-body-2xl">
                 {item.title}
               </span>
-              <span className="text-neutral-700 text-body-lg h-[227px] sm:[200px] overflow-y-auto scrollbar-hide">
+              <span className="text-neutral-700 text-body-lg h-[227px] sm:[200px]">
                 {item.desc}
               </span>
               <div className="flex gap-3 items-center">
                 <img
                   src={item.src}
-                  alt="/placeholder.svg"
+                  alt="/placeholder.png"
                   className="w-[60px] h-[60px] rounded-full"
                 />
                 <div className="flex flex-col gap-1 flex-1 justify-center">
@@ -455,10 +462,13 @@ const About = () => {
       <div
         className="xl:flex hidden what-we-believe z-10 bg-brand-secondary px-16 pt-6 pb-0 gap-4 justify-center"
         style={{
-          backgroundImage: `url("/about-bg.png")`,
+          backgroundImage: `url("/about/about-bg.png")`,
         }}
       >
-        <img src="/about-male.png" className="h-[391px] self-end mb-[-1px]" />
+        <img
+          src="/about/about-male.png"
+          className="h-[391px] self-end mb-[-1px]"
+        />
         <div className="flex flex-col gap-10 py-16 items-center justify-center flex-1 max-w-[680px]">
           <div className="flex flex-col gap-4 items-center justify-center">
             <span className="text-brand-primary text-body-xl font-semibold">
@@ -470,12 +480,15 @@ const About = () => {
           </div>
           <Button>Start Your Journey Today</Button>
         </div>
-        <img src="/about-female.png" className="h-[360px] self-end mb-[-1px]" />
+        <img
+          src="/about/about-female.png"
+          className="h-[360px] self-end mb-[-1px]"
+        />
       </div>
       <div
         className="xl:hidden flex items-center flex-col what-we-believe z-10 bg-brand-secondary px-5 pt-12 sm:px-12 gap-4 justify-center"
         style={{
-          backgroundImage: `url("/about-bg.png")`,
+          backgroundImage: `url("/about/about-bg.png")`,
         }}
       >
         <div className="flex flex-col gap-6 sm:gap-8 xl:gap-10 items-center justify-center flex-1 max-w-[680px]">
@@ -487,15 +500,17 @@ const About = () => {
               “You don’t need to do this alone. You just need the right guide.”
             </span>
           </div>
-          <Button>Start Your Journey Today</Button>
+          <Button onClick={() => navigate("/contact-us")}>
+            Start Your Journey Today
+          </Button>
         </div>
         <div className="flex">
           <img
-            src="/about-male.png"
+            src="/about/about-male.png"
             className="h-[293px] sm:h-[391px] self-end mb-[-1px]"
           />
           <img
-            src="/about-female.png"
+            src="/about/about-female.png"
             className="h-[270px] sm:h-[360px] self-end mb-[-1px] -ml-20"
           />
         </div>

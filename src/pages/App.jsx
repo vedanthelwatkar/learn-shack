@@ -20,6 +20,7 @@ const About = lazy(() => import("./About"));
 
 import { LayoutProvider } from "@/context/LayoutContext";
 import { getS3 } from "@/store/useConstantsStore";
+import { Skeleton } from "@/components/Skeleton";
 
 const ScrollToTop = ({ children }) => {
   const location = useLocation();
@@ -65,9 +66,7 @@ const App = () => {
               >
                 <WhatsappIcon />
               </a>
-              <Suspense
-                fallback={<div className="p-8 text-center">Loading...</div>}
-              >
+              <Suspense fallback={<Skeleton />}>
                 <Routes>
                   <Route path="/" element={<Home />} errorElement="error" />
                   <Route
@@ -76,7 +75,7 @@ const App = () => {
                     errorElement={<ErrorPage />}
                   />
                   <Route
-                    path="/about"
+                    path="/about-us"
                     element={<About />}
                     errorElement={<ErrorPage />}
                   />
