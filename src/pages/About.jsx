@@ -398,7 +398,7 @@ const About = () => {
           ))}
         </div>
       </div>
-      <div className="life-at-ls flex flex-col gap-12 p-16  items-center justify-center">
+      <div className="life-at-ls relative flex flex-col gap-6 sm:gap-12 p-12 sm:p-16  items-center justify-center">
         <div className="flex flex-col gap-4 items-center justify-center z-10">
           <span className="text-brand-primary text-body-xl font-semibold">
             BEHIND THE SCENES
@@ -407,39 +407,25 @@ const About = () => {
             Glimpse of Life At LearnShack Edu
           </span>
         </div>
-        <div className="relative">
-          <div className="absolute top-[-60%] sm:top-[-40%] w-dvw flex justify-center items-center">
-            <div
-              className="w-[925px] sm:w-[1800px] h-[200px] bg-neutral-50 flex-shrink-0"
-              style={{
-                borderRadius:
-                  window.innerWidth < 640 ? "450px / 100px" : "900px / 100px",
-              }}
+        <div className="absolute top-0 sm:top-[15%] md:top-[5%] xl:top-[7%] w-dvw flex justify-center items-center">
+          <div className="w-[925px] sm:w-[1160px] md:w-[1800px] 2xl:w-[2400px] rounded-[50%] h-[200px] bg-neutral-50 flex-shrink-0" />
+        </div>
+        <div
+          className="flex overflow-x-auto w-dvw scrollbar-hide gap-4 justify-start items-center"
+          ref={lifeAtLearnshackRef}
+        >
+          {lifeAtLearnshackImages.map((item, index) => (
+            <img
+              key={index}
+              src={item}
+              alt={`Life at LearnShack ${index + 1}`}
+              className="w-[280px] h-[280px] sm:w-[360px] sm:h-[360px]"
+              ref={index === middleIndex ? middleImageRef : null}
             />
-          </div>
-          <div
-            className="flex overflow-x-auto w-dvw scrollbar-hide gap-4 justify-start items-center"
-            ref={lifeAtLearnshackRef}
-          >
-            {lifeAtLearnshackImages.map((item, index) => (
-              <img
-                key={index}
-                src={item}
-                alt={`Life at LearnShack ${index + 1}`}
-                className="w-[280px] h-[280px] sm:w-[360px] sm:h-[360px]"
-                ref={index === middleIndex ? middleImageRef : null}
-              />
-            ))}
-          </div>
-          <div className="absolute bottom-[-60%] sm:bottom-[-45%] w-dvw flex justify-center items-center">
-            <div
-              className="w-[925px] sm:w-[1800px] h-[200px] bg-neutral-50 flex-shrink-0"
-              style={{
-                borderRadius:
-                  window.innerWidth < 640 ? "450px / 100px" : "900px / 100px",
-              }}
-            />
-          </div>
+          ))}
+        </div>
+        <div className="absolute bottom-[-25%] sm:bottom-[-16%] xl:bottom-[-15%] w-dvw flex justify-center items-center">
+          <div className="w-[925px] sm:w-[1160px] md:w-[1800px] 2xl:w-[2400px] h-[200px] rounded-[50%] bg-neutral-50 flex-shrink-0" />
         </div>
       </div>
       <div
