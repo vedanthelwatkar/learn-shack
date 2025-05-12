@@ -1,65 +1,42 @@
 import React, { useRef, useEffect, useState } from "react";
-import { motion, useAnimation, useAnimationFrame } from "framer-motion";
+import { useAnimation, useAnimationFrame } from "framer-motion";
 import BoltIcon from "@/svgComponents/BoltIcon";
-import useConstantsStore, { getS3 } from "@/store/useConstantsStore";
 import InfiniteCarousel from "../InfiniteCarousel";
 
+const universities = [
+  "/svg-uni-logos/australian-national-university.svg",
+  "/svg-uni-logos/brok-university.svg",
+  "/svg-uni-logos/delft-university-of-technology.svg",
+  "/svg-uni-logos/iu-international-university-of-applied-sciences.svg",
+  "/svg-uni-logos/johns-hopkins-university.svg",
+  "/svg-uni-logos/kth-royal-institute-of-technology.svg",
+  "/svg-uni-logos/massey-university.svg",
+  "/svg-uni-logos/mcgill-university.svg",
+  "/svg-uni-logos/nanyang-technological-university.svg",
+  "/svg-uni-logos/national-university-of-singapore.svg",
+  "/svg-uni-logos/paris-saclay-university.svg",
+  "/svg-uni-logos/singapore-management-university.svg",
+  "/svg-uni-logos/srh-hochschule-berlin.svg",
+  "/svg-uni-logos/stanford-university.svg",
+  "/svg-uni-logos/trinity-college-dublin.svg",
+  "/svg-uni-logos/university-college-cork.svg",
+  "/svg-uni-logos/university-college-dublin.svg",
+  "/svg-uni-logos/university-college-london.svg",
+  "/svg-uni-logos/university-of-amsterdam.svg",
+  "/svg-uni-logos/university-of-auckland.svg",
+  "/svg-uni-logos/university-of-edinburgh.svg",
+  "/svg-uni-logos/university-of-europe-for-applied-sciences.svg",
+  "/svg-uni-logos/university-of-groningen-rug.svg",
+  "/svg-uni-logos/university-of-otago.svg",
+  "/svg-uni-logos/university-of-queensland.svg",
+  "/svg-uni-logos/university-of-southampton.svg",
+  "/svg-uni-logos/university-of-sydney.svg",
+  "/svg-uni-logos/university-of-toronto.svg",
+  "/svg-uni-logos/uppsala-university.svg",
+  "/svg-uni-logos/yale-university.svg",
+];
+
 const UniversityCarousel = () => {
-  const [universities, setUniversities] = useState([]);
-  const { universityLogos } = useConstantsStore();
-
-  useEffect(() => {
-    getS3(
-      {
-        bucketName: "learn-shack-new-bucket",
-        prefix: "svg-uni-logos/",
-      },
-      { variable: "universityLogos" }
-    );
-  }, []);
-
-  useEffect(() => {
-    if (universityLogos && universityLogos.length > 0) {
-      const mappedUrls = universityLogos.map((item) => item.url);
-      setUniversities(mappedUrls);
-    }
-  }, [universityLogos]);
-  const duplicatedUniversities = [...universities, ...universities];
-
-  const carouselRef = useRef(null);
-  const containerRef = useRef(null);
-  const controls = useAnimation();
-  const isHovered = useRef(false);
-  const baseSpeed = useRef(-1.3);
-  const xPosition = useRef(0);
-  const isFirstRender = useRef(true);
-
-  useEffect(() => {
-    if (isFirstRender.current && carouselRef.current) {
-      xPosition.current = 0;
-      controls.set({ x: xPosition.current });
-      isFirstRender.current = false;
-    }
-  }, [controls]);
-
-  useAnimationFrame(() => {
-    if (!carouselRef.current) return;
-
-    const containerWidth = carouselRef.current.scrollWidth / 2;
-
-    const currentSpeed = isHovered.current
-      ? baseSpeed.current * 0.3
-      : baseSpeed.current;
-
-    xPosition.current += currentSpeed;
-
-    if (Math.abs(xPosition.current) >= containerWidth) {
-      xPosition.current = 0;
-    }
-
-    controls.set({ x: xPosition.current });
-  });
-
   return (
     <div className="pt-10 pb-5 md:py-[60px] w-full flex items-center justify-center overflow-hidden">
       <div className="flex flex-col gap-12 w-full">
@@ -69,7 +46,7 @@ const UniversityCarousel = () => {
           </span>
 
           <InfiniteCarousel>
-            {duplicatedUniversities.map((item, index) => (
+            {universities.map((item, index) => (
               <div key={index} className="flex-shrink-0">
                 <img
                   src={item}

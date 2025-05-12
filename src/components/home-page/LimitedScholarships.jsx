@@ -50,7 +50,7 @@ const LimitedScholarships = () => {
         <div className="flex sm:flex-row flex-col-reverse items-stretch bg-neutral-0 rounded-xl p-3 sm:p-6 relative">
           <GraduationHatIcon className="sm:hidden absolute -top-8 -left-9 h-12" />
           <img
-            src="https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/scholarship-with-learnshack.png"
+            src="/scholarship-with-learnshack.png"
             alt="scholarship-with-learnshack"
             className="w-full h-full object-cover object-top rounded-md"
           />

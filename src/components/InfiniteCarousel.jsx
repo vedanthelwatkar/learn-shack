@@ -9,6 +9,7 @@ const InfiniteCarousel = ({ className, children }) => {
   const xPosition = useRef(0);
   const isFirstRender = useRef(true);
   const [animationSlowed, setAnimationSlowed] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const originalChildren = Children.toArray(children);
   const duplicatedChildren = [
@@ -21,6 +22,18 @@ const InfiniteCarousel = ({ className, children }) => {
     ...originalChildren,
     ...originalChildren,
   ];
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 1280);
+    };
+
+    checkScreenSize();
+
+    window.addEventListener("resize", checkScreenSize);
+
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
 
   useEffect(() => {
     if (isFirstRender.current && carouselRef.current) {
@@ -48,15 +61,32 @@ const InfiniteCarousel = ({ className, children }) => {
     });
   });
 
-  const toggleAnimation = () => {
-    setAnimationSlowed(!animationSlowed);
+  const handleClick = () => {
+    if (isMobile) {
+      setAnimationSlowed(!animationSlowed);
+    }
+  };
+
+  const handleMouseEnter = () => {
+    if (!isMobile) {
+      setAnimationSlowed(true);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (!isMobile) {
+      setAnimationSlowed(false);
+    }
   };
 
   return (
     <div
       ref={containerRef}
       className={`overflow-hidden w-full ${className}`}
-      onClick={toggleAnimation}
+      onClick={handleClick}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onTouchStart={isMobile ? () => {} : undefined}
     >
       <motion.div
         ref={carouselRef}

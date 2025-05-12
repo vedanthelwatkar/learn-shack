@@ -15,8 +15,6 @@ import LinkedinIcon from "@/svgComponents/LinkedinIcon";
 import CopyrightIcon from "@/svgComponents/CopyrightIcon";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import WhatsappSecondaryIcon from "@/svgComponents/WhatsappSecondaryIcon";
-import useConstantsStore from "@/store/useConstantsStore";
-import { getImageFromS3 } from "@/hooks/get-images";
 
 const socialLinks = [
   {
@@ -125,17 +123,14 @@ const navLinks = {
 const Footer = () => {
   const isMobile = useMediaQuery();
   const isTablet = useMediaQuery("(min-width: 768px) and (max-width: 1023px)");
-  const { constantImages } = useConstantsStore();
 
   const getBrandQuoteImg = () => {
-    if (!constantImages || !constantImages.length) return;
-
     if (isMobile) {
-      return getImageFromS3(constantImages, "brand-quote-mobile.png");
+      return "/brand-quote-mobile.png";
     } else if (isTablet) {
-      return getImageFromS3(constantImages, "brand-quote-tablet.png");
+      return "/brand-quote-tablet.png";
     } else {
-      return getImageFromS3(constantImages, "brand-quote-desktop.png");
+      return "/brand-quote-desktop.png";
     }
   };
 

@@ -19,22 +19,11 @@ const Users = lazy(() => import("./pages/Users"));
 const About = lazy(() => import("./pages/About"));
 
 import { LayoutProvider } from "@/context/LayoutContext";
-import { getS3 } from "@/store/useConstantsStore";
 import { Skeleton } from "@/components/Skeleton";
 
 const ScrollToTop = ({ children }) => {
   const location = useLocation();
   const navigationType = useNavigationType();
-
-  useEffect(() => {
-    getS3(
-      {
-        bucketName: "learn-shack-new-bucket",
-        prefix: "public/",
-      },
-      { variable: "constantImages" }
-    );
-  }, []);
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0);

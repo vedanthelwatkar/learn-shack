@@ -3,7 +3,6 @@ import { useState, useRef, useId, useEffect } from "react";
 import { Button } from "../ui/button";
 import RightDirection from "@/svgComponents/RightDirection";
 import { useMediaQuery } from "@/hooks/use-media-query";
-import useConstantsStore from "@/store/useConstantsStore";
 import { useNavigate } from "react-router-dom";
 
 const Slide = ({ slide, index, current, handleSlideClick }) => {
@@ -136,11 +135,9 @@ const CarouselControl = ({ type, title, handleClick }) => {
 };
 
 export default function StudyAbroadCarousel() {
-  const { constantImages } = useConstantsStore();
-
   const baseSlides = [
     {
-      src: "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/study-in-uk.png",
+      src: "/study-in-uk.png",
       title: "Study in UK",
       description:
         "Explore affordable education in UK with top-ranked universities & scholarships.",
@@ -151,7 +148,7 @@ export default function StudyAbroadCarousel() {
       },
     },
     {
-      src: "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/study-in-australia.png",
+      src: "/study-in-australia.png",
       title: "Study in Australia",
       description:
         "Explore affordable education in Australia with top-ranked universities & scholarships.",
@@ -166,7 +163,7 @@ export default function StudyAbroadCarousel() {
       },
     },
     {
-      src: "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/study-in-germany.png",
+      src: "/study-in-germany.png",
       title: "Study in Germany",
       description:
         "Explore affordable education in Germany with top-ranked universities & scholarships.",
@@ -181,7 +178,7 @@ export default function StudyAbroadCarousel() {
       },
     },
     {
-      src: "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/study-in-usa.png",
+      src: "/study-in-usa.png",
       title: "Study in USA",
       description:
         "Explore affordable education in USA with top-ranked universities & scholarships.",
@@ -196,7 +193,7 @@ export default function StudyAbroadCarousel() {
       },
     },
     {
-      src: "https://learn-shack-new-bucket.s3.ap-south-1.amazonaws.com/public/study-in-canada.png",
+      src: "/study-in-canada.png",
       title: "Study in Canada",
       description:
         "Explore affordable education in Canada with top-ranked universities & scholarships.",
