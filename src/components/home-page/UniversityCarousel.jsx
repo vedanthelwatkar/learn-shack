@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { motion, useAnimation, useAnimationFrame } from "framer-motion";
 import BoltIcon from "@/svgComponents/BoltIcon";
 import useConstantsStore, { getS3 } from "@/store/useConstantsStore";
+import InfiniteCarousel from "../InfiniteCarousel";
 
 const UniversityCarousel = () => {
   const [universities, setUniversities] = useState([]);
@@ -61,35 +62,23 @@ const UniversityCarousel = () => {
 
   return (
     <div className="pt-10 pb-5 md:py-[60px] w-full flex items-center justify-center overflow-hidden">
-      <div className="flex flex-col gap-12 w-full max-w-6xl">
+      <div className="flex flex-col gap-12 w-full">
         <div className="flex flex-col gap-8 sm:gap-10">
           <span className="text-body-xl text-neutral-800 font-semibold flex justify-center">
             850+ university partners & growing
           </span>
 
-          <div
-            ref={containerRef}
-            className="w-full"
-            onMouseEnter={() => (isHovered.current = true)}
-            onMouseLeave={() => (isHovered.current = false)}
-          >
-            <motion.div
-              ref={carouselRef}
-              className="flex gap-4 sm:gap-8 ml-0"
-              animate={controls}
-              initial={{ x: 0 }}
-            >
-              {duplicatedUniversities.map((item, index) => (
-                <div key={index} className="flex-shrink-0">
-                  <img
-                    src={item}
-                    alt={`University logo ${index}`}
-                    className="h-[80px] w-auto mix-blend-screen"
-                  />
-                </div>
-              ))}
-            </motion.div>
-          </div>
+          <InfiniteCarousel>
+            {duplicatedUniversities.map((item, index) => (
+              <div key={index} className="flex-shrink-0">
+                <img
+                  src={item}
+                  alt={`University logo ${index}`}
+                  className="h-[80px] w-auto mix-blend-screen"
+                />
+              </div>
+            ))}
+          </InfiniteCarousel>
         </div>
 
         <div className="hidden lg:flex gap-12 justify-center">

@@ -67,6 +67,120 @@ export const faqData = [
   },
 ];
 
+export const progressCardData = [
+  {
+    title: "Students",
+    desc: "mentored personally with 1:1 guidance across their full study abroad journey.",
+    data: 3500,
+    suffix: "+",
+  },
+  {
+    title: "Scholarships",
+    desc: "disbursed and fee waivers unlocked through strong, tailored applications.",
+    data: 1.5,
+    prefix: "₹",
+    suffix: "Cr+",
+    decimalPlaces: 1,
+  },
+  {
+    title: "University Partners",
+    desc: "across the UK, USA, Canada, Germany, Ireland, Australia, and more.",
+    data: 850,
+    suffix: "+",
+  },
+  {
+    title: "Counsellings",
+    desc: "and counting, with hundreds of new journeys beginning each month.",
+    data: 25000,
+    suffix: "+",
+  },
+];
+
+export const reviewData = [
+  {
+    title: "Masters in Business Analyticsy",
+    desc: "Learnshack helped me clear IELTS with 7.5 bands in just a month with clarity. They handled everything—from shortlisting top universities and submitting applications to securing my education loan and visa.",
+    name: "Shubhra Pandey",
+    from: "Banaras",
+    to: "UK",
+    flag: "🇬🇧",
+    src: "/shubhra-pandey-withbg-learnshack.png",
+  },
+  {
+    title: "MSc in Computer Science",
+    desc: "I was working at the Times of India, but deep down, I felt stuck. On my friend's recommendation, I came to Learnshack. Their team didn’t just talk about universities; they helped me figure out my own goals and gave me the confidence to take this step. The entire process, from selecting the right university to getting my offer, was stress-free. Today, I’m here in the UK, studying at a world-class university and looking forward to my future.",
+    name: "Sejal Arora",
+    from: "Jhansi",
+    to: "England",
+    flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+    src: "/placeholder.png",
+  },
+  {
+    title: "Msc in Medical Device Technology",
+    desc: "I had already paid a deposit to a university in Ireland, but had to withdraw due to visa delays—waiting a year felt devastating. Then I found LearnShack. Their team truly understood my situation, gave me tailored advice, and I had a new offer letter within no time. Thanks to their relationships with universities, I didn’t have to waste a year, and today, I’m in Ireland, studying exactly what I wanted.",
+    name: "Vignan Thokala",
+    from: "Hyderabad",
+    to: "Ireland",
+    flag: "🇮🇪",
+    src: "/vighnan-thokala-withbg-learnshack.png",
+  },
+  {
+    title: "Msc Computer Science",
+    desc: "Learnshack guided me from switching plans in India to securing admission at the University of Edinburgh with a scholarship and English test waiver. Their expert team understood my profile deeply and delivered results that felt truly personalized—even good enough for me to refer a friend confidently.",
+    name: "Hrisav Raj",
+    from: "Patna",
+    to: "Scotland",
+    flag: "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+    src: "/placeholder.png",
+  },
+  {
+    title: "Msc in Cyber Security",
+    desc: "I spent 3 lakhs on a premium study abroad service that failed to get me an admit or even recover my deposit. I felt completely lost—until I found LearnShack. They understood my goals, guided me personally, and even helped me get my refund back. More than just saving my money, they gave me a second chance at my dream.",
+    name: "Keyur Sabhani",
+    from: "Ahmedabad",
+    to: "Germany",
+    flag: "🇩🇪",
+    src: "/keyur-sabhani-withbg-learnshack.png",
+    featured: true,
+  },
+  {
+    title: "MSc in Robotics & AI",
+    desc: "I had multiple offers, but somehow, none of them felt right. My heart was set on the University of Hertfordshire, but getting in seemed nearly impossible. When I shared my goal with the counselors at Learnshack, instead of convincing me to settle for the options I already had, they worked towards making my dream a reality, and within just three days, I received my offer letter, along with a scholarship!",
+    name: "Gautham Srinivasiah",
+    from: "Hyderabad",
+    to: "England",
+    flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+    src: "/placeholder.png",
+  },
+  {
+    title: "Msc in Sustainable Supply Chain Management",
+    desc: "While other consultancy pushed me towards mismatched options, Learnshack suggested better-suited countries like Ireland and USA. We applied to six universities & I got offers from literally all of them. Today, I’m studying my dream course at UCD, and I finally felt like someone was truly on my side.",
+    name: "Himani Verma",
+    from: "Delhi",
+    to: "Ireland",
+    flag: "🇮🇪",
+    src: "/himani-verma-withbg-learnshack.png",
+  },
+  {
+    title: "MSc in Computer Science",
+    desc: "I was struggling to clear IELTS and TOEFL despite multiple attempts, even after paying a deposit elsewhere. Learnshack turned it all around—helping me find a university that waived English tests, securing a low-interest education loan, and even arranging my accommodation. Their support was a complete game-changer.",
+    name: "Aradhya Charan",
+    from: "Lucknow",
+    to: "England",
+    flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+    src: "/placeholder.png",
+  },
+  {
+    title: "Msc in Artificial Intelligence",
+    desc: "Learnshack helped me turn things around when my initial university and visa process got stuck. They guided me to withdraw the old application, secured my admit to Aston University, and helped me file a priority visa within weeks.",
+    name: "Harsh Jirapure",
+    from: "Surat",
+    to: "UK",
+    flag: "🇬🇧",
+    src: "/harsh-jirapure-withbg-learnshack.png",
+  },
+];
+
 export const countries = [
   {
     code: "AF",
