@@ -8,6 +8,7 @@ import ThinRightArrow from "@/svgComponents/ThinRightArrow";
 import { progressCardData, reviewData } from "@/utils/constants";
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const whatWeOfferData = [
   {
@@ -115,11 +116,19 @@ const About = () => {
           src="/about/map.png"
           className="absolute max-w-none top-[178px] w-[360px] h-[174px] sm:top-[101px] sm:w-[786px] sm:h-[380px] xl:top-6 xl:h-[450px] xl:w-[931px]"
         />
-        <img
+        <motion.img
+          initial={{ x: -10, y: 10 }}
+          whileInView={{ x: 0, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
           src="/about/castle-image-1.png"
           className="absolute left-0 bottom-0 h-[175px] sm:h-[208px] xl:h-[368px]"
         />
-        <img
+        <motion.img
+          initial={{ x: -10, y: 10 }}
+          whileInView={{ x: 0, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
           src="/about/castle-image-2.png"
           className="absolute right-0 bottom-0 h-[175px] sm:h-[208px] xl:h-[368px]"
         />
