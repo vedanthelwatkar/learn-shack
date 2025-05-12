@@ -1,20 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
-// Easing functions collection
 const EasingFunctions = {
-  // Linear interpolation (no easing)
   linear: (t) => t,
 
-  // Quadratic ease out - starts fast, slows down at the end
   easeOutQuad: (t) => t * (2 - t),
 
-  // Cubic ease out - even smoother deceleration
   easeOutCubic: (t) => 1 - Math.pow(1 - t, 3),
 
-  // Quartic ease out - very smooth deceleration
   easeOutQuart: (t) => 1 - Math.pow(1 - t, 4),
 
-  // Bounce effect at the end
   easeOutBounce: (t) => {
     const n1 = 7.5625;
     const d1 = 2.75;
@@ -44,8 +38,31 @@ const NumberCountUp = ({
 }) => {
   const [count, setCount] = useState(start);
   const [isComplete, setIsComplete] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const countRef = useRef(null);
 
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    if (countRef.current) {
+      observer.observe(countRef.current);
+    }
+
+    return () => {
+      if (countRef.current) {
+        observer.unobserve(countRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible) return;
+
     let startTimestamp = null;
     const ease =
       EasingFunctions[easingFunction] || EasingFunctions.easeOutCubic;
@@ -63,7 +80,6 @@ const NumberCountUp = ({
       if (progress < 1) {
         window.requestAnimationFrame(step);
       } else {
-        // Ensure we land exactly on the end value
         setCount(end);
         setIsComplete(true);
       }
@@ -71,13 +87,11 @@ const NumberCountUp = ({
 
     window.requestAnimationFrame(step);
 
-    // Cleanup function to cancel animation if component unmounts
     return () => {
       window.cancelAnimationFrame(step);
     };
-  }, [end, start, duration, easingFunction]);
+  }, [end, start, duration, easingFunction, isVisible]);
 
-  // Format number with separators and decimal places
   const formattedNumber = count?.toLocaleString("en-US", {
     minimumFractionDigits: decimalPlaces,
     maximumFractionDigits: decimalPlaces,
@@ -85,6 +99,7 @@ const NumberCountUp = ({
 
   return (
     <div
+      ref={countRef}
       className={`number-count-up ${className} ${isComplete ? "complete" : ""}`}
       aria-live="polite"
       aria-atomic="true"

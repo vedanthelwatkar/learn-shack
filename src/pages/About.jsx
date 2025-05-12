@@ -398,7 +398,7 @@ const About = () => {
               <span className="text-brand-primary font-semibold text-body-2xl">
                 {item.title}
               </span>
-              <span className="text-neutral-700 text-body-lg h-[227px] sm:[200px]">
+              <span className="text-neutral-700 text-body-lg h-[227px] sm:h-[200px] overflow-auto scrollbar-hide">
                 {item.desc}
               </span>
               <div className="flex gap-3 items-center">
