@@ -155,7 +155,7 @@ const About = () => {
               </h4>
             </div>
             <div className="flex gap-4 flex-col sm:flex-row items-center justify-center">
-              <div className="bg-neutral-0 flex flex-col rounded-md border border-neutral-200 xl:min-w-[280px] flex-1">
+              <div className="bg-neutral-0 flex overflow-hidden flex-col rounded-md border border-neutral-200 xl:min-w-[280px] flex-1">
                 <img
                   src="/image-placeholder.png"
                   className="h-[200px] xl:h-[260px] object-cover"
