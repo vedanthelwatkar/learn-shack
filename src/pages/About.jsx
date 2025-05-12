@@ -114,11 +114,11 @@ const About = () => {
       <div className="banner relative bg-brand-secondary px-5 pt-12 pb-40 sm:px-20 sm:py-24 flex items-center justify-center">
         <img
           src="/about/map.png"
-          className="absolute max-w-none top-[178px] w-[360px] h-[174px] sm:top-[101px] sm:w-[786px] sm:h-[380px] xl:top-6 xl:h-[450px] xl:w-[931px]"
+          className="absolute max-w-none overflow-hidden top-[178px] w-[360px] h-[174px] sm:top-[101px] sm:w-[786px] sm:h-[380px] xl:top-6 xl:h-[450px] xl:w-[931px]"
         />
         <motion.img
           initial={{ x: -10, y: 10 }}
-          whileInView={{ x: 0, y: 0 }}
+          animate={{ x: 0, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
           src="/about/castle-image-1.png"
@@ -126,7 +126,7 @@ const About = () => {
         />
         <motion.img
           initial={{ x: 10, y: 10 }}
-          whileInView={{ x: 0, y: 0 }}
+          animate={{ x: 0, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
           src="/about/castle-image-2.png"
