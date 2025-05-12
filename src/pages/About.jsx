@@ -125,7 +125,7 @@ const About = () => {
           className="absolute left-0 bottom-0 h-[175px] sm:h-[208px] xl:h-[368px]"
         />
         <motion.img
-          initial={{ x: -10, y: 10 }}
+          initial={{ x: 10, y: 10 }}
           whileInView={{ x: 0, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
