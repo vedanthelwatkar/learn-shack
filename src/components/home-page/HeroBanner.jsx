@@ -106,7 +106,7 @@ const HeroBanner = () => {
         </div>
       </div>
 
-      <div className="flex w-full h-[300px] sm:w-full sm:h-[300px] md:w-[360px] md:h-[505px] lg:w-[505px] lg:h-[505px] rounded-xl bg-brand-secondary overflow-hidden bg-cover bg-center relative">
+      <div className="flex w-full h-[300px] md:w-[360px] sm:h-[505px] lg:w-[505px] lg:h-[505px] rounded-xl bg-brand-secondary overflow-hidden bg-cover bg-center relative">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
