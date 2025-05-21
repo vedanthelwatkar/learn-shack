@@ -67,7 +67,8 @@ const TermsConditions = () => {
         </div>
       </div>
       <div className="p-5 pb-10 md:p-10 md:pb-20 lg:p-20 lg:pt-5">
-      <div className="flex items-center justify-center w-full">
+      <div className="hello-test flex items-center justify-center w-full">
+
         <div className="flex flex-col gap-4 text-neutral-700 text-body-lg justify-self-center max-w-[800px]">
           <span className="text-body-2xl font-semibold text-neutral-800">
             AGREEMENT TO OUR LEGAL TERMS
