@@ -53,6 +53,7 @@ const PrivacyPolicy = () => {
         </div>
       </div>
       <div className="p-5 pb-10 md:p-10 md:pb-20 lg:p-20 lg:pt-5">
+      <div className="flex items-center justify-center w-full">
         <div className="flex flex-col gap-4 text-neutral-700 text-body-lg justify-self-center max-w-[800px]">
           <p>
             This Privacy Notice for Learnshack Private Limited ("we," "us," or
@@ -667,6 +668,7 @@ const PrivacyPolicy = () => {
               contact@learnshackedu.com
             </p>
           </div>
+        </div>
         </div>
       </div>
     </div>
