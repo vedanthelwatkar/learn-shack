@@ -89,10 +89,10 @@ const navLinks = {
     { name: "SAT", href: "/test-preparation/sat" },
   ],
   Company: [
-    {
-      name: "About Us",
-      href: "/about-us",
-    },
+    // {
+    //   name: "About Us",
+    //   href: "/about-us",
+    // },
     // {
     //   name: "Our Services",
     //   href: "/services"

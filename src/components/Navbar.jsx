@@ -96,9 +96,9 @@ const NavBar = () => {
               <div className={`flex items-center gap-6`}>
                 {/* <NavigationMenuComponent /> */}
                 {/* <Button variant="outline">Evaluate Profile</Button> */}
-                <Button variant="outline" onClick={() => navigate("/about-us")}>
+                {/* <Button variant="outline" onClick={() => navigate("/about-us")}>
                   About Us
-                </Button>
+                </Button> */}
                 <Button
                   onClick={() =>
                     navigate("/contact-us", {
