@@ -63,11 +63,11 @@ const App = () => {
                     element={<NotFound />}
                     errorElement={<ErrorPage />}
                   />
-                  <Route
+                  {/* <Route
                     path="/about-us"
                     element={<About />}
                     errorElement={<ErrorPage />}
-                  />
+                  /> */}
                   <Route
                     path="/terms-and-conditions"
                     element={<TermsAndConditions />}
